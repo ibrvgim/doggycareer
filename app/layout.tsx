@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+import { Nunito } from 'next/font/google';
+
+const font = Nunito({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Doggycareer',
-    default: 'Doggycareer',
+    default: 'Doggycareer | Job Search',
   },
   description: 'Find your dream job with Doggycareer.',
 };
@@ -16,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body className={`${font.className} antialiased min-h-screen`}>
+        {children}
+      </body>
     </html>
   );
 }
