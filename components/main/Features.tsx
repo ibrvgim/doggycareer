@@ -27,7 +27,7 @@ const featuresData = [
     ),
     title: 'See Only Jobs That Match You',
     description:
-      'Get job listings that align with your skills, experience, and preferences, saving you time and helping you focus on the best matches.',
+      'Get jobs that align with your skills, experience, and preferences, saving you time and helping you focus on the best matches.',
   },
 
   {
@@ -43,11 +43,14 @@ const featuresData = [
 function Features() {
   return (
     <div>
-      <p className='text-center text-6xl font-extrabold text-blue-900 tracking-wider mt-12'>
+      <p className='text-center text-6xl font-extrabold text-blue-900 tracking-wider mt-32'>
         Why Join Us?
       </p>
+      <p className='text-center text-gray-400 uppercase mt-5 tracking-widest font-semibold'>
+        Make your own decisions
+      </p>
 
-      <div className='flex gap-5 justify-center mt-16'>
+      <div className='flex gap-5 justify-center mt-12'>
         {featuresData.map((feature) => (
           <FeatureCard
             key={feature.title}

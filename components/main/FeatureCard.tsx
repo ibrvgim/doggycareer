@@ -15,7 +15,7 @@ function FeatureCard({
           {title}
         </p>
       </div>
-      <p className='text-gray-500 text-justify'>{description}</p>
+      <p className='text-gray-500 text-center'>{description}</p>
     </div>
   );
 }

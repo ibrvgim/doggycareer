@@ -6,7 +6,7 @@ import {
 
 function StatisticCard() {
   return (
-    <div className='border-[1.7px] rounded-2xl border-gray-300 h-60 mt-16 max-w-[103rem] mx-auto flex justify-evenly items-center'>
+    <div className='border-[1.7px] rounded-2xl border-gray-300 h-60 mt-12 max-w-[104rem] mx-auto flex justify-evenly items-center'>
       <div className='flex flex-col items-center justify-center text-3xl gap-2 font-bold text-blue-900'>
         <UserGroupIcon className='size-16 text-rose-400 mb-3' />
         <span className='tracking-wider'>567 059</span>
