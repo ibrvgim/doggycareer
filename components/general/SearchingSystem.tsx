@@ -1,11 +1,9 @@
 import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/solid';
 import Input from './Input';
 import RegionInput from './RegionInput';
-import { getCountries } from '@/data/getCountries';
+import { Cities } from '@/types/types';
 
-async function SearchingSystem() {
-  const cities = await getCountries();
-
+function SearchingSystem({ cities }: Cities) {
   return (
     <form className='flex justify-center items-center mt-12 gap-[0.3rem]'>
       <Input

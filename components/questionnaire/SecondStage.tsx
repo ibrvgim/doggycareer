@@ -1,11 +1,9 @@
-import { getCountries } from '@/data/getCountries';
 import CustomCitiesSelect from './CustomCitiesSelect';
 import QuestionnaireCard from './QuestionnaireCard';
 import PlaceImage from '@/public/questionnaire-images/place.svg';
+import { Cities } from '@/types/types';
 
-async function SecondStage() {
-  const cities = await getCountries();
-
+function SecondStage({ cities }: Cities) {
   return (
     <QuestionnaireCard
       question={

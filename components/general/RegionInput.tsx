@@ -16,8 +16,8 @@ function RegionInput({ name, placeholder, icon, cities }: Props) {
 
   const getSomeCities = cities?.cities
     .map((city) => city.toLowerCase())
-    .filter((city: string) => city.includes(input.toLowerCase()))
-    .slice(0, 3);
+    .filter((city: string) => city.includes(input.trim().toLowerCase()))
+    .slice(0, 4);
 
   return (
     <div className='flex items-center relative'>
@@ -36,13 +36,13 @@ function RegionInput({ name, placeholder, icon, cities }: Props) {
         autoComplete='off'
       />
 
-      {show && (
+      {show && input.trim().length > 0 && (
         <div className='bg-white w-full rounded-md absolute top-14 flex flex-col items-start gap-3 px-8 py-4 border-gray-300 border-[1px] shadow-lg'>
           {getSomeCities.length > 0 ? (
             getSomeCities.map((city: string) => (
               <button
                 key={city}
-                className='text-gray-500 cursor-pointer tracking-wider hover:text-blue-700 transition-colors font-semibold capitalize'
+                className='text-gray-500 cursor-pointer tracking-wider hover:text-blue-700 transition-colors capitalize'
                 onClick={() => {
                   setInput(city);
                   setShow(false);

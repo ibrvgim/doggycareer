@@ -2,7 +2,7 @@ import {
   jobType,
   officeType,
   publicationDates,
-} from '@/data/cardsData/filtersCardData';
+} from '@/data/manualData/filtersCardData';
 import FilterCard from './FilterCard';
 
 function FiltersList() {

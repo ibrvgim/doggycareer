@@ -9,3 +9,10 @@ interface CardItemsType {
   value: string;
   name: string;
 }
+
+// FETCHING CITIES TYPE
+export interface Cities {
+  cities: {
+    cities: string[];
+  };
+}

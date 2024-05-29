@@ -1,20 +1,29 @@
 import Header from '@/components/general/Header';
 import Features from '@/components/main/Features';
 import Questionnaire from '@/components/questionnaire/Questionnaire';
-import RecommendedJobs from '@/components/main/RecommendedJobs';
 import Statistics from '@/components/main/Statistics';
+import { getCountries } from '@/data/getCountries';
+import MobileAdCard from '@/components/general/MobileAdCard';
+import Footer from '@/components/general/Footer';
+import TipCard from '@/components/main/TipCard';
 
-function RootPage() {
+async function RootPage() {
+  const cities = await getCountries();
+
   return (
     <main>
-      <Header />
+      <Header cities={cities} />
 
-      <section className='py-20 px-28'>
-        <Questionnaire />
+      <div className='py-20 px-28'>
+        <Questionnaire cities={cities} />
         {/* <RecommendedJobs /> */}
         <Features />
+        <TipCard />
         <Statistics />
-      </section>
+        <MobileAdCard />
+      </div>
+
+      <Footer />
     </main>
   );
 }

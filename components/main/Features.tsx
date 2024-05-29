@@ -42,8 +42,8 @@ const featuresData = [
 
 function Features() {
   return (
-    <div>
-      <p className='text-center text-6xl font-extrabold text-blue-900 tracking-wider mt-32'>
+    <section className='mt-32'>
+      <p className='text-center text-6xl font-extrabold text-blue-900 tracking-wider'>
         Why Join Us?
       </p>
       <p className='text-center text-gray-400 uppercase mt-5 tracking-widest font-semibold'>
@@ -60,7 +60,7 @@ function Features() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 

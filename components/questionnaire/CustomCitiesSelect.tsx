@@ -1,21 +1,14 @@
-'use client';
-
 import { useState } from 'react';
 import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-
-interface Cities {
-  cities: {
-    cities: string[];
-  };
-}
+import { Cities } from '@/types/types';
 
 function CustomCitiesSelect({ cities }: Cities) {
   const [input, setInput] = useState('');
-  const [chosenCities, setchosenCities] = useState<string[]>([]);
+  const [chosenCities, setChosenCities] = useState<string[]>([]);
 
   const getSomeCities = cities?.cities
     .map((city) => city.toLowerCase())
-    .filter((city: string) => city.includes(input.toLowerCase()))
+    .filter((city: string) => city.includes(input.trim().toLowerCase()))
     .slice(0, 5);
 
   function chooseOnClick(chosenCity: string) {
@@ -24,12 +17,12 @@ function CustomCitiesSelect({ cities }: Cities) {
       return;
     }
 
-    setchosenCities((cities) => [...cities, chosenCity]);
+    setChosenCities((cities) => [...cities, chosenCity]);
     setInput('');
   }
 
   function deleteCity(cityToDelete: string) {
-    setchosenCities((cities) => cities.filter((city) => city !== cityToDelete));
+    setChosenCities((cities) => cities.filter((city) => city !== cityToDelete));
   }
 
   return (
@@ -62,7 +55,7 @@ function CustomCitiesSelect({ cities }: Cities) {
         <input
           type='text'
           placeholder='Choose Job Regions ( max. 5 )'
-          className='border-[1px] border-gray-400 rounded-full w-10/12 pl-12 pr-6 h-11 text-sm tracking-wider text-blue-900 placeholder:font-light disabled:opacity-60'
+          className='border-[1px] border-gray-400 rounded-full w-10/12 pl-12 pr-6 h-11 text-sm tracking-wider text-blue-900 placeholder:font-medium disabled:opacity-60'
           onChange={(e) => setInput(e.target.value)}
           value={input}
           disabled={
@@ -74,13 +67,13 @@ function CustomCitiesSelect({ cities }: Cities) {
         />
       </div>
 
-      {input && (
-        <div className='bg-white w-10/12 rounded-xl absolute mt-2 flex flex-col items-start gap-3 px-8 py-4 border-gray-300 border-[1px] shadow-lg'>
+      {input.trim().length > 0 && (
+        <div className='bg-white w-10/12 rounded-xl absolute mt-2 flex flex-col items-start gap-3 px-8 py-4 border-gray-300 border-[1px] shadow-lg z-10'>
           {getSomeCities.length > 0 ? (
             getSomeCities.map((city: string) => (
               <button
                 key={city}
-                className='text-gray-500 cursor-pointer tracking-wider text-sm hover:text-blue-700 transition-colors font-semibold capitalize'
+                className='text-gray-500 cursor-pointer tracking-wider text-[15px] hover:text-blue-700 transition-colors font-medium capitalize'
                 onClick={() => chooseOnClick(city)}
               >
                 {city}
