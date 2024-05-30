@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Logo from './Logo';
 import { UserIcon } from '@heroicons/react/24/solid';
+import NavLink from './NavLink';
 
 function Navigation() {
   return (
@@ -9,26 +10,16 @@ function Navigation() {
 
       <ul className='flex items-center gap-[2.5rem]'>
         <li>
-          <Link
-            href='/contact'
-            className='font-semibold tracking-wider text-lg text-gray-600 hover:text-blue-800'
-          >
-            Contact
-          </Link>
+          <NavLink href='/personal-jobs/saved-jobs'>My Jobs</NavLink>
         </li>
 
         <li>
-          <Link
-            href='/about-us'
-            className='font-semibold tracking-wider text-lg text-gray-600 hover:text-blue-800'
-          >
-            About Us
-          </Link>
+          <NavLink href='/about-us'>About</NavLink>
         </li>
 
         <li>
           <Link href='/profile'>
-            <UserIcon className='size-7 text-gray-600 hover:text-blue-800 cursor-pointer transition-all ml-6' />
+            <UserIcon className='size-7 text-gray-500 hover:text-sky-600 cursor-pointer transition-all ml-6' />
           </Link>
         </li>
       </ul>

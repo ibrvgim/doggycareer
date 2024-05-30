@@ -6,7 +6,7 @@ export const companyList = [
 
   {
     title: 'Contact',
-    link: '/contact',
+    link: '/',
   },
 ];
 

@@ -69,7 +69,7 @@ function CustomCitiesSelect({ cities }: Cities) {
 
       {input.trim().length > 0 && (
         <div className='bg-white w-10/12 rounded-xl absolute mt-2 flex flex-col items-start gap-3 px-8 py-4 border-gray-300 border-[1px] shadow-lg z-10'>
-          {getSomeCities.length > 0 ? (
+          {getSomeCities && getSomeCities.length > 0 ? (
             getSomeCities.map((city: string) => (
               <button
                 key={city}

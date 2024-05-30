@@ -1,7 +1,11 @@
+export const metadata = {
+  title: 'About Us',
+};
+
 function AboutUsPage() {
   return (
     <div>
-      <h1>About Us</h1>
+      <p>Welcome to The Doggycareer</p>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import LogoImage from '@/public/logo.png';
 function Logo() {
   return (
     <div>
-      <Link href='/' className='flex items-center gap-5'>
+      <Link href='/'>
         <Image
           src={LogoImage}
           alt='logo paw image'

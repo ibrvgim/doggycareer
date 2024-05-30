@@ -11,20 +11,21 @@ async function RootPage() {
   const cities = await getCountries();
 
   return (
-    <main>
-      <Header cities={cities} />
+    <>
+      <main>
+        <Header cities={cities} />
 
-      <div className='py-20 px-28'>
-        <Questionnaire cities={cities} />
-        {/* <RecommendedJobs /> */}
-        <Features />
-        <TipCard />
-        <Statistics />
-        <MobileAdCard />
-      </div>
-
+        <div className='py-20 px-28'>
+          <Questionnaire cities={cities} />
+          {/* <RecommendedJobs /> */}
+          <Features />
+          <TipCard />
+          <Statistics />
+          <MobileAdCard />
+        </div>
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
 
