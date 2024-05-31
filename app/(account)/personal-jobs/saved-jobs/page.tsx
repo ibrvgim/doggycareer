@@ -1,5 +1,5 @@
 import NoJobCard from '@/components/my-jobs/NoJobCard';
-import SaveJobImage from '@/public/save-job-image.svg';
+import SaveJobImage from '@/public/general/save-job-image.svg';
 
 export const metadata = {
   title: 'Saved Jobs',

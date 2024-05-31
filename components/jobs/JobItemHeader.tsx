@@ -8,7 +8,7 @@ function JobItemHeader() {
       <JobItemImage />
 
       <div>
-        <p className='text-3xl font-bold text-blue-900 mb-3'>
+        <p className='text-3xl font-bold text-cyan-700 mb-3'>
           Junior Front - End Developer
         </p>
         <JobInfoBadge />

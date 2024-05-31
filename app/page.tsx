@@ -6,6 +6,7 @@ import { getCountries } from '@/data/getCountries';
 import MobileAdCard from '@/components/general/MobileAdCard';
 import Footer from '@/components/general/Footer';
 import TipCard from '@/components/main/TipCard';
+// import RecommendedJobs from '@/components/main/RecommendedJobs';
 
 async function RootPage() {
   const cities = await getCountries();

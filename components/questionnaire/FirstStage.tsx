@@ -22,7 +22,7 @@ function FirstStage() {
 
 function Button({ children }: { children: React.ReactNode }) {
   return (
-    <button className='border-2 rounded-md border-gray-400 text-gray-500 font-semibold w-[40%] h-12 hover:border-blue-900 hover:text-blue-800 transition-all'>
+    <button className='border-2 rounded-md border-gray-400 text-gray-500 font-semibold w-[40%] h-12 hover:border-cyan-600 hover:text-cyan-700 transition-all'>
       {children}
     </button>
   );

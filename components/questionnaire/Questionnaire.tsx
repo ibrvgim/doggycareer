@@ -73,7 +73,7 @@ function Button({
 }) {
   return (
     <button
-      className='text-blue-900 font-bold opacity-70 uppercase tracking-widest hover:opacity-100 transition-all'
+      className='text-cyan-700 font-bold opacity-70 uppercase tracking-widest hover:opacity-100 transition-all'
       onClick={handleOnClick}
     >
       {children}

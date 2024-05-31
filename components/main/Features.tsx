@@ -43,7 +43,7 @@ const featuresData = [
 function Features() {
   return (
     <section className='mt-32'>
-      <p className='text-center text-6xl font-extrabold text-blue-900 tracking-wider'>
+      <p className='text-center text-6xl font-extrabold text-cyan-700 tracking-wider'>
         Why Join Us?
       </p>
       <p className='text-center text-gray-400 uppercase mt-5 tracking-widest font-semibold'>

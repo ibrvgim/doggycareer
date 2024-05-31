@@ -20,8 +20,8 @@ function SearchingSystem({ cities }: Cities) {
 
       <button
         type='submit'
-        className='bg-blue-800 text-white font-bold tracking-wider px-12 h-full py-[0.63rem] 
-        rounded shadow-xl hover:bg-blue-900 transition-colors'
+        className='bg-cyan-600 text-white font-bold tracking-wider px-12 h-full py-[0.63rem] 
+        rounded shadow-xl hover:bg-cyan-700 transition-colors'
       >
         Get Jobs
       </button>

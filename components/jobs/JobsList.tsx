@@ -3,7 +3,7 @@ import JobCard from './JobCard';
 function JobsList() {
   return (
     <div className='w-full'>
-      <p className='text-lg font-bold text-blue-900 mb-5 tracking-wider'>
+      <p className='text-lg font-bold text-cyan-600 mb-5 tracking-wider'>
         Job results: 3.936
       </p>
 

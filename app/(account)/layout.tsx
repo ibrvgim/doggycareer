@@ -8,7 +8,7 @@ export default function SecondaryLayout({
   return (
     <div>
       <SecondaryHeader />
-      <main className='px-32 py-20'>{children}</main>
+      <main>{children}</main>
     </div>
   );
 }

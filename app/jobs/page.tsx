@@ -14,6 +14,7 @@ async function JobsPage() {
 
         <section className='flex gap-12 py-20 px-28'>
           <FiltersList />
+          {/* SUSPENSE NEEDED TO BE ADD, TO SHOW JOBS LOADING PROCCESS */}
           <JobsList />
         </section>
       </main>

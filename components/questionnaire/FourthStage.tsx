@@ -24,7 +24,7 @@ function FourthStage() {
           />
         </div>
 
-        <button className='flex gap-3 items-center justify-center bg-blue-400 text-white w-10/12 rounded-full mt-4 px-4 py-2 font-bold hover:bg-blue-500 transition-all'>
+        <button className='flex gap-3 items-center justify-center bg-cyan-500 text-white w-10/12 rounded-full mt-4 px-4 py-2 font-bold hover:bg-cyan-600 transition-all'>
           <BellAlertIcon className='size-[18px] text-white' />
           Get Notifications
         </button>

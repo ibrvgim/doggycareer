@@ -1,11 +1,11 @@
 import NoJobCard from '@/components/my-jobs/NoJobCard';
-import ApplyJobImage from '@/public/apply-job-image.svg';
+import ApplyJobImage from '@/public/general/apply-job-image.svg';
 
 export const metadata = {
   title: 'Applied Jobs',
 };
 
-function AppliedJobsPage() {
+async function AppliedJobsPage() {
   return (
     <div className='w-full'>
       <NoJobCard

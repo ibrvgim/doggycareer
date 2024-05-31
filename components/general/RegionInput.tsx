@@ -42,7 +42,7 @@ function RegionInput({ name, placeholder, icon, cities }: Props) {
             getSomeCities.map((city: string) => (
               <button
                 key={city}
-                className='text-gray-500 cursor-pointer tracking-wider hover:text-blue-700 transition-colors capitalize'
+                className='text-gray-500 cursor-pointer tracking-wider hover:text-cyan-700 transition-colors capitalize'
                 onClick={() => {
                   setInput(city);
                   setShow(false);

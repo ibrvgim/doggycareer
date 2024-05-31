@@ -5,7 +5,10 @@ import LogoImage from '@/public/logo.png';
 function Logo() {
   return (
     <div>
-      <Link href='/'>
+      <Link
+        href='/'
+        className='flex gap-5 items-center text-2xl uppercase font-extrabold tracking-widest text-cyan-700'
+      >
         <Image
           src={LogoImage}
           alt='logo paw image'
@@ -13,6 +16,7 @@ function Logo() {
           width={50}
           className='opacity-80'
         />
+        Doggycareer
       </Link>
     </div>
   );

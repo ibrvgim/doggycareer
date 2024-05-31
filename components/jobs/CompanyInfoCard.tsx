@@ -4,7 +4,7 @@ import { JobItemImage } from './JobItemHeader';
 
 function CompanyInfoCard() {
   return (
-    <div className='border-[1.5px] border-gray-400 rounded-lg px-12 py-12'>
+    <div className='border-[1.5px] border-gray-400 rounded-lg px-10 py-8'>
       <div className='flex items-center gap-7 '>
         <JobItemImage />
 

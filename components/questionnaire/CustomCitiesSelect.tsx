@@ -41,7 +41,7 @@ function CustomCitiesSelect({ cities }: Cities) {
 
         {!chosenCities.includes('home office') && (
           <li
-            className='bg-transparent px-5 py-1 rounded-full border-blue-900 border-[1px] text-sm cursor-pointer flex items-center gap-2 hover:text-blue-800 hover:bg-blue-50 hover:border-blue-900 transition-all'
+            className='bg-transparent px-5 py-1 rounded-full border-cyan-700 border-[1px] text-sm cursor-pointer flex items-center gap-2 hover:text-cyan-800 hover:bg-cyan-100 hover:border-cyan-900 transition-all'
             onClick={() => chooseOnClick('home office')}
           >
             <PlusIcon className='size-[14px] font-extrabold' />
@@ -55,7 +55,7 @@ function CustomCitiesSelect({ cities }: Cities) {
         <input
           type='text'
           placeholder='Choose Job Regions ( max. 5 )'
-          className='border-[1px] border-gray-400 rounded-full w-10/12 pl-12 pr-6 h-11 text-sm tracking-wider text-blue-900 placeholder:font-medium disabled:opacity-60'
+          className='border-[1px] border-gray-400 rounded-full w-10/12 pl-12 pr-6 h-11 text-sm tracking-wider text-gray-700 placeholder:font-medium disabled:opacity-60'
           onChange={(e) => setInput(e.target.value)}
           value={input}
           disabled={
@@ -73,7 +73,7 @@ function CustomCitiesSelect({ cities }: Cities) {
             getSomeCities.map((city: string) => (
               <button
                 key={city}
-                className='text-gray-500 cursor-pointer tracking-wider text-[15px] hover:text-blue-700 transition-colors font-medium capitalize'
+                className='text-gray-500 cursor-pointer tracking-wider text-[15px] hover:text-cyan-700 transition-colors font-medium capitalize'
                 onClick={() => chooseOnClick(city)}
               >
                 {city}

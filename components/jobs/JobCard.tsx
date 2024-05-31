@@ -7,8 +7,8 @@ const description =
 function JobCard({ descriptionLength = 200 }: { descriptionLength?: number }) {
   return (
     <Link href='/jobs/id'>
-      <div className='border-[2px] rounded-2xl border-gray-300 px-10 pt-8 pb-12 hover:border-blue-800 transition-all cursor-pointer'>
-        <p className='text-2xl font-bold tracking-wider text-blue-900 mb-4 opacity-90'>
+      <div className='border-[2px] rounded-2xl border-gray-300 bg-white px-10 pt-8 pb-12 hover:border-cyan-600 transition-all cursor-pointer'>
+        <p className='text-2xl font-bold tracking-wider text-cyan-700 mb-4 opacity-90'>
           Junior Front - End Developer
         </p>
 

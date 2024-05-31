@@ -28,8 +28,8 @@ function NoJobCard({
 
       <Link
         href='/jobs'
-        className='border-[1.5px] border-blue-600 px-10 py-2 rounded-md font-semibold text-blue-600 uppercase text-xs tracking-widest
-        hover:bg-blue-50 hover:shadow-sm hover:text-blue-800 hover:border-blue-800 transition-all'
+        className='border-[1.5px] border-cyan-600 px-10 py-2 rounded-md font-semibold text-cyan-600 uppercase text-xs tracking-widest
+        hover:bg-cyan-50 hover:shadow-sm hover:text-cyan-800 hover:border-cyan-800 transition-all'
       >
         See Jobs
       </Link>

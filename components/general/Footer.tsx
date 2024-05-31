@@ -23,7 +23,7 @@ interface List {
 
 function Footer() {
   return (
-    <footer className='bg-gradient-to-br from-rose-50 to-blue-50 min-h-96 px-32 py-12 mt-16 flex flex-col'>
+    <footer className='bg-gradient-to-br from-rose-50 to-blue-50 min-h-96 px-32 py-12 flex flex-col'>
       <div className='flex-grow flex justify-between flex-wrap gap-y-10 gap-x-5'>
         <FooterList title='Company' lists={companyList} />
         <FooterList title='Other Sources' lists={additionalList} />
@@ -33,7 +33,7 @@ function Footer() {
 
       <div className='border-t-2 border-gray-300 mt-8 flex gap-3 items-center pt-6 '>
         <Image src={LogoImage} alt='company logo' height={25} width={25} />
-        <p className='text-sm text-blue-900 font-bold tracking-widest'>
+        <p className='text-sm text-cyan-700 font-bold tracking-widest'>
           Doggycareer GmbH &copy; {new Date().getFullYear()}
         </p>
       </div>
@@ -44,12 +44,12 @@ function Footer() {
 function FooterList({ title, lists }: { title: string; lists: List[] }) {
   return (
     <div>
-      <p className='mb-6 uppercase font-extrabold text-blue-900 text-sm tracking-widest'>
+      <p className='mb-6 uppercase font-extrabold text-cyan-700 text-sm tracking-widest'>
         {title}
       </p>
       <ul className='text-sm tracking-wider text-gray-500 flex flex-col items-start gap-3'>
         {lists.map((list: List) => (
-          <li key={list.title} className='hover:text-blue-900 transition-all'>
+          <li key={list.title} className='hover:text-cyan-700 transition-all'>
             <Link href={list.link}>{list.title}</Link>
           </li>
         ))}
@@ -61,10 +61,9 @@ function FooterList({ title, lists }: { title: string; lists: List[] }) {
 function SocialMedia() {
   return (
     <div>
-      <p className='mb-6 uppercase font-extrabold text-blue-900 text-sm tracking-widest'>
+      <p className='mb-6 uppercase font-extrabold text-cyan-700 text-sm tracking-widest'>
         Connections
       </p>
-
       <ul className='text-gray-500 flex items-center gap-5'>
         <Link
           href='https://www.instagram.com/'
@@ -107,7 +106,16 @@ function SocialMedia() {
         </Link>
       </ul>
 
-      <div className='flex gap-3 mt-10'>
+      <div className='text-gray-500 mt-6 text-sm tracking-wider'>
+        <p className='mb-2 hover:text-cyan-600 cursor-pointer transition-colors'>
+          support@doggycareer.com
+        </p>
+        <p className='hover:text-cyan-600 cursor-pointer transition-colors'>
+          career@doggycareer.com
+        </p>
+      </div>
+
+      <div className='flex gap-3 mt-6'>
         <Link href='https://www.apple.com/app-store/' target='_blank'>
           <Image src={AppStoreIcon} alt='app store icon' className='w-24' />
         </Link>

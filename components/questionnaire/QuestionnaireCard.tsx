@@ -14,7 +14,7 @@ function QuestionnaireCard({
       <div className='flex-grow'>&nbsp;</div>
       <div className='flex gap-5 items-center'>
         <div className='flex-1'>
-          <p className='text-5xl font-bold text-blue-800 leading-snug'>
+          <p className='text-5xl font-bold text-cyan-600 leading-snug'>
             {question}
           </p>
           {children}

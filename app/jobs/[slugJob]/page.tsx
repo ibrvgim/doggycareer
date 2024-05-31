@@ -3,6 +3,7 @@ import SecondaryHeader from '@/components/general/SecondaryHeader';
 import CompanyInfoCard from '@/components/jobs/CompanyInfoCard';
 import JobContentContainer from '@/components/jobs/JobContentContainer';
 import { JobItemHeader } from '@/components/jobs/JobItemHeader';
+import JobSuggestions from '@/components/jobs/JobSuggestions';
 
 function JobItemPage() {
   return (
@@ -13,18 +14,26 @@ function JobItemPage() {
         <JobItemHeader />
 
         <div className='mt-8 flex flex-wrap gap-2'>
-          <Button style='border-blue-500 bg-blue-800 text-white hover:bg-blue-600'>
+          <Button style='bg-cyan-600 text-white hover:bg-cyan-700'>
             Apply
           </Button>
-          <Button style='border-blue-900 hover:bg-blue-50'>Save</Button>
+          <Button style='border-cyan-700 hover:bg-cyan-50'>Save</Button>
         </div>
 
         <JobContentContainer />
+
+        <div className='flex justify-center items-center gap-5 mb-16 border-y-2 border-y-gray-300 py-8'>
+          <p className='text-[17px] font-semibold text-gray-600 tracking-wider'>
+            Are you interested?
+          </p>
+          <Button style='bg-cyan-600 text-white text-sm hover:bg-cyan-700'>
+            Apply Now
+          </Button>
+        </div>
+
         <CompanyInfoCard />
-
-        <div>Other Job Suggestions</div>
       </main>
-
+      <JobSuggestions />
       <Footer />
     </div>
   );

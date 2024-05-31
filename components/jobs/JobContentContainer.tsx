@@ -1,8 +1,8 @@
 function JobContentContainer() {
   return (
-    <section className='mt-14'>
+    <section className='my-14'>
       <div className='text-gray-600 text-justify tracking-wide leading-relaxed mb-10'>
-        <p className='text-blue-900 text-xl font-semibold mb-4 tracking-wider'>
+        <p className='text-cyan-700 text-xl font-semibold mb-4 tracking-wider'>
           About the Job:
         </p>
         <p className='mb-6'>
@@ -35,7 +35,7 @@ function JobContentContainer() {
       </div>
 
       <div className='mb-10'>
-        <p className='text-blue-900 text-[17px] font-semibold mb-4 tracking-wider'>
+        <p className='text-cyan-700 text-[17px] font-semibold mb-4 tracking-wider'>
           Responsibilities:
         </p>
         <ul className='text-gray-600 tracking-wide flex flex-col gap-1'>
@@ -51,8 +51,8 @@ function JobContentContainer() {
         </ul>
       </div>
 
-      <div className='mb-16'>
-        <p className='text-blue-900 text-[17px] font-semibold mb-4 tracking-wider'>
+      <div>
+        <p className='text-cyan-700 text-[17px] font-semibold mb-4 tracking-wider'>
           Qualifications:
         </p>
         <ul className='text-gray-600 tracking-wide flex flex-col gap-1'>
