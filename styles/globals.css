@@ -167,3 +167,9 @@
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
 }
+
+/* GENERAL CHANGES */
+
+input:focus {
+  outline: 1px solid #0e7490;
+}

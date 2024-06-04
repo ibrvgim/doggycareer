@@ -4,14 +4,17 @@ import CompanyInfoCard from '@/components/jobs/CompanyInfoCard';
 import JobContentContainer from '@/components/jobs/JobContentContainer';
 import { JobItemHeader } from '@/components/jobs/JobItemHeader';
 import JobSuggestions from '@/components/jobs/JobSuggestions';
+import { getSingleJob } from '@/data/jobs/apiJobs';
 
-function JobItemPage() {
+async function JobItemPage({ params }: { params: { slugJob: string } }) {
+  const singleJob = await getSingleJob(params.slugJob);
+
   return (
     <div>
       <SecondaryHeader />
 
       <main className='px-[20%] pt-20 pb-10'>
-        <JobItemHeader />
+        <JobItemHeader job={singleJob} />
 
         <div className='mt-8 flex flex-wrap gap-2'>
           <Button style='bg-cyan-600 text-white hover:bg-cyan-700'>
@@ -20,7 +23,7 @@ function JobItemPage() {
           <Button style='border-cyan-700 hover:bg-cyan-50'>Save</Button>
         </div>
 
-        <JobContentContainer />
+        <JobContentContainer job={singleJob} />
 
         <div className='flex justify-center items-center gap-5 mb-16 border-y-2 border-y-gray-300 py-8'>
           <p className='text-[17px] font-semibold text-gray-600 tracking-wider'>
@@ -31,9 +34,9 @@ function JobItemPage() {
           </Button>
         </div>
 
-        <CompanyInfoCard />
+        <CompanyInfoCard job={singleJob} />
       </main>
-      <JobSuggestions />
+      <JobSuggestions slugJob={params.slugJob} />
       <Footer />
     </div>
   );

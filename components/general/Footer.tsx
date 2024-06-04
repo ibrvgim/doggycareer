@@ -106,16 +106,7 @@ function SocialMedia() {
         </Link>
       </ul>
 
-      <div className='text-gray-500 mt-6 text-sm tracking-wider'>
-        <p className='mb-2 hover:text-cyan-600 cursor-pointer transition-colors'>
-          support@doggycareer.com
-        </p>
-        <p className='hover:text-cyan-600 cursor-pointer transition-colors'>
-          career@doggycareer.com
-        </p>
-      </div>
-
-      <div className='flex gap-3 mt-6'>
+      <div className='flex gap-3 mt-12'>
         <Link href='https://www.apple.com/app-store/' target='_blank'>
           <Image src={AppStoreIcon} alt='app store icon' className='w-24' />
         </Link>

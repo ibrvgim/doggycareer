@@ -3,9 +3,12 @@ import Header from '@/components/general/Header';
 import FiltersList from '@/components/jobs/FiltersList';
 import JobsList from '@/components/jobs/JobsList';
 import { getCountries } from '@/data/getCountries';
+import { getJobs } from '@/data/jobs/apiJobs';
+import { JobType } from '@/types/types';
 
 async function JobsPage() {
   const cities = await getCountries();
+  const allJobs: JobType[] = await getJobs();
 
   return (
     <>
@@ -14,8 +17,7 @@ async function JobsPage() {
 
         <section className='flex gap-12 py-20 px-28'>
           <FiltersList />
-          {/* SUSPENSE NEEDED TO BE ADD, TO SHOW JOBS LOADING PROCCESS */}
-          <JobsList />
+          <JobsList allJobs={allJobs} />
         </section>
       </main>
       <Footer />

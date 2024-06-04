@@ -48,7 +48,7 @@ function CustomJobsSelect({ jobs }: Jobs) {
         <input
           type='text'
           placeholder='Choose Job Titles ( max. 3 )'
-          className='border-[1px] border-gray-400 rounded-full w-10/12 pl-12 pr-6 h-11 text-sm tracking-wider text-blue-900 placeholder:font-medium disabled:opacity-60'
+          className='border-[1px] border-gray-400 rounded-full w-10/12 pl-12 pr-6 h-11 text-sm tracking-wider text-cyan-700 placeholder:font-medium disabled:opacity-60'
           onChange={(e) => setInput(e.target.value)}
           value={input}
           disabled={chosenJobs.length >= 3}
@@ -62,7 +62,7 @@ function CustomJobsSelect({ jobs }: Jobs) {
             getSomeJobes.map((job: string) => (
               <button
                 key={job}
-                className='text-gray-500 cursor-pointer tracking-wider text-[15px] hover:text-blue-700 transition-colors font-medium capitalize'
+                className='text-gray-500 cursor-pointer tracking-wider text-[15px] hover:text-cyan-700 transition-colors font-medium capitalize'
                 onClick={() => chooseOnClick(job)}
               >
                 {job}

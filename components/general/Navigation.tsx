@@ -18,7 +18,7 @@ function Navigation() {
         </li>
 
         <li>
-          <Link href='/profile'>
+          <Link href='/account/profile'>
             <UserIcon className='size-7 text-gray-500 hover:text-sky-600 cursor-pointer transition-all ml-6' />
           </Link>
         </li>
