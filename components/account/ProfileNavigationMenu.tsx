@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { FaPenToSquare } from 'react-icons/fa6';
-import { IoMdLogOut } from 'react-icons/io';
 import { BiSolidMessageSquareDetail } from 'react-icons/bi';
 import { FaRegUserCircle } from 'react-icons/fa';
+import SignoutButton from '../authentication/SignoutButton';
 
-function ProfileNavigationMenu() {
+function ProfileNavigationMenu({ logout }: { logout: () => void }) {
   return (
     <div className='border-[1.7px] border-gray-300 px-5 min-w-72 pt-5 pb-3 rounded-xl'>
       <div className='flex flex-col gap-2 tracking-[0.07rem] font-medium text-gray-700'>
@@ -47,10 +47,7 @@ function ProfileNavigationMenu() {
         </Tab>
 
         <div className='pt-2 mt-2 border-t-2 border-t-gray-200'>
-          <button className='py-2 px-4 rounded-md text-sm cursor-pointer text-red-600 hover:bg-red-50 transition-all flex gap-2 items-center w-full'>
-            <IoMdLogOut className='text-lg text-red-600' />
-            Sign Out
-          </button>
+          <SignoutButton logout={logout} />
         </div>
       </div>
     </div>

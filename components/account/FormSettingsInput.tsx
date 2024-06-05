@@ -4,6 +4,7 @@ export function Input({
   type,
   placeholder,
   label,
+  error,
   disabled = false,
   defaultValue,
 }: {
@@ -13,15 +14,21 @@ export function Input({
   placeholder?: string;
   label: string;
   disabled?: boolean;
+  error?: string;
   defaultValue?: string;
 }) {
   return (
     <div>
       <label
         htmlFor={name}
-        className='uppercase text-[11px] tracking-widest text-gray-500 font-semibold'
+        className='uppercase text-[11px] tracking-widest text-gray-500 font-semibold flex'
       >
         {label}
+        {error && (
+          <span className='ml-auto text-red-500 normal-case text-xs'>
+            {error.slice(0, 1).toUpperCase() + error.slice(1).toLowerCase()}
+          </span>
+        )}
       </label>
 
       <div className='flex items-center mt-2 relative'>

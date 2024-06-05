@@ -34,7 +34,7 @@ function FiltersList() {
       />
 
       <div className='flex justify-end mt-8'>
-        <button className='bg-cyan-600 text-white px-8 py-2 rounded-md text-sm tracking-wider font-semibold'>
+        <button className='bg-cyan-600 text-white px-8 py-2 rounded-md text-sm tracking-wider font-semibold hover:bg-cyan-700 transition-all'>
           Apply Filters
         </button>
       </div>
