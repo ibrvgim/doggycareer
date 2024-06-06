@@ -1,4 +1,5 @@
 import Footer from '@/components/general/Footer';
+import GoBack from '@/components/general/GoBack';
 import SecondaryHeader from '@/components/general/SecondaryHeader';
 import CompanyInfoCard from '@/components/jobs/CompanyInfoCard';
 import JobContentContainer from '@/components/jobs/JobContentContainer';
@@ -14,6 +15,9 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
       <SecondaryHeader />
 
       <main className='px-[20%] pt-20 pb-10'>
+        <div className='mb-8'>
+          <GoBack />
+        </div>
         <JobItemHeader job={singleJob} />
 
         <div className='mt-8 flex flex-wrap gap-2'>

@@ -1,3 +1,17 @@
+export const sortBy = [
+  {
+    label: 'Most Recent',
+    value: 'recent',
+    name: 'sortBy',
+  },
+
+  {
+    label: 'Most Relevant',
+    value: 'relevant',
+    name: 'sortBy',
+  },
+];
+
 export const publicationDates = [
   {
     label: 'Published within 24 hours',

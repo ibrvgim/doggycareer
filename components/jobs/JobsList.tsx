@@ -6,17 +6,27 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import ListSpinner from '../general/ListSpinner';
 import NoMatchingJobs from './NoMatchingJobs';
+import { differenceInDays, differenceInHours } from 'date-fns';
 
 function JobsList({ allJobs }: { allJobs: JobType[] }) {
   const params = useSearchParams();
   const publicationDate = params?.get('publicationDate');
   const jobType = params?.get('jobType');
   const officeType = params?.get('officeType');
+  const sortBy = params?.get('sortBy');
 
   let filteredJobs: JobType[] = allJobs;
 
+  if (sortBy) {
+    filteredJobs = filteredJobs.sort((a, b) => {
+      if (sortBy === 'recent') {
+        return new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime();
+      } else return NaN;
+    });
+  }
+
   if (jobType) {
-    filteredJobs = allJobs.filter((job) => {
+    filteredJobs = filteredJobs.filter((job) => {
       if (jobType === 'partTime')
         return job.jobType.toLowerCase() === 'part time';
       else if (jobType === 'fullTime')
@@ -37,11 +47,23 @@ function JobsList({ allJobs }: { allJobs: JobType[] }) {
     });
   }
 
+  if (publicationDate) {
+    filteredJobs = filteredJobs.filter((job) => {
+      if (publicationDate === '24hours')
+        return differenceInHours(new Date(), new Date(job.postedAt)) <= 24;
+      else if (publicationDate === '7days')
+        return differenceInDays(new Date(), new Date(job.postedAt)) <= 7;
+      else if (publicationDate === '14days')
+        return differenceInDays(new Date(), new Date(job.postedAt)) <= 14;
+      else return job;
+    });
+  }
+
   return (
     <div className='w-full'>
       {filteredJobs.length > 0 ? (
         <Suspense fallback={<ListSpinner />}>
-          <p className='text-lg font-bold text-gray-500 mb-5 tracking-wider'>
+          <p className='text-xl font-bold text-gray-500 tracking-wider mb-8'>
             Job results: {filteredJobs.length}
           </p>
 

@@ -4,6 +4,7 @@ import {
   jobType,
   officeType,
   publicationDates,
+  sortBy,
 } from '@/data/manualData/filtersCardData';
 import FilterCard from './FilterCard';
 import { filterAction } from '@/actions/filtersFormAction';
@@ -14,9 +15,16 @@ function FiltersList() {
   const defaultPublicationDate = params.get('publicationDate') || '';
   const defaultJobType = params.get('jobType') || '';
   const defaultOfficeType = params.get('officeType') || '';
+  const defaultSortBy = params.get('sortBy') || '';
 
   return (
     <form action={filterAction}>
+      <FilterCard
+        options={sortBy}
+        title='Sort By'
+        defaultChecked={defaultSortBy}
+      />
+
       <FilterCard
         options={publicationDates}
         title='Publication Date'

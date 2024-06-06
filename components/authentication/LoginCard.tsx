@@ -6,9 +6,15 @@ import Link from 'next/link';
 import { useFormState } from 'react-dom';
 import { MdEmail, MdLock } from 'react-icons/md';
 import SubmitButton from './SubmitButton';
+import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
 function LoginCard() {
   const [state, formAction] = useFormState(loginUser, {});
+
+  useEffect(() => {
+    if (state?.credentials) toast.error(state.credentials);
+  }, [state.credentials]);
 
   return (
     <form
@@ -55,6 +61,12 @@ function LoginCard() {
               <MdLock />
             </Input>
           </div>
+
+          {state?.credentials && (
+            <p className='mt-6 uppercase text-xs tracking-wider font-semibold text-red-500'>
+              {state.credentials}
+            </p>
+          )}
           <SubmitButton>Continue</SubmitButton>
         </div>
       </div>

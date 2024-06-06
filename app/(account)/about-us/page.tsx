@@ -73,6 +73,8 @@ function ImageCard({ image }: { image: StaticImageData }) {
         alt='story part image'
         className='max-h-96 max-w-[30rem] object-cover'
         draggable={false}
+        priority
+        quality={70}
       />
     </div>
   );

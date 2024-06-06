@@ -1,16 +1,21 @@
 import JobInfoBadge from '@/components/jobs/JobInfoBadge';
-import CompanyLogo from '@/public/trivago-logo.svg';
 import { JobType } from '@/types/types';
+import { jobPosted } from '@/utilities/jobPosted';
 import Image from 'next/image';
 
 function JobItemHeader({ job }: { job: JobType }) {
-  console.log(job.logo);
   return (
     <div className='flex gap-10 items-center'>
       <JobItemImage job={job} />
 
-      <div>
-        <p className='text-3xl font-bold text-cyan-700 mb-3'>{job.jobTitle}</p>
+      <div className='w-full'>
+        <div className='mb-4 flex flex-wrap items-center justify-between gap-x-5 gap-y-2'>
+          <p className='text-3xl font-bold text-cyan-700'>{job.jobTitle}</p>
+          <p className='text-sm text-gray-400 font-medium'>
+            posted {jobPosted(job.postedAt)}
+          </p>
+        </div>
+
         <JobInfoBadge job={job} />
       </div>
     </div>

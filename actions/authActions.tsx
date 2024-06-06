@@ -1,7 +1,7 @@
 'use server';
 
 import { createUserAPI, loginUserAPI } from '@/data/auth/apiUser';
-import { log } from 'console';
+import { createSavedAppliedJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import { redirect } from 'next/navigation';
 
 interface ErrorsType {
@@ -50,9 +50,15 @@ export async function loginUser(_: any, data: FormData) {
     return errors;
   }
 
-  const loginData = await loginUserAPI(email, password);
+  const loginOutput = await loginUserAPI(email, password);
 
-  if (loginData.user) redirect('/');
+  if (typeof loginOutput !== 'string') {
+    errors.credentials = '';
+    redirect('/');
+  } else {
+    errors.credentials = loginOutput;
+    return errors;
+  }
 }
 
 export async function createUser(_: any, data: FormData) {
@@ -66,7 +72,7 @@ export async function createUser(_: any, data: FormData) {
   const checkFirstName = validValue('firstName', firstName, 3);
   const checkLastName = validValue('lastName', lastName, 3);
   const checkEmail = validEmail(email);
-  const checkPhoneNumber = validValue('phoneNumber', phoneNumber, 3);
+  const checkPhoneNumber = validValue('phoneNumber', phoneNumber, 10);
   const checkPassword = validValue('password', password, 8);
   const checkConfirmPassword = validValue(
     'confirmPassword',
@@ -100,5 +106,8 @@ export async function createUser(_: any, data: FormData) {
     phoneNumber
   );
 
-  if (newUser.user) redirect('/');
+  if (newUser.user) {
+    createSavedAppliedJobs(newUser.user.id);
+    redirect('/');
+  }
 }

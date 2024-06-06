@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import JobInfoBadge from './JobInfoBadge';
 import { JobType } from '@/types/types';
+import { jobPosted } from '@/utilities/jobPosted';
 
 function JobCard({
   job,
@@ -22,7 +23,9 @@ function JobCard({
           {job.jobDescription.slice(0, descriptionLength) + '...'}
         </p>
 
-        <span className='text-sm text-gray-400 float-right'>17 hours ago</span>
+        <span className='text-sm text-gray-400 float-right'>
+          {jobPosted(job.postedAt)}
+        </span>
       </div>
     </Link>
   );

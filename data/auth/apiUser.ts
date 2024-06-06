@@ -29,7 +29,7 @@ export async function loginUserAPI(email: string, password: string) {
     password,
   });
 
-  if (error) throw new Error(error.message);
+  if (error) return error.message;
   return data;
 }
 
