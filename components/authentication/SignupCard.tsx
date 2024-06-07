@@ -1,6 +1,5 @@
 'use client';
 
-import { createUser } from '@/actions/authActions';
 import { Input } from '@/components/account/FormSettingsInput';
 import Link from 'next/link';
 import { useFormState } from 'react-dom';
@@ -11,6 +10,7 @@ import {
   MdLock,
 } from 'react-icons/md';
 import SubmitButton from './SubmitButton';
+import { createUser } from '@/actions/authActions';
 
 function SignupCard() {
   const [state, formAction] = useFormState(createUser, {});

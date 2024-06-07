@@ -7,8 +7,8 @@ import {
   sortBy,
 } from '@/data/manualData/filtersCardData';
 import FilterCard from './FilterCard';
-import { filterAction } from '@/actions/filtersFormAction';
 import { useSearchParams } from 'next/navigation';
+import { filterAction } from '@/actions/filtersFormAction';
 
 function FiltersList() {
   const params = useSearchParams();

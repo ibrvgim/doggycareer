@@ -1,6 +1,9 @@
+import { JobType } from '@/types/types';
 import JobCard from '../jobs/JobCard';
+import ListSpinner from '../general/ListSpinner';
+import { Suspense } from 'react';
 
-function RecommendedJobs() {
+function RecommendedJobs({ allJobs }: { allJobs: JobType[] }) {
   return (
     <div>
       <p className='text-center text-6xl font-extrabold text-cyan-700 tracking-widest mt-12'>
@@ -11,10 +14,11 @@ function RecommendedJobs() {
       </p>
 
       <div className='flex justify-center gap-5 mt-12 max-w-[104rem] mx-auto'>
-        {/* SUSPENSE TO SHOW LOADING PROCCESS */}
-        <JobCard descriptionLength={86} />
-        <JobCard descriptionLength={86} />
-        <JobCard descriptionLength={86} />
+        <Suspense fallback={<ListSpinner />}>
+          {allJobs.slice(0, 3).map((job) => (
+            <JobCard key={job.id} job={job} descriptionLength={86} />
+          ))}
+        </Suspense>
       </div>
     </div>
   );

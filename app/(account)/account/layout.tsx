@@ -1,19 +1,18 @@
 import ProfileNavigationMenu from '@/components/account/ProfileNavigationMenu';
-import { logoutUserAPI } from '@/data/auth/apiUser';
+import { getUserAPI } from '@/data/auth/apiUser';
+import { redirect } from 'next/navigation';
 
 async function MyJobsLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  async function logout() {
-    'use server';
-    return await logoutUserAPI();
-  }
+  const user = await getUserAPI();
+  if (user?.role !== 'authenticated') redirect('/authentication');
 
   return (
     <div className='flex items-start gap-14 px-32 py-20'>
-      <ProfileNavigationMenu logout={logout} />
+      <ProfileNavigationMenu />
       {children}
     </div>
   );

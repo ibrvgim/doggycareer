@@ -1,7 +1,14 @@
 'use server';
 
-import { createUserAPI, loginUserAPI } from '@/data/auth/apiUser';
+import {
+  createUserAPI,
+  loginUserAPI,
+  logoutUserAPI,
+  updatePasswordAPI,
+  updatePersonalInformationAPI,
+} from '@/data/auth/apiUser';
 import { createSavedAppliedJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 interface ErrorsType {
@@ -109,5 +116,52 @@ export async function createUser(_: any, data: FormData) {
   if (newUser.user) {
     createSavedAppliedJobs(newUser.user.id);
     redirect('/');
+  }
+}
+
+export async function signoutAction() {
+  await logoutUserAPI();
+  redirect('/authentication');
+}
+
+export async function updateUserInfo(_: any, data: FormData) {
+  const firstName = data.get('firstName') as string;
+  const lastName = data.get('lastName') as string;
+  const phoneNumber = data.get('phoneNumber') as string;
+
+  const checkFirstName = validValue('firstName', firstName, 3);
+  const checkLastName = validValue('lastName', lastName, 3);
+  const checkPhoneNumber = validValue('phoneNumber', phoneNumber, 10);
+
+  if (!checkFirstName || !checkLastName || !checkPhoneNumber) {
+    return errors;
+  } else {
+    await updatePersonalInformationAPI(firstName, lastName, phoneNumber);
+    revalidatePath('/');
+  }
+}
+
+export async function updatePassword(_: any, data: FormData) {
+  const password = data.get('password') as string;
+  const confirmPassword = data.get('confirmPassword') as string;
+
+  const checkPassword = validValue('password', password, 8);
+  const checkConfirmPassword = validValue(
+    'confirmPassword',
+    confirmPassword,
+    8
+  );
+
+  if (!checkPassword || !checkConfirmPassword) {
+    return errors;
+  } else if (password !== confirmPassword) {
+    errors.confirmPassword = 'Passwords mismatch';
+    errors.password = 'Passwords mismatch';
+    return errors;
+  } else {
+    errors.confirmPassword = '';
+    errors.password = '';
+
+    await updatePasswordAPI(password);
   }
 }

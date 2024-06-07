@@ -8,7 +8,13 @@ import ListSpinner from '../general/ListSpinner';
 import NoMatchingJobs from './NoMatchingJobs';
 import { differenceInDays, differenceInHours } from 'date-fns';
 
-function JobsList({ allJobs }: { allJobs: JobType[] }) {
+function JobsList({
+  allJobs,
+  savedJobs,
+}: {
+  allJobs: JobType[];
+  savedJobs: string[];
+}) {
   const params = useSearchParams();
   const publicationDate = params?.get('publicationDate');
   const jobType = params?.get('jobType');
@@ -69,7 +75,7 @@ function JobsList({ allJobs }: { allJobs: JobType[] }) {
 
           <div className='flex flex-col gap-5'>
             {filteredJobs.map((job) => (
-              <JobCard key={job.id} job={job} />
+              <JobCard key={job.id} job={job} savedJobs={savedJobs} />
             ))}
           </div>
         </Suspense>

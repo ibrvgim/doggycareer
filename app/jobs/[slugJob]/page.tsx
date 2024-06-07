@@ -1,3 +1,4 @@
+import { saveJobAction } from '@/actions/actionSavedAppliedJobs';
 import Footer from '@/components/general/Footer';
 import GoBack from '@/components/general/GoBack';
 import SecondaryHeader from '@/components/general/SecondaryHeader';
@@ -5,10 +6,18 @@ import CompanyInfoCard from '@/components/jobs/CompanyInfoCard';
 import JobContentContainer from '@/components/jobs/JobContentContainer';
 import { JobItemHeader } from '@/components/jobs/JobItemHeader';
 import JobSuggestions from '@/components/jobs/JobSuggestions';
+import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob } from '@/data/jobs/apiJobs';
+import { getSavedJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 
 async function JobItemPage({ params }: { params: { slugJob: string } }) {
   const singleJob = await getSingleJob(params.slugJob);
+  const user = await getUserAPI();
+  const savedJobs = await getSavedJobs();
+
+  const getCurrentUserSavedJobs = savedJobs?.find(
+    (item) => item.userId === user?.id
+  ).savedJobs;
 
   return (
     <div>
@@ -24,7 +33,23 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
           <Button style='bg-cyan-600 text-white hover:bg-cyan-700'>
             Apply
           </Button>
-          <Button style='border-cyan-700 hover:bg-cyan-50'>Save</Button>
+          <form action={saveJobAction}>
+            <input
+              name='jobId'
+              value={params.slugJob}
+              hidden
+              className='hidden'
+            />
+            {!getCurrentUserSavedJobs.includes(params.slugJob) ? (
+              <Button style='border-cyan-700 hover:bg-cyan-50 font-semibold'>
+                Save
+              </Button>
+            ) : (
+              <Button style='border-red-500 hover:bg-red-50 text-red-500 font-semibold'>
+                Remove from My Jobs
+              </Button>
+            )}
+          </form>
         </div>
 
         <JobContentContainer job={singleJob} />

@@ -40,7 +40,7 @@ export function Input({
           name={name}
           type={type}
           placeholder={placeholder}
-          className='w-full h-10 rounded-md pl-12 text-sm tracking-wider border-[1px] text-gray-600 border-gray-400 disabled:text-gray-500  disabled:bg-blue-50 placeholder:text-gray-300'
+          className='w-full h-10 rounded-md pl-12 text-sm tracking-wider border-[1px] text-gray-600 border-gray-400 disabled:text-gray-500  disabled:opacity-85 disabled:border-gray-300 placeholder:text-gray-300'
           disabled={disabled}
           defaultValue={defaultValue}
         />

@@ -1,3 +1,6 @@
+'use client';
+
+import { UserType } from '@/types/types';
 import { Button, OutlineButton } from './FormSettingsButton';
 import { Input } from './FormSettingsInput';
 import {
@@ -6,10 +9,14 @@ import {
   MdLocalPhone,
   MdLock,
 } from 'react-icons/md';
+import { useFormState } from 'react-dom';
+import { updatePassword, updateUserInfo } from '@/actions/authActions';
 
-export function PersonalInfoForm() {
+export function PersonalInfoForm({ user }: { user: UserType }) {
+  const [state, formAction] = useFormState(updateUserInfo, {});
+
   return (
-    <form>
+    <form action={formAction}>
       <p className='mb-6 font-bold text-gray-500 text-3xl tracking-wider'>
         Change Personal Information
       </p>
@@ -20,6 +27,8 @@ export function PersonalInfoForm() {
           type='text'
           placeholder='ex. Alex'
           label='First Name'
+          defaultValue={user?.user_metadata.firstName}
+          error={state?.firstName ? state?.firstName : ''}
         >
           <MdOutlineDriveFileRenameOutline />
         </Input>
@@ -29,6 +38,8 @@ export function PersonalInfoForm() {
           type='text'
           placeholder='ex. Johnson'
           label='Last Name'
+          defaultValue={user?.user_metadata.lastName}
+          error={state?.lastName ? state?.lastName : ''}
         >
           <MdOutlineDriveFileRenameOutline />
         </Input>
@@ -37,7 +48,7 @@ export function PersonalInfoForm() {
           type='email'
           label='Email Address'
           disabled={true}
-          defaultValue='alex.johnson@gmail.com'
+          defaultValue={user?.user_metadata.email}
         >
           <MdEmail />
         </Input>
@@ -47,6 +58,8 @@ export function PersonalInfoForm() {
           type='phone'
           placeholder='ex. +4917684618956'
           label='Phone Number'
+          defaultValue={user?.user_metadata.phoneNumber}
+          error={state?.phoneNumber ? state?.phoneNumber : ''}
         >
           <MdLocalPhone />
         </Input>
@@ -61,8 +74,10 @@ export function PersonalInfoForm() {
 }
 
 export function PasswordForm() {
+  const [state, formAction] = useFormState(updatePassword, {});
+
   return (
-    <form>
+    <form action={formAction}>
       <p className='mb-6 font-bold text-gray-500 text-3xl tracking-wider'>
         Change Credentials
       </p>
@@ -73,15 +88,17 @@ export function PasswordForm() {
           type='password'
           placeholder='Minimum 8 characters'
           label='Password'
+          error={state?.password ? state?.password : ''}
         >
           <MdLock />
         </Input>
 
         <Input
-          name='lastName'
-          type='text'
+          name='confirmPassword'
+          type='password'
           placeholder='Minimum 8 characters'
           label='Confirm Password'
+          error={state?.confirmPassword ? state?.confirmPassword : ''}
         >
           <MdLock />
         </Input>
