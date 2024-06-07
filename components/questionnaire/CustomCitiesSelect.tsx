@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import { Cities } from '@/types/types';
+import { Cities, QuestionnaireType } from '@/types/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLocation } from '@/redux/slices/questionnaireSLice';
 
 function CustomCitiesSelect({ cities }: Cities) {
   const [input, setInput] = useState('');
-  const [chosenCities, setChosenCities] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const questionnaire = useSelector(
+    (state: { questionnaire: QuestionnaireType }) => state.questionnaire
+  );
 
   const getSomeCities = cities?.cities
     .map((city) => city.toLowerCase())
@@ -12,24 +17,24 @@ function CustomCitiesSelect({ cities }: Cities) {
     .slice(0, 5);
 
   function chooseOnClick(chosenCity: string) {
-    if (chosenCities.includes(chosenCity) || chosenCities.length >= 6) {
+    if (questionnaire.location.length >= 6) {
       setInput('');
       return;
     }
 
-    setChosenCities((cities) => [...cities, chosenCity]);
+    dispatch(setLocation(chosenCity));
     setInput('');
   }
 
   function deleteCity(cityToDelete: string) {
-    setChosenCities((cities) => cities.filter((city) => city !== cityToDelete));
+    dispatch(setLocation(cityToDelete));
   }
 
   return (
     <div className='relative top-0 left-0'>
       <ul className='flex flex-wrap gap-3 mb-5 text-gray-600'>
-        {chosenCities.length > 0 &&
-          chosenCities.map((city) => (
+        {questionnaire.location.length > 0 &&
+          questionnaire.location.map((city) => (
             <li
               key={city}
               className='bg-rose-100 text-rose-900 tracking-wide px-6 py-1 rounded-full text-sm border-rose-600 border-[1px] cursor-pointer hover:bg-rose-200 transition-all capitalize'
@@ -39,7 +44,7 @@ function CustomCitiesSelect({ cities }: Cities) {
             </li>
           ))}
 
-        {!chosenCities.includes('home office') && (
+        {!questionnaire.location.includes('home office') && (
           <li
             className='bg-transparent px-5 py-1 rounded-full border-cyan-700 border-[1px] text-sm cursor-pointer flex items-center gap-2 hover:text-cyan-800 hover:bg-cyan-100 hover:border-cyan-900 transition-all'
             onClick={() => chooseOnClick('home office')}
@@ -59,9 +64,9 @@ function CustomCitiesSelect({ cities }: Cities) {
           onChange={(e) => setInput(e.target.value)}
           value={input}
           disabled={
-            chosenCities.includes('home office')
-              ? chosenCities.length === 6
-              : chosenCities.length === 5
+            questionnaire.location.includes('home office')
+              ? questionnaire.location.length === 6
+              : questionnaire.location.length === 5
           }
           autoComplete='off'
         />

@@ -3,6 +3,7 @@ import '../styles/globals.css';
 
 import { Nunito } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
+import ReduxProvider from '@/redux/ReduxProvider';
 
 const font = Nunito({
   subsets: ['latin'],
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${font.className} antialiased min-h-screen`}>
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
         <Toaster
           position='bottom-center'
           gutter={12}

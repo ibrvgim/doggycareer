@@ -1,7 +1,16 @@
+import { QuestionnaireType } from '@/types/types';
 import QuestionnaireCard from './QuestionnaireCard';
 import WorkImage from '@/public/questionnaire-images/work.svg';
+import { useDispatch } from 'react-redux';
+import { setJobType } from '@/redux/slices/questionnaireSLice';
 
-function FirstStage() {
+function FirstStage({ questionnaire }: { questionnaire: QuestionnaireType }) {
+  const dispatch = useDispatch();
+
+  function handleJobType(type: string) {
+    dispatch(setJobType(type));
+  }
+
   return (
     <QuestionnaireCard
       question={
@@ -13,16 +22,43 @@ function FirstStage() {
       image={WorkImage}
     >
       <div className='flex gap-3 mt-14'>
-        <Button>Part time</Button>
-        <Button>Full time</Button>
+        <Button
+          handleOnClick={() => handleJobType('partTime')}
+          active={questionnaire.jobType === 'partTime'}
+        >
+          Part time
+        </Button>
+        <Button
+          handleOnClick={() => handleJobType('fullTime')}
+          active={questionnaire.jobType === 'fullTime'}
+        >
+          Full time
+        </Button>
       </div>
     </QuestionnaireCard>
   );
 }
 
-function Button({ children }: { children: React.ReactNode }) {
+function Button({
+  children,
+  handleOnClick,
+  active,
+}: {
+  children: React.ReactNode;
+  handleOnClick: () => void;
+  active: boolean;
+}) {
   return (
-    <button className='border-2 rounded-md border-gray-400 text-gray-500 font-semibold w-[40%] h-12 hover:border-cyan-600 hover:text-cyan-700 transition-all'>
+    <button
+      className='border-2 rounded-md border-gray-400 text-gray-500 font-semibold w-[40%] h-12 
+      hover:border-cyan-600 hover:text-cyan-700 transition-all'
+      style={
+        active
+          ? { border: '2px solid rgb(8 145 178)', color: 'rgb(14 116 144)' }
+          : {}
+      }
+      onClick={handleOnClick}
+    >
       {children}
     </button>
   );

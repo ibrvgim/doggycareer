@@ -18,7 +18,7 @@ function validEmail(email: string) {
     errors.email = 'Field must be filled in';
     return true;
   } else if (!valid) {
-    errors.email = 'Invalid email format';
+    errors.email = 'Wrong email format';
     return false;
   } else {
     errors.email = '';

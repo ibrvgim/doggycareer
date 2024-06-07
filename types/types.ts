@@ -19,7 +19,6 @@ export interface Cities {
 }
 
 // JOBS TYPE
-
 export interface JobType {
   id: number;
   postedAt: string;
@@ -35,4 +34,12 @@ export interface JobType {
   responsibilities: string;
   qualifications: string;
   industry: string;
+}
+
+// QUESTIONNAIRE TYPE
+export interface QuestionnaireType {
+  jobType: string;
+  location: string[];
+  industry: string[];
+  email: string;
 }

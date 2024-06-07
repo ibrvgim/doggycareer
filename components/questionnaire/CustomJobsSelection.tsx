@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { useDispatch, useSelector } from 'react-redux';
+import { QuestionnaireType } from '@/types/types';
+import { setIndustry } from '@/redux/slices/questionnaireSLice';
 
 interface Jobs {
   jobs: string[];
@@ -7,7 +10,10 @@ interface Jobs {
 
 function CustomJobsSelect({ jobs }: Jobs) {
   const [input, setInput] = useState('');
-  const [chosenJobs, setChosenJobs] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const questionnaire = useSelector(
+    (state: { questionnaire: QuestionnaireType }) => state.questionnaire
+  );
 
   const getSomeJobes = jobs
     .map((job) => job.toLowerCase())
@@ -15,24 +21,24 @@ function CustomJobsSelect({ jobs }: Jobs) {
     .slice(0, 5);
 
   function chooseOnClick(chosenJob: string) {
-    if (chosenJobs.includes(chosenJob) || chosenJobs.length >= 3) {
+    if (questionnaire.industry.length >= 3) {
       setInput('');
       return;
     }
 
-    setChosenJobs((jobs) => [...jobs, chosenJob]);
+    dispatch(setIndustry(chosenJob));
     setInput('');
   }
 
   function deleteCity(jobToDelete: string) {
-    setChosenJobs((jobs) => jobs.filter((job) => job !== jobToDelete));
+    dispatch(setIndustry(jobToDelete));
   }
 
   return (
     <div className='relative top-0 left-0'>
       <ul className='flex flex-wrap gap-3 mb-5 text-gray-600'>
-        {chosenJobs.length > 0 &&
-          chosenJobs.map((job) => (
+        {questionnaire.industry.length > 0 &&
+          questionnaire.industry.map((job) => (
             <li
               key={job}
               className='bg-rose-100 text-rose-900 tracking-wide px-6 py-1 rounded-full text-sm border-rose-600 border-[1px] cursor-pointer hover:bg-rose-200 transition-all capitalize'
@@ -51,7 +57,7 @@ function CustomJobsSelect({ jobs }: Jobs) {
           className='border-[1px] border-gray-400 rounded-full w-10/12 pl-12 pr-6 h-11 text-sm tracking-wider text-cyan-700 placeholder:font-medium disabled:opacity-60'
           onChange={(e) => setInput(e.target.value)}
           value={input}
-          disabled={chosenJobs.length >= 3}
+          disabled={questionnaire.industry.length >= 3}
           autoComplete='off'
         />
       </div>
