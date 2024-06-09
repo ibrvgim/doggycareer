@@ -11,9 +11,11 @@ import { differenceInDays, differenceInHours } from 'date-fns';
 function JobsList({
   allJobs,
   savedJobs,
+  aplliedJobs,
 }: {
   allJobs: JobType[];
   savedJobs: string[];
+  aplliedJobs: string[];
 }) {
   const params = useSearchParams();
   const publicationDate = params?.get('publicationDate');
@@ -75,7 +77,12 @@ function JobsList({
 
           <div className='flex flex-col gap-5'>
             {filteredJobs.map((job) => (
-              <JobCard key={job.id} job={job} savedJobs={savedJobs} />
+              <JobCard
+                key={job.id}
+                job={job}
+                savedJobs={savedJobs}
+                aplliedJobs={aplliedJobs}
+              />
             ))}
           </div>
         </Suspense>

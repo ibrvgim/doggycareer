@@ -1,3 +1,8 @@
+// FORMS ERROR TYPE
+export interface ErrorsType {
+  [key: string]: string | undefined;
+}
+
 //  FILTERS TYPE
 export interface FilterCardType {
   options: CardItemsType[];

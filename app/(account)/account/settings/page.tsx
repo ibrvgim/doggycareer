@@ -4,12 +4,10 @@ import {
 } from '@/components/account/SettingsForm';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { UserType } from '@/types/types';
-import { redirect } from 'next/navigation';
 
 async function SettingsPage() {
   const user: UserType | null = await getUserAPI();
-
-  if (user === null) return redirect('/authentication');
+  if (!user) return null;
 
   return (
     <div className='w-full flex flex-col gap-10'>

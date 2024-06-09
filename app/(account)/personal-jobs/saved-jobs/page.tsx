@@ -2,7 +2,7 @@ import JobCard from '@/components/jobs/JobCard';
 import NoJobCard from '@/components/my-jobs/NoJobCard';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getJobs } from '@/data/jobs/apiJobs';
-import { getSavedJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
+import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import SaveJobImage from '@/public/general/save-job-image.svg';
 
 export const metadata = {
@@ -12,14 +12,14 @@ export const metadata = {
 async function SavedJobsPage() {
   const allJobs = await getJobs();
   const user = await getUserAPI();
-  const savedJobs = await getSavedJobs();
+  const storedJobs = await getUserStoredJobs();
 
-  const getCurrentUserSavedJobs = savedJobs?.find(
+  const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
   ).savedJobs;
 
   const getAllSavedJobs = allJobs.filter((job) =>
-    getCurrentUserSavedJobs?.includes(job.id.toString())
+    listSavedJobs?.includes(job.id.toString())
   );
 
   return (

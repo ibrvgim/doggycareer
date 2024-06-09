@@ -8,12 +8,9 @@ import {
   updatePersonalInformationAPI,
 } from '@/data/auth/apiUser';
 import { createSavedAppliedJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
+import { ErrorsType } from '@/types/types';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-
-interface ErrorsType {
-  [key: string]: string | undefined;
-}
 
 const errors: ErrorsType = {};
 

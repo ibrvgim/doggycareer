@@ -3,14 +3,14 @@
 import { UserType } from '@/types/types';
 import { Button, OutlineButton } from './FormSettingsButton';
 import { Input } from './FormSettingsInput';
+import { useFormState } from 'react-dom';
+import { updatePassword, updateUserInfo } from '@/actions/authActions';
 import {
   MdOutlineDriveFileRenameOutline,
   MdEmail,
   MdLocalPhone,
   MdLock,
 } from 'react-icons/md';
-import { useFormState } from 'react-dom';
-import { updatePassword, updateUserInfo } from '@/actions/authActions';
 
 export function PersonalInfoForm({ user }: { user: UserType }) {
   const [state, formAction] = useFormState(updateUserInfo, {});

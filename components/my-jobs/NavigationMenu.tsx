@@ -18,6 +18,7 @@ function NavigationMenu() {
         >
           Saved Jobs
         </Tab>
+
         <Tab
           href='/personal-jobs/applied-jobs'
           icon={<FaUserPen className='text-lg text-gray-600' />}

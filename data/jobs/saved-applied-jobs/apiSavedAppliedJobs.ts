@@ -26,11 +26,23 @@ export async function updateSavedJobs(id: string, saved: string[]) {
   return data;
 }
 
-export async function getSavedJobs() {
+// APPLIED JOBS API
+export async function updateAppliedJobs(id: string, applied: string[]) {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('saved-applied-jobs')
+    .update({ appliedJobs: applied })
+    .eq('userId', id)
+    .select();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+export async function getUserStoredJobs() {
   const supabase = createClient();
 
   const { data } = await supabase.from('saved-applied-jobs').select('*');
   return data;
 }
-
-// APPLIED JOBS API
