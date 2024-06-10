@@ -1,7 +1,8 @@
-import { IoSettingsSharp } from 'react-icons/io5';
-import { FaPenToSquare } from 'react-icons/fa6';
-import { BiSolidMessageSquareDetail } from 'react-icons/bi';
+import { IoSettingsOutline } from 'react-icons/io5';
+import { FaRegEdit } from 'react-icons/fa';
+import { BiMessageSquareDetail } from 'react-icons/bi';
 import { FaRegUserCircle } from 'react-icons/fa';
+import { BsClipboard2Data } from 'react-icons/bs';
 import SignoutButton from '../authentication/SignoutButton';
 import NavTab from './NavTab';
 
@@ -15,30 +16,35 @@ function ProfileNavigationMenu() {
 
         <NavTab
           href='/account/profile'
-          icon={<FaRegUserCircle className='text-[16px] text-gray-600' />}
+          icon={<FaRegUserCircle className='text-[17px] text-gray-600' />}
         >
           Profile
         </NavTab>
 
         <NavTab
           href='/account/post-job'
-          icon={<FaPenToSquare className='text-[16px] text-gray-600' />}
+          icon={<FaRegEdit className='text-[17px] text-gray-600' />}
         >
           Post a Job
         </NavTab>
 
         <NavTab
+          href='/account/my-posted-jobs'
+          icon={<BsClipboard2Data className='text-[17px] text-gray-600' />}
+        >
+          My Posted Jobs
+        </NavTab>
+
+        <NavTab
           href='/account/messages'
-          icon={
-            <BiSolidMessageSquareDetail className='text-[16px] text-gray-600' />
-          }
+          icon={<BiMessageSquareDetail className='text-[17px] text-gray-600' />}
         >
           Messages
         </NavTab>
 
         <NavTab
           href='/account/settings'
-          icon={<IoSettingsSharp className='text-lg text-gray-600' />}
+          icon={<IoSettingsOutline className='text-lg text-gray-600' />}
         >
           Settings
         </NavTab>

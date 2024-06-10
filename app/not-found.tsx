@@ -13,7 +13,7 @@ function PageNotFound() {
         <Image
           src={NotFoundImage}
           alt='page not found'
-          width={350}
+          width={300}
           draggable={false}
         />
 

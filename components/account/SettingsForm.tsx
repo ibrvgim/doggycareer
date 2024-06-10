@@ -2,7 +2,7 @@
 
 import { UserType } from '@/types/types';
 import { Button, OutlineButton } from './FormSettingsButton';
-import { Input } from './FormSettingsInput';
+import { Input } from '../general/Input';
 import { useFormState } from 'react-dom';
 import { updatePassword, updateUserInfo } from '@/actions/authActions';
 import {

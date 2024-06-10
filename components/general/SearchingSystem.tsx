@@ -1,12 +1,12 @@
 import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/solid';
-import Input from './Input';
-import RegionInput from './RegionInput';
+import JobTitleInput from '../main/JobTitleInput';
 import { Cities } from '@/types/types';
+import RegionInput from '../main/RegionInput';
 
 function SearchingSystem({ cities }: Cities) {
   return (
     <form className='flex justify-center items-center mt-12 gap-[0.3rem]'>
-      <Input
+      <JobTitleInput
         name='title'
         placeholder='Job Title'
         icon={<MagnifyingGlassIcon className='size-6 text-gray-400' />}

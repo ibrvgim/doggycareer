@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { createClient } from '../supabase/server';
 
 export async function getJobs() {
@@ -19,7 +20,9 @@ export async function getSingleJob(id: string) {
     .eq('id', id)
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error(error.message);
+  }
 
   return job;
 }

@@ -10,10 +10,12 @@ import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import { AiOutlineFileProtect } from 'react-icons/ai';
 
 async function JobItemPage({ params }: { params: { slugJob: string } }) {
   const singleJob = await getSingleJob(params.slugJob);
+  if (!singleJob) notFound();
   const user = await getUserAPI();
   const storedJobs = await getUserStoredJobs();
 

@@ -1,29 +1,50 @@
-function Input({
+export function Input({
   name,
+  children,
+  type,
   placeholder,
-  icon,
+  label,
+  error,
+  disabled = false,
+  defaultValue,
 }: {
-  name: string;
-  placeholder: string;
-  icon: JSX.Element;
+  children: React.ReactNode;
+  name?: string;
+  type: string;
+  placeholder?: string;
+  label: string;
+  disabled?: boolean;
+  error?: string;
+  defaultValue?: string;
 }) {
   return (
     <div>
-      <div className='flex items-center relative'>
-        <span className='z-10 absolute left-4'>{icon}</span>
+      <label
+        htmlFor={name}
+        className='uppercase text-[11px] tracking-widest text-gray-500 font-semibold flex'
+      >
+        {label}
+        {error && (
+          <span className='ml-auto text-red-500 normal-case text-xs'>
+            {error.slice(0, 1).toUpperCase() + error.slice(1).toLowerCase()}
+          </span>
+        )}
+      </label>
+
+      <div className='flex items-center mt-2 relative'>
+        <span className='absolute text-lg left-4 text-gray-400'>
+          {children}
+        </span>
         <input
-          type='text'
+          id={name}
           name={name}
+          type={type}
           placeholder={placeholder}
-          className='h-12 w-[22rem] rounded-md pl-[3.2rem] pr-4 border-[1px] border-gray-400 shadow-lg 
-          text-[15px] text-gray-700 tracking-widest font-medium placeholder:text-gray-400 placeholder:font-light'
-          autoComplete='off'
+          className='w-full h-10 rounded-md pl-11 text-sm tracking-wider border-[1px] text-gray-600 border-gray-400 disabled:text-gray-500  disabled:opacity-85 disabled:border-gray-300 placeholder:text-gray-300'
+          disabled={disabled}
+          defaultValue={defaultValue}
         />
       </div>
-
-      <div></div>
     </div>
   );
 }
-
-export default Input;

@@ -11,7 +11,7 @@ import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { GiReceiveMoney } from 'react-icons/gi';
 import { GrCircleInformation } from 'react-icons/gr';
 import { IoDocument } from 'react-icons/io5';
-import { Input } from '../account/FormSettingsInput';
+import { Input } from '../general/Input';
 import FileInput from './FileInput';
 import { Button, OutlineButton } from '../account/FormSettingsButton';
 import { useFormState } from 'react-dom';
