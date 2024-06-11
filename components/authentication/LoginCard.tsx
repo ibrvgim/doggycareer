@@ -1,6 +1,5 @@
 'use client';
 
-import { Input } from '@/components/account/FormSettingsInput';
 import Link from 'next/link';
 import { useFormState } from 'react-dom';
 import { MdEmail, MdLock } from 'react-icons/md';
@@ -8,6 +7,7 @@ import SubmitButton from './SubmitButton';
 import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 import { loginUser } from '@/actions/authActions';
+import { Input } from '../general/Input';
 
 function LoginCard() {
   const [state, formAction] = useFormState(loginUser, {});

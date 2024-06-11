@@ -18,9 +18,7 @@ interface CardItemsType {
 
 // FETCHING CITIES TYPE
 export interface Cities {
-  cities: {
-    cities: string[];
-  };
+  cities: string[];
 }
 
 // JOBS TYPE
@@ -39,6 +37,23 @@ export interface JobType {
   responsibilities: string;
   qualifications: string;
   industry: string;
+  postAuthor?: string;
+}
+
+export interface PostedJobType {
+  companyName: string;
+  logo: string;
+  jobTitle: string;
+  location: string;
+  jobType: string;
+  officeType: string;
+  website: string | null;
+  employeesNumber: string;
+  jobDescription: string;
+  responsibilities: string;
+  qualifications: string;
+  industry: string;
+  postAuthor?: string;
 }
 
 // QUESTIONNAIRE TYPE

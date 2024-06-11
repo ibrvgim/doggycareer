@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { PostedJobType } from '@/types/types';
 import { createClient } from '../supabase/server';
 
 export async function getJobs() {
@@ -25,4 +25,13 @@ export async function getSingleJob(id: string) {
   }
 
   return job;
+}
+
+export async function postJobAPI(job: PostedJobType) {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.from('jobs').insert([job]).select();
+
+  if (error) throw new Error(error.message);
+  return data;
 }

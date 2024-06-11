@@ -1,1 +1,5 @@
+//  FOR MAIN JOBS LIST
 export const ITEMS_PER_PAGE = 10;
+
+// FOR MY POSTED JOBS PAGE
+export const POSTED_JOBS_PER_PAGE = 5;

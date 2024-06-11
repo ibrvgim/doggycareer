@@ -173,7 +173,7 @@ function AdditionalInformation({ state }: { state: ErrorsType | undefined }) {
       <Input
         name='workPermission'
         type='text'
-        placeholder='Answer here'
+        placeholder='ex. Yes, I do'
         label='Do you have a work permit in Germany? *'
         error={state?.workPermission ? state?.workPermission : ''}
       >

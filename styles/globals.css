@@ -170,6 +170,7 @@
 
 /* GENERAL CHANGES */
 
-input:focus {
+input:focus,
+textarea:focus {
   outline: 1px solid #0e7490;
 }
