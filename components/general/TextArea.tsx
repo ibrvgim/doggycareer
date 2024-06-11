@@ -6,12 +6,14 @@ function TextArea({
   size,
   placeholder,
   error,
+  defaultValue,
 }: {
   label: string;
   name: string;
   size: string;
   placeholder: string;
   error?: string;
+  defaultValue?: string;
 }) {
   return (
     <div className='w-full'>
@@ -34,6 +36,7 @@ function TextArea({
         border-gray-400 placeholder:text-gray-300'
         placeholder={placeholder}
         style={{ minHeight: `${size}` }}
+        defaultValue={defaultValue}
       ></textarea>
     </div>
   );

@@ -1,5 +1,5 @@
 import NoPostedJobCard from '@/components/account/NoPostedJobCard';
-import PostedJobsList from '@/components/account/PostedJobsList';
+import SecondaryJobsListContainer from '@/components/general/SecondaryJobsListContainer';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getJobs } from '@/data/jobs/apiJobs';
 import { JobType } from '@/types/types';
@@ -17,7 +17,7 @@ async function MyPostedJobs() {
   return (
     <div className='w-full'>
       {myPostedJobs.length > 0 ? (
-        <PostedJobsList jobs={myPostedJobs} />
+        <SecondaryJobsListContainer jobs={myPostedJobs} />
       ) : (
         <NoPostedJobCard />
       )}

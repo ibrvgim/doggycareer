@@ -2,21 +2,21 @@
 
 import { JobType } from '@/types/types';
 import JobCard from '../jobs/JobCard';
-import { POSTED_JOBS_PER_PAGE } from '@/utilities/constants';
-import BasicPagination from '../general/Pagination';
+import BasicPagination from './Pagination';
 import { useState } from 'react';
+import { SMALL_LIST_ITEMS_PER_PAGE } from '@/utilities/constants';
 
-function PostedJobsList({ jobs }: { jobs: JobType[] }) {
+function SecondaryJobsListContainer({ jobs }: { jobs: JobType[] }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageCount = Math.ceil(jobs.length / POSTED_JOBS_PER_PAGE);
+  const pageCount = Math.ceil(jobs.length / SMALL_LIST_ITEMS_PER_PAGE);
 
   function handlePageChange(event: React.ChangeEvent<unknown>, page: number) {
     setCurrentPage(page);
   }
 
   const paginatedJobs = jobs.slice(
-    (currentPage - 1) * POSTED_JOBS_PER_PAGE,
-    currentPage * POSTED_JOBS_PER_PAGE
+    (currentPage - 1) * SMALL_LIST_ITEMS_PER_PAGE,
+    currentPage * SMALL_LIST_ITEMS_PER_PAGE
   );
 
   return (
@@ -27,7 +27,7 @@ function PostedJobsList({ jobs }: { jobs: JobType[] }) {
         ))}
       </ul>
 
-      {jobs.length > POSTED_JOBS_PER_PAGE && (
+      {jobs.length > SMALL_LIST_ITEMS_PER_PAGE && (
         <div className='mt-14 flex justify-center'>
           <BasicPagination
             currentPage={currentPage}
@@ -40,4 +40,4 @@ function PostedJobsList({ jobs }: { jobs: JobType[] }) {
   );
 }
 
-export default PostedJobsList;
+export default SecondaryJobsListContainer;

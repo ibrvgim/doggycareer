@@ -5,20 +5,21 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ConfirmationImage from '@/public/general/confirmation.svg';
 import Image from 'next/image';
+import Footer from '@/components/general/Footer';
 
 async function ConfirmationPage({
   searchParams,
 }: {
   searchParams: { job: string };
 }) {
-  if (!searchParams.job) notFound();
   const getJob: JobType = await getSingleJob(searchParams.job);
+  if (!getJob) notFound();
 
   return (
     <div>
       <SecondaryHeader />
 
-      <section className='px-[10%] pt-10 pb-10 text-center'>
+      <section className='px-[10%] pt-10 pb-20 text-center'>
         <Image
           src={ConfirmationImage}
           alt='confirmation image'
@@ -44,6 +45,8 @@ async function ConfirmationPage({
           Other Jobs
         </Link>
       </section>
+
+      <Footer />
     </div>
   );
 }

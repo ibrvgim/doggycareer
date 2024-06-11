@@ -10,11 +10,11 @@ async function JobSuggestions({ slugJob }: { slugJob: string }) {
 
   const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).savedJobs;
+  )?.savedJobs;
 
   const listAppliedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).appliedJobs;
+  )?.appliedJobs;
 
   // exclude current job and jobs that user already applied
   const filteredJobs = allJobs

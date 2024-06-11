@@ -1,4 +1,4 @@
-import { PostedJobType } from '@/types/types';
+import { JobType, PostedJobType } from '@/types/types';
 import { createClient } from '../supabase/server';
 
 export async function getJobs() {
@@ -34,4 +34,25 @@ export async function postJobAPI(job: PostedJobType) {
 
   if (error) throw new Error(error.message);
   return data;
+}
+
+export async function updateJobAPI(jobId: string, updatedJob: PostedJobType) {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('jobs')
+    .update(updatedJob)
+    .eq('id', jobId)
+    .select();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+export async function deleteJobAPI(jobId: string) {
+  const supabase = createClient();
+
+  const { error } = await supabase.from('jobs').delete().eq('id', jobId);
+
+  if (error) throw new Error(error.message);
 }

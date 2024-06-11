@@ -11,6 +11,7 @@ function JobItemHeader({ job }: { job: JobType }) {
       <div className='w-full'>
         <div className='mb-4 flex flex-wrap items-center justify-between gap-x-5 gap-y-2'>
           <p className='text-3xl font-bold text-cyan-700'>{job.jobTitle}</p>
+
           <p className='text-sm text-gray-400 font-medium'>
             posted {jobPosted(job.postedAt)}
           </p>

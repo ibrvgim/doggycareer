@@ -31,7 +31,7 @@ export interface JobType {
   location: string;
   jobType: string;
   officeType: string;
-  website: string | null;
+  website: string | undefined;
   employeesNumber: string;
   jobDescription: string;
   responsibilities: string;

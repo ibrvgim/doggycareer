@@ -5,27 +5,31 @@ import SecondaryHeader from '@/components/general/SecondaryHeader';
 import CompanyInfoCard from '@/components/jobs/CompanyInfoCard';
 import JobContentContainer from '@/components/jobs/JobContentContainer';
 import { JobItemHeader } from '@/components/jobs/JobItemHeader';
+import JobManageContainer from '@/components/jobs/JobManageContainer';
 import JobSuggestions from '@/components/jobs/JobSuggestions';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
+import { JobType } from '@/types/types';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { AiOutlineFileProtect } from 'react-icons/ai';
 
 async function JobItemPage({ params }: { params: { slugJob: string } }) {
-  const singleJob = await getSingleJob(params.slugJob);
+  const singleJob: JobType = await getSingleJob(params.slugJob);
   if (!singleJob) notFound();
   const user = await getUserAPI();
   const storedJobs = await getUserStoredJobs();
 
   const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).savedJobs;
+  )?.savedJobs;
 
   const listAppliedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).appliedJobs;
+  )?.appliedJobs;
+
+  const isAuthor = user?.id === singleJob.postAuthor;
 
   return (
     <div>
@@ -37,69 +41,75 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
         </div>
         <JobItemHeader job={singleJob} />
 
-        <div className='mt-8 flex items-center flex-wrap gap-2'>
-          {!listAppliedJobs.includes(params.slugJob) ? (
-            <Link
-              href={`apply/${params.slugJob}`}
-              className='bg-cyan-600 text-white hover:bg-cyan-700 border-[1.5px] rounded-full tracking-wider text-center min-w-72 py-1 px-4 font-bold transition-all'
-            >
-              Apply
-            </Link>
-          ) : (
-            <div className='flex gap-2 items-center mt-6 opacity-80'>
-              <AiOutlineFileProtect className='size-6 text-gray-500' />
-              <p className='text-gray-500 tracking-wider font-semibold'>
-                You have applied for this Job.
-              </p>
-            </div>
-          )}
+        {!isAuthor && (
+          <div className='mt-8 flex items-center flex-wrap gap-2'>
+            {!listAppliedJobs.includes(params.slugJob) ? (
+              <Link
+                href={`apply/${params.slugJob}`}
+                className='bg-cyan-600 text-white hover:bg-cyan-700 border-[1.5px] rounded-full tracking-wider text-center min-w-72 py-1 px-4 font-bold transition-all'
+              >
+                Apply
+              </Link>
+            ) : (
+              <div className='flex gap-2 items-center mt-6 opacity-80'>
+                <AiOutlineFileProtect className='size-6 text-gray-500' />
+                <p className='text-gray-500 tracking-wider font-semibold'>
+                  You have applied for this Job.
+                </p>
+              </div>
+            )}
 
-          {!listAppliedJobs.includes(params.slugJob) && (
-            <form action={saveJobAction}>
-              <input
-                name='jobId'
-                value={params.slugJob}
-                hidden
-                className='hidden'
-                readOnly
-              />
+            {!listAppliedJobs.includes(params.slugJob) && (
+              <form action={saveJobAction}>
+                <input
+                  name='jobId'
+                  value={params.slugJob}
+                  hidden
+                  className='hidden'
+                  readOnly
+                />
 
-              {!listSavedJobs.includes(params.slugJob) ? (
-                <Button style='border-cyan-700 hover:bg-cyan-50 font-semibold'>
-                  Save
-                </Button>
-              ) : (
-                <Button style='border-red-500 hover:bg-red-50 text-red-500 font-semibold'>
-                  Remove from My Jobs
-                </Button>
-              )}
-            </form>
-          )}
-        </div>
+                {!listSavedJobs.includes(params.slugJob) ? (
+                  <Button style='border-cyan-700 hover:bg-cyan-50 font-semibold'>
+                    Save
+                  </Button>
+                ) : (
+                  <Button style='border-red-500 hover:bg-red-50 text-red-500 font-semibold'>
+                    Remove from My Jobs
+                  </Button>
+                )}
+              </form>
+            )}
+          </div>
+        )}
+
+        {isAuthor && <JobManageContainer jobId={params?.slugJob} />}
 
         <JobContentContainer job={singleJob} />
 
-        <div className='flex justify-center items-center gap-5 mb-16 border-y-2 border-y-gray-300 py-8'>
-          {!listAppliedJobs.includes(params.slugJob) ? (
-            <>
-              <p className='text-[17px] font-semibold text-gray-600 tracking-wider'>
-                Are you interested?
-              </p>
-              <Link
-                href={`apply/${params.slugJob}`}
-                className='bg-cyan-600 text-white text-sm hover:bg-cyan-700 border-[1.5px] rounded-full 
+        {!isAuthor && (
+          <div className='flex justify-center items-center gap-5 mb-16 border-y-2 border-y-gray-300 py-8'>
+            {!listAppliedJobs.includes(params.slugJob) ? (
+              <>
+                <p className='text-[17px] font-semibold text-gray-600 tracking-wider'>
+                  Are you interested?
+                </p>
+                <Link
+                  href={`apply/${params.slugJob}`}
+                  className='bg-cyan-600 text-white text-sm hover:bg-cyan-700 border-[1.5px] rounded-full 
             tracking-wider text-center min-w-80 py-[0.35rem] px-5 font-bold transition-all'
-              >
-                Apply Now
-              </Link>
-            </>
-          ) : (
-            <p className='text-[17px] font-semibold text-gray-600 tracking-wider'>
-              You have apllied for this job. We will contact you as soon as
-              possible.
-            </p>
-          )}
-        </div>
+                >
+                  Apply Now
+                </Link>
+              </>
+            ) : (
+              <p className='text-[17px] font-semibold text-gray-600 tracking-wider'>
+                You have apllied for this job. We will contact you as soon as
+                possible.
+              </p>
+            )}
+          </div>
+        )}
 
         <CompanyInfoCard job={singleJob} />
       </main>

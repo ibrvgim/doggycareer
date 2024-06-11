@@ -11,6 +11,8 @@ async function ApplyPage({ params }: { params: { slugApply: string } }) {
   const getJob: JobType = await getSingleJob(params.slugApply);
   const user = await getUserAPI();
   if (!user) redirect('/authentication');
+  const isAuthor = user?.id === getJob.postAuthor;
+  if (isAuthor) redirect('/jobs');
 
   return (
     <div>

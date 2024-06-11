@@ -8,10 +8,11 @@ interface Props {
   name: string;
   cities: Cities;
   error?: string;
+  defaultValue?: string;
 }
 
-function JobRegionSelect({ name, cities, error }: Props) {
-  const [input, setInput] = useState('');
+function JobRegionSelect({ name, cities, error, defaultValue }: Props) {
+  const [input, setInput] = useState(defaultValue || '');
   const [show, setShow] = useState(false);
 
   const getSomeCities = cities?.cities

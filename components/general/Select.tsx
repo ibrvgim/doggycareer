@@ -7,13 +7,15 @@ function Select({
   name,
   label,
   options,
+  defaultValue,
 }: {
   name: string;
   label: string;
   options: string[];
+  defaultValue?: string;
 }) {
   const [show, setShow] = useState(false);
-  const [value, setValue] = useState(options[0]);
+  const [value, setValue] = useState(defaultValue || options[0]);
 
   function toggleSelect() {
     setShow((show) => !show);

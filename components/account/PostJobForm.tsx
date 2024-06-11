@@ -6,7 +6,7 @@ import { IoLink, IoImagesOutline } from 'react-icons/io5';
 import { FaPeopleGroup } from 'react-icons/fa6';
 import { CiTextAlignCenter } from 'react-icons/ci';
 import { BsPersonWorkspace } from 'react-icons/bs';
-import { Cities, ErrorsType } from '@/types/types';
+import { Cities, ErrorsType, JobType } from '@/types/types';
 import JobRegionSelect from './JobRegionSelect';
 import { Input } from '../general/Input';
 import Select from '../general/Select';
@@ -14,24 +14,42 @@ import TextArea from '../general/TextArea';
 import { useFormState } from 'react-dom';
 import { postJobAction } from '@/actions/postJobAction';
 
-function PostJobForm({ cities }: { cities: Cities }) {
+function PostJobForm({
+  cities,
+  edit = false,
+  defaultValues,
+  jobId,
+}: {
+  cities: Cities;
+  edit?: boolean;
+  defaultValues?: JobType;
+  jobId?: string;
+}) {
   const [state, formAction] = useFormState(postJobAction, {});
 
   return (
     <form action={formAction}>
-      <p className='mb-6 font-bold text-gray-500 text-3xl tracking-wider'>
+      {jobId && (
+        <input name='jobId' value={jobId} className='hidden' hidden readOnly />
+      )}
+      <p className='mb-6 font-bold text-gray-500 text-2xl tracking-wider'>
         Company Information
       </p>
-      <CompanyInformation cities={cities} state={state || {}} />
+      <CompanyInformation
+        cities={cities}
+        state={state}
+        edit={edit}
+        defaultValues={defaultValues}
+      />
 
-      <p className='mb-6 font-bold text-gray-500 text-3xl tracking-wider mt-14'>
+      <p className='mb-6 font-bold text-gray-500 text-2xl tracking-wider mt-14'>
         Job Information
       </p>
-      <JobInformation state={state || {}} />
+      <JobInformation state={state} edit={edit} defaultValues={defaultValues} />
 
       <div className='flex gap-2 justify-end mt-8'>
         <OutlineButton>Cancel</OutlineButton>
-        <Button>Post a Job</Button>
+        <Button>{edit ? 'Edit a Job' : 'Post a Job'}</Button>
       </div>
     </form>
   );
@@ -40,9 +58,13 @@ function PostJobForm({ cities }: { cities: Cities }) {
 function CompanyInformation({
   cities,
   state,
+  edit,
+  defaultValues,
 }: {
   cities: Cities;
-  state: ErrorsType;
+  state?: ErrorsType;
+  edit?: boolean;
+  defaultValues?: JobType;
 }) {
   return (
     <div className='grid grid-cols-2 gap-x-4 gap-y-6'>
@@ -52,6 +74,7 @@ function CompanyInformation({
         placeholder='ex. Doggycareer'
         label='Company Name *'
         error={state?.companyName ? state.companyName : ''}
+        defaultValue={edit ? defaultValues?.companyName : ''}
       >
         <PiBuildingsFill />
       </Input>
@@ -61,6 +84,7 @@ function CompanyInformation({
         type='text'
         placeholder='ex. https://doggycareer.de'
         label='Company Website'
+        defaultValue={edit ? defaultValues?.website : ''}
       >
         <IoLink />
       </Input>
@@ -71,6 +95,7 @@ function CompanyInformation({
         placeholder='ex. https://doggycareer/4789466.svg/'
         label='Company Logo *'
         error={state?.logo ? state.logo : ''}
+        defaultValue={edit ? defaultValues?.logo : ''}
       >
         <IoImagesOutline />
       </Input>
@@ -79,6 +104,7 @@ function CompanyInformation({
         name='location'
         cities={cities}
         error={state?.location ? state.location : ''}
+        defaultValue={edit ? defaultValues?.location : ''}
       />
 
       <Input
@@ -87,6 +113,7 @@ function CompanyInformation({
         placeholder='ex. 5.000 - 10.000'
         label='Employees Number *'
         error={state?.employeesNumber ? state.employeesNumber : ''}
+        defaultValue={edit ? defaultValues?.employeesNumber : ''}
       >
         <FaPeopleGroup />
       </Input>
@@ -94,7 +121,15 @@ function CompanyInformation({
   );
 }
 
-function JobInformation({ state }: { state: ErrorsType }) {
+function JobInformation({
+  state,
+  edit,
+  defaultValues,
+}: {
+  state: ErrorsType;
+  edit?: boolean;
+  defaultValues?: JobType;
+}) {
   return (
     <div>
       <div className='grid grid-cols-2 gap-x-4 gap-y-6'>
@@ -104,6 +139,7 @@ function JobInformation({ state }: { state: ErrorsType }) {
           placeholder='ex. Senior Front - End Developer'
           label='Job Title *'
           error={state?.jobTitle ? state.jobTitle : ''}
+          defaultValue={edit ? defaultValues?.jobTitle : ''}
         >
           <CiTextAlignCenter />
         </Input>
@@ -112,12 +148,14 @@ function JobInformation({ state }: { state: ErrorsType }) {
           name='jobType'
           label='Job Type *'
           options={['Full time', 'Part time']}
+          defaultValue={edit ? defaultValues?.jobType : ''}
         />
 
         <Select
           name='officeType'
           label='Office Type *'
           options={['On Site', 'Remote', 'Hybrid']}
+          defaultValue={edit ? defaultValues?.officeType : ''}
         />
 
         <Input
@@ -126,6 +164,7 @@ function JobInformation({ state }: { state: ErrorsType }) {
           placeholder='ex. Information Technology'
           label='Job Industry *'
           error={state?.industry ? state.industry : ''}
+          defaultValue={edit ? defaultValues?.industry : ''}
         >
           <BsPersonWorkspace />
         </Input>
@@ -138,6 +177,7 @@ function JobInformation({ state }: { state: ErrorsType }) {
           size='20rem'
           placeholder='Tell us about your company and the job you are posting.'
           error={state?.jobDescription ? state.jobDescription : ''}
+          defaultValue={edit ? defaultValues?.jobDescription : ''}
         />
       </div>
 
@@ -148,6 +188,7 @@ function JobInformation({ state }: { state: ErrorsType }) {
           size='14rem'
           placeholder='Describe the responsibilities that a person should do.'
           error={state?.responsibilities ? state.responsibilities : ''}
+          defaultValue={edit ? defaultValues?.responsibilities : ''}
         />
       </div>
 
@@ -158,6 +199,7 @@ function JobInformation({ state }: { state: ErrorsType }) {
           size='14rem'
           placeholder='Describe the qualifications that a candidate should have.'
           error={state?.qualifications ? state.qualifications : ''}
+          defaultValue={edit ? defaultValues?.qualifications : ''}
         />
       </div>
     </div>

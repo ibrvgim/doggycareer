@@ -1,7 +1,7 @@
 'use server';
 
 import { getUserAPI } from '@/data/auth/apiUser';
-import { postJobAPI } from '@/data/jobs/apiJobs';
+import { getSingleJob, postJobAPI, updateJobAPI } from '@/data/jobs/apiJobs';
 import { ErrorsType, PostedJobType } from '@/types/types';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -23,6 +23,8 @@ function validValue(key: string, value: string, length: number) {
 
 export async function postJobAction(_: any, data: FormData) {
   const user = await getUserAPI();
+
+  const jobId = data.get('jobId') as string | undefined;
 
   const companyName = data.get('companyName') as string;
   const logo = data.get('logo') as string;
@@ -72,6 +74,8 @@ export async function postJobAction(_: any, data: FormData) {
   )
     return errors;
 
+  const getJob = jobId && (await getSingleJob(jobId));
+
   const job: PostedJobType = {
     companyName,
     logo,
@@ -88,7 +92,13 @@ export async function postJobAction(_: any, data: FormData) {
     postAuthor: user?.id || '',
   };
 
-  const response = await postJobAPI(job);
-  revalidatePath('/');
-  redirect(`/jobs/${response?.[0].id}`);
+  if (jobId) {
+    await updateJobAPI(getJob?.id, job);
+    revalidatePath('/');
+    redirect(`/jobs/${getJob?.id}`);
+  } else {
+    const response = await postJobAPI(job);
+    revalidatePath('/');
+    redirect(`/jobs/${response?.[0].id}`);
+  }
 }

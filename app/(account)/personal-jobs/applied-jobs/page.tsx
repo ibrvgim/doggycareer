@@ -1,4 +1,4 @@
-import JobCard from '@/components/jobs/JobCard';
+import SecondaryJobsListContainer from '@/components/general/SecondaryJobsListContainer';
 import NoJobCard from '@/components/my-jobs/NoJobCard';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getJobs } from '@/data/jobs/apiJobs';
@@ -25,11 +25,7 @@ async function AppliedJobsPage() {
   return (
     <div className='w-full'>
       {getAllAppliedJobs.length > 0 ? (
-        <div className='flex flex-col gap-7'>
-          {getAllAppliedJobs.map((job) => (
-            <JobCard key={job.id} job={job} />
-          ))}
-        </div>
+        <SecondaryJobsListContainer jobs={getAllAppliedJobs} />
       ) : (
         <NoJobCard
           image={ApplyJobImage}
