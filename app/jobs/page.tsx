@@ -1,7 +1,6 @@
 import Footer from '@/components/general/Footer';
 import Header from '@/components/general/Header';
-import FiltersList from '@/components/jobs/FiltersList';
-import JobsList from '@/components/jobs/JobsList';
+import JobsContainer from '@/components/jobs/JobsContainer';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getCountries } from '@/data/getCountries';
 import { getJobs } from '@/data/jobs/apiJobs';
@@ -34,15 +33,11 @@ async function JobsPage() {
     <>
       <main>
         <Header cities={cities} />
-
-        <section className='flex gap-12 py-20 px-28'>
-          <FiltersList />
-          <JobsList
-            allJobs={allJobs}
-            savedJobs={listSavedJobs}
-            aplliedJobs={listAppliedJobs}
-          />
-        </section>
+        <JobsContainer
+          allJobs={allJobs}
+          listSavedJobs={listSavedJobs}
+          listAppliedJobs={listAppliedJobs}
+        />
       </main>
       <Footer />
     </>
