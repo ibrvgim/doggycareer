@@ -29,16 +29,16 @@ function CompanyInfoCard({ job }: { job: JobType }) {
               </span>
             </li>
 
-            <li className='flex items-center gap-2'>
-              <LinkIcon className='size-[1.20rem] text-rose-300' />
-              <span className='font-semibold text-sm tracking-wider text-blue-600 opacity-80 hover:text-blue-700 hover:opacity-100 transition-all'>
-                {job.website && (
+            {job.website && (
+              <li className='flex items-center gap-2'>
+                <LinkIcon className='size-[1.20rem] text-rose-300' />
+                <span className='font-semibold text-sm tracking-wider text-blue-600 opacity-80 hover:text-blue-700 hover:opacity-100 transition-all'>
                   <Link href={job.website} target='_blank'>
                     {job.website}
                   </Link>
-                )}
-              </span>
-            </li>
+                </span>
+              </li>
+            )}
           </ul>
         </div>
       </div>

@@ -11,6 +11,7 @@
   height: 5rem;
   color: #0891b2;
 }
+
 .questuonnaireLoader:before,
 .questuonnaireLoader:after {
   content: '';
@@ -24,6 +25,7 @@
   transform: rotateX(70deg);
   animation: 1s spin linear infinite;
 }
+
 .questuonnaireLoader:after {
   color: #f43f5e;
   transform: rotateY(70deg);
@@ -77,8 +79,8 @@
 
 /* MINI LOADER */
 .miniLoder {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   position: relative;
   animation: rotate 1s linear infinite;

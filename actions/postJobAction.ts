@@ -3,6 +3,7 @@
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob, postJobAPI, updateJobAPI } from '@/data/jobs/apiJobs';
 import { ErrorsType, PostedJobType } from '@/types/types';
+import { formatNumber } from '@/utilities/formatNumber';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
@@ -33,7 +34,11 @@ export async function postJobAction(_: any, data: FormData) {
   const jobType = data.get('jobType') as string;
   const officeType = data.get('officeType') as string;
   const website = data.get('website') as string;
-  const employeesNumber = data.get('employeesNumber') as string;
+  const employeesMinValue = data.get('employeesMinValue') as string;
+  const employeesMaxValue = data.get('employeesMaxValue') as string;
+  const employeesNumber = `${formatNumber(employeesMinValue)} - ${formatNumber(
+    employeesMaxValue
+  )}`;
   const jobDescription = data.get('jobDescription') as string;
   const responsibilities = data.get('responsibilities') as string;
   const qualifications = data.get('qualifications') as string;

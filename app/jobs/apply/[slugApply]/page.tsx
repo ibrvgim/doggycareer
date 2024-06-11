@@ -4,15 +4,23 @@ import ApplyForm from '@/components/jobs/ApplyForm';
 import JobInfoBadge from '@/components/jobs/JobInfoBadge';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob } from '@/data/jobs/apiJobs';
+import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import { JobType } from '@/types/types';
 import { redirect } from 'next/navigation';
 
 async function ApplyPage({ params }: { params: { slugApply: string } }) {
+  const storedJobs = await getUserStoredJobs();
   const getJob: JobType = await getSingleJob(params.slugApply);
   const user = await getUserAPI();
   if (!user) redirect('/authentication');
   const isAuthor = user?.id === getJob.postAuthor;
   if (isAuthor) redirect('/jobs');
+
+  const listAppliedJobs = storedJobs?.find(
+    (item) => item.userId === user?.id
+  )?.appliedJobs;
+
+  if (listAppliedJobs.includes(params.slugApply)) redirect('/jobs');
 
   return (
     <div>

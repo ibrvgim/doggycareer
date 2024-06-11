@@ -3,7 +3,6 @@
 import { Button, OutlineButton } from '@/components/account/FormSettingsButton';
 import { PiBuildingsFill } from 'react-icons/pi';
 import { IoLink, IoImagesOutline } from 'react-icons/io5';
-import { FaPeopleGroup } from 'react-icons/fa6';
 import { CiTextAlignCenter } from 'react-icons/ci';
 import { BsPersonWorkspace } from 'react-icons/bs';
 import { Cities, ErrorsType, JobType } from '@/types/types';
@@ -13,6 +12,7 @@ import Select from '../general/Select';
 import TextArea from '../general/TextArea';
 import { useFormState } from 'react-dom';
 import { postJobAction } from '@/actions/postJobAction';
+import EmployeesInput from './EmployeesInput';
 
 function PostJobForm({
   cities,
@@ -107,16 +107,10 @@ function CompanyInformation({
         defaultValue={edit ? defaultValues?.location : ''}
       />
 
-      <Input
-        name='employeesNumber'
-        type='text'
-        placeholder='ex. 5.000 - 10.000'
-        label='Employees Number *'
+      <EmployeesInput
         error={state?.employeesNumber ? state.employeesNumber : ''}
         defaultValue={edit ? defaultValues?.employeesNumber : ''}
-      >
-        <FaPeopleGroup />
-      </Input>
+      />
     </div>
   );
 }
