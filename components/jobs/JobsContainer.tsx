@@ -12,11 +12,13 @@ function JobsContainer({
   allJobs,
   listSavedJobs,
   listAppliedJobs,
+  listArchivedJobs,
 }: {
   userId: string | undefined;
   allJobs: JobType[];
   listSavedJobs: string[];
   listAppliedJobs: string[];
+  listArchivedJobs: string[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageCount = Math.ceil(allJobs.length / ITEMS_PER_PAGE);
@@ -26,7 +28,11 @@ function JobsContainer({
   }
 
   const paginatedJobs = allJobs
-    .filter((job) => job.postAuthor !== userId)
+    .filter(
+      (job) =>
+        job.postAuthor !== userId &&
+        !listArchivedJobs?.includes(job?.id.toString())
+    )
     .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (

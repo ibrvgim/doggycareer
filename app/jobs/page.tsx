@@ -31,6 +31,10 @@ async function JobsPage() {
     (item) => item.userId === user?.id
   )?.appliedJobs;
 
+  const listArchivedJobs = storedJobs?.find(
+    (item) => item.userId === user?.id
+  )?.archive;
+
   return (
     <>
       <main>
@@ -40,6 +44,7 @@ async function JobsPage() {
           allJobs={allJobs}
           listSavedJobs={listSavedJobs}
           listAppliedJobs={listAppliedJobs}
+          listArchivedJobs={listArchivedJobs}
         />
       </main>
       <Footer />

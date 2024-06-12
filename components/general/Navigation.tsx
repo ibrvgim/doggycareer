@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Logo from './Logo';
-import { UserIcon } from '@heroicons/react/24/solid';
+import { PiUserCircleLight } from 'react-icons/pi';
 import NavLink from './NavLink';
 
 function Navigation() {
@@ -19,7 +19,7 @@ function Navigation() {
 
         <li>
           <Link href='/account/profile'>
-            <UserIcon className='size-7 text-gray-500 hover:text-sky-600 cursor-pointer transition-all ml-6' />
+            <PiUserCircleLight className='size-11 text-gray-500 hover:text-sky-600 cursor-pointer transition-all ml-4' />
           </Link>
         </li>
       </ul>

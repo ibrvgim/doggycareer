@@ -76,9 +76,10 @@ function CustomCitiesSelect({ cities }: { cities: Cities }) {
         />
       </div>
 
-      {input.trim().length > 0 && (
+      {input.trim().length > 0 && getSomeCities.length > 0 && (
         <div className='bg-white w-10/12 rounded-xl absolute mt-2 flex flex-col items-start gap-3 px-4 py-4 border-gray-300 border-[1px] shadow-lg z-10'>
-          {getSomeCities && getSomeCities.length > 0 ? (
+          {getSomeCities &&
+            getSomeCities.length > 0 &&
             getSomeCities.map((city: string) => (
               <button
                 key={city}
@@ -88,12 +89,7 @@ function CustomCitiesSelect({ cities }: { cities: Cities }) {
               >
                 {city}
               </button>
-            ))
-          ) : (
-            <p className='text-gray-500 text-sm font-semibold tracking-wider'>
-              No city found
-            </p>
-          )}
+            ))}
         </div>
       )}
     </div>

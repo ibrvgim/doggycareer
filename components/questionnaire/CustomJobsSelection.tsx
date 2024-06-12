@@ -62,9 +62,9 @@ function CustomJobsSelect({ industries }: { industries: string[] }) {
         />
       </div>
 
-      {input.trim().length > 0 && (
+      {input.trim().length > 0 && getSomeJobes.length > 0 && (
         <div className='bg-white w-10/12 rounded-xl absolute mt-2 flex flex-col items-start gap-2 px-4 py-4 border-gray-300 border-[1px] shadow-lg z-10'>
-          {getSomeJobes.length > 0 ? (
+          {getSomeJobes.length > 0 &&
             getSomeJobes.map((job: string) => (
               <button
                 key={job}
@@ -74,12 +74,7 @@ function CustomJobsSelect({ industries }: { industries: string[] }) {
               >
                 {job}
               </button>
-            ))
-          ) : (
-            <p className='text-gray-500 text-sm font-semibold tracking-wider'>
-              No title found
-            </p>
-          )}
+            ))}
         </div>
       )}
     </div>

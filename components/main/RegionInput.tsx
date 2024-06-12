@@ -46,9 +46,9 @@ function RegionInput({
         style={error ? { border: '2px solid rgb(220 38 38)' } : {}}
       />
 
-      {show && input.trim().length > 0 && (
+      {show && input.trim().length > 0 && getSomeCities?.length > 0 && (
         <div className='bg-white w-full rounded-md absolute top-14 flex flex-col items-start gap-2 px-3 py-4 border-gray-300 border-[1px] shadow-lg'>
-          {getSomeCities.length > 0 ? (
+          {getSomeCities.length > 0 &&
             getSomeCities.map((city: string) => (
               <button
                 key={city}
@@ -62,12 +62,7 @@ function RegionInput({
               >
                 {city}
               </button>
-            ))
-          ) : (
-            <p className='text-gray-500 text-sm font-semibold tracking-wider'>
-              No City Found
-            </p>
-          )}
+            ))}
         </div>
       )}
     </div>

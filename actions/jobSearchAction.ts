@@ -20,19 +20,21 @@ export async function jobSearchAction(_: any, data: FormData) {
   errors['inputError'] = '';
   if (title && location) {
     redirect(
-      `/jobs/?title=${slugify(title)}&location=${slugify(location)}${
-        filtersValue && '&' + filtersValue
-      }`
+      `/jobs/?title=${slugify(title.toLowerCase())}&location=${slugify(
+        location.toLowerCase()
+      )}${filtersValue && '&' + filtersValue}`
     );
   } else if (location) {
     redirect(
-      `/jobs/?location=${slugify(location)}${
+      `/jobs/?location=${slugify(location.toLowerCase())}${
         filtersValue && '&' + filtersValue
       }`
     );
   } else if (title) {
     redirect(
-      `/jobs/?title=${slugify(title)}${filtersValue && '&' + filtersValue}`
+      `/jobs/?title=${slugify(title.toLowerCase())}${
+        filtersValue && '&' + filtersValue
+      }`
     );
   }
 }

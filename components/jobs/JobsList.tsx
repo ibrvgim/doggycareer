@@ -32,22 +32,34 @@ function JobsList({
     filteredJobs = filteredJobs.filter((job) => {
       if (location && title) {
         return (
-          job.location.toLowerCase().trim() ===
+          job.location.toLowerCase().trim().split('-').join(' ') ===
             location?.toLowerCase().trim().split('-').join(' ') &&
-          job.industry.toLowerCase().trim() ===
-            title?.toLowerCase().trim().split('-').join(' ')
+          (job.industry.toLowerCase().trim().split('-').join(' ') ===
+            title?.toLowerCase().trim().split('-').join(' ') ||
+            job.jobTitle
+              .toLowerCase()
+              .trim()
+              .split('-')
+              .join(' ')
+              .includes(title?.toLowerCase().trim().split('-').join(' ')))
         );
       } else if (location) {
         return (
-          job.location.toLowerCase().trim() ===
+          job.location.toLowerCase().trim().split('-').join(' ') ===
           location?.toLowerCase().trim().split('-').join(' ')
         );
-      } else {
+      } else if (title) {
         return (
-          job.industry.toLowerCase().trim() ===
-          title?.toLowerCase().trim().split('-').join(' ')
+          job.industry.toLowerCase().trim().split('-').join(' ') ===
+            title?.toLowerCase().trim().split('-').join(' ') ||
+          job.jobTitle
+            .toLowerCase()
+            .trim()
+            .split('-')
+            .join(' ')
+            .includes(title?.toLowerCase().trim().split('-').join(' '))
         );
-      }
+      } else return job;
     });
   }
 

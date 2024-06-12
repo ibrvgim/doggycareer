@@ -38,7 +38,7 @@ function JobRegionSelect({ name, cities, error, defaultValue }: Props) {
           type='text'
           name={name}
           placeholder='ex. Berlin'
-          className='w-full h-10 rounded-md pl-11 text-sm tracking-wider border-[1px] text-gray-600 border-gray-400 disabled:text-gray-500  disabled:opacity-85 disabled:border-gray-300 placeholder:text-gray-300'
+          className='w-full h-10 rounded-md pl-11 text-sm tracking-wider border-[1px] text-gray-600 border-gray-400 disabled:text-gray-500  disabled:opacity-85 disabled:border-gray-300 placeholder:text-gray-300 capitalize'
           value={input.slice(0, 1).toUpperCase() + input.slice(1).toLowerCase()}
           onChange={(e) => {
             setInput(e.target.value);
@@ -47,9 +47,9 @@ function JobRegionSelect({ name, cities, error, defaultValue }: Props) {
           autoComplete='off'
         />
 
-        {show && input.trim().length > 0 && (
+        {show && input.trim().length > 0 && getSomeCities.length > 0 && (
           <div className='bg-white z-50 w-full rounded-md absolute top-12 text-sm flex flex-col items-start gap-1 px-2 py-4 border-gray-300 border-[1px] shadow-lg'>
-            {getSomeCities.length > 0 ? (
+            {getSomeCities.length > 0 &&
               getSomeCities.map((city: string) => (
                 <button
                   key={city}
@@ -63,12 +63,7 @@ function JobRegionSelect({ name, cities, error, defaultValue }: Props) {
                 >
                   {city}
                 </button>
-              ))
-            ) : (
-              <p className='text-gray-500 text-sm font-semibold tracking-wider'>
-                No city found
-              </p>
-            )}
+              ))}
           </div>
         )}
       </div>
