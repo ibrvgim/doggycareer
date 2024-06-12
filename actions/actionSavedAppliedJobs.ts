@@ -3,6 +3,8 @@
 import { getUserAPI } from '@/data/auth/apiUser';
 import {
   getUserStoredJobs,
+  updateAppliedJobs,
+  updateArchiveJobs,
   updateSavedJobs,
 } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import { revalidatePath } from 'next/cache';
@@ -22,5 +24,25 @@ export async function saveJobAction(data: FormData) {
       await updateSavedJobs(user?.id, [...clearedJobs]);
     } else await updateSavedJobs(user?.id, [jobId, ...listSavedJobs]);
     revalidatePath('/personal-jobs');
+  }
+}
+
+export async function archiveJobAction(data: FormData) {
+  const jobId = data.get('jobId') as string;
+  const user = await getUserAPI();
+  const storedJobs = await getUserStoredJobs();
+
+  const listArchivedJobs = storedJobs?.find(
+    (item) => item.userId === user?.id
+  ).archive;
+
+  const listAppliedJobs = storedJobs
+    ?.find((item) => item.userId === user?.id)
+    .appliedJobs.filter((item: string) => item !== jobId);
+
+  if (user?.id && jobId) {
+    await updateArchiveJobs(user?.id, [jobId, ...listArchivedJobs]);
+    await updateAppliedJobs(user?.id, [...listAppliedJobs]);
+    revalidatePath('/jobs');
   }
 }

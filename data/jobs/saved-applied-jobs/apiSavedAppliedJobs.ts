@@ -40,6 +40,20 @@ export async function updateAppliedJobs(id: string, applied: string[]) {
   return data;
 }
 
+// ARCHIVE JOBS API
+export async function updateArchiveJobs(id: string, archived: string[]) {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('saved-applied-jobs')
+    .update({ archive: archived })
+    .eq('userId', id)
+    .select();
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
 export async function getUserStoredJobs() {
   const supabase = createClient();
 

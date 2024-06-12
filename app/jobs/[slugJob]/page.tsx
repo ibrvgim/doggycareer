@@ -1,4 +1,7 @@
-import { saveJobAction } from '@/actions/actionSavedAppliedJobs';
+import {
+  archiveJobAction,
+  saveJobAction,
+} from '@/actions/actionSavedAppliedJobs';
 import Footer from '@/components/general/Footer';
 import GoBack from '@/components/general/GoBack';
 import SecondaryHeader from '@/components/general/SecondaryHeader';
@@ -14,6 +17,7 @@ import { JobType } from '@/types/types';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { AiOutlineFileProtect } from 'react-icons/ai';
+import { FaBoxArchive } from 'react-icons/fa6';
 
 async function JobItemPage({ params }: { params: { slugJob: string } }) {
   const singleJob: JobType = await getSingleJob(params.slugJob);
@@ -29,6 +33,10 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
     (item) => item.userId === user?.id
   )?.appliedJobs;
 
+  const listArchivedJobs = storedJobs?.find(
+    (item) => item.userId === user?.id
+  )?.archive;
+
   const isAuthor = user?.id === singleJob.postAuthor;
 
   return (
@@ -41,7 +49,7 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
         </div>
         <JobItemHeader job={singleJob} />
 
-        {!isAuthor && (
+        {!isAuthor && !listArchivedJobs.includes(params.slugJob) && (
           <div className='mt-8 flex items-center flex-wrap gap-2'>
             {!listAppliedJobs.includes(params.slugJob) ? (
               <Link
@@ -51,11 +59,25 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
                 Apply
               </Link>
             ) : (
-              <div className='flex gap-2 items-center mt-6 opacity-80'>
-                <AiOutlineFileProtect className='size-6 text-gray-500' />
-                <p className='text-gray-500 tracking-wider font-semibold'>
-                  You have applied for this Job.
-                </p>
+              <div className='mt-6 flex items-center gap-5'>
+                <div className='flex gap-2 items-center opacity-80 border-r-2 border-r-gray-400 pr-4'>
+                  <AiOutlineFileProtect className='size-6 text-gray-500' />
+                  <p className='text-gray-500 tracking-wider font-semibold'>
+                    You have applied for this Job.
+                  </p>
+                </div>
+
+                <form action={archiveJobAction}>
+                  <input
+                    name='jobId'
+                    value={params?.slugJob}
+                    className='hidden'
+                    hidden
+                  />
+                  <Button style='bg-gray-500 text-gray-100 text-sm font-semibold min-w-64 hover:bg-gray-600'>
+                    Move to Archive
+                  </Button>
+                </form>
               </div>
             )}
 
@@ -83,11 +105,20 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
           </div>
         )}
 
+        {listArchivedJobs.includes(params.slugJob) && (
+          <div className='flex gap-2 items-center opacity-80 pr-4 mt-8'>
+            <FaBoxArchive className='size-5 text-gray-400' />
+            <p className='text-gray-500 tracking-wider font-semibold'>
+              Job is Archived.
+            </p>
+          </div>
+        )}
+
         {isAuthor && <JobManageContainer jobId={params?.slugJob} />}
 
         <JobContentContainer job={singleJob} />
 
-        {!isAuthor && (
+        {!isAuthor && !listArchivedJobs.includes(params.slugJob) && (
           <div className='flex justify-center items-center gap-5 mb-16 border-y-2 border-y-gray-300 py-8'>
             {!listAppliedJobs.includes(params.slugJob) ? (
               <>

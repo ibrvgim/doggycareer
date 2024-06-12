@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { IoIosBookmark } from 'react-icons/io';
+import { IoIosBookmark, IoIosArchive } from 'react-icons/io';
 import { FaUserPen } from 'react-icons/fa6';
 
 function NavigationMenu() {
@@ -24,6 +24,13 @@ function NavigationMenu() {
           icon={<FaUserPen className='text-lg text-gray-600' />}
         >
           Applied Jobs
+        </Tab>
+
+        <Tab
+          href='/personal-jobs/archive'
+          icon={<IoIosArchive className='text-lg text-gray-600' />}
+        >
+          Archive
         </Tab>
       </div>
     </div>

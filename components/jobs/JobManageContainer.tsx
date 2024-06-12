@@ -20,7 +20,7 @@ function JobManageContainer({ jobId }: { jobId: string }) {
 
         <Link
           href={`/jobs/edit/${jobId}`}
-          className='border-[1px] rounded-full tracking-widest min-w-48 py-0 px-4 font-semibold bg-cyan-600 text-gray-100 border-cyan-600 hover:bg-cyan-700 text-center transition-all'
+          className='border-[1px] rounded-full tracking-widest min-w-48 opacity-85 py-0 px-4 bg-cyan-600 text-gray-100 border-cyan-600 hover:bg-cyan-700 text-center transition-all'
         >
           Edit
         </Link>
@@ -45,7 +45,7 @@ function Button({
 }) {
   return (
     <button
-      className={`border-[1px] rounded-full tracking-widest min-w-48 py-0 px-4 font-semibold ${style} transition-all`}
+      className={`border-[1px] rounded-full tracking-widest min-w-48 py-0 px-4 opacity-85 ${style} transition-all`}
     >
       {children}
     </button>
