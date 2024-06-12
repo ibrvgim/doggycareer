@@ -3,7 +3,7 @@ import JobTitleInput from '../main/JobTitleInput';
 import { Cities } from '@/types/types';
 import RegionInput from '../main/RegionInput';
 
-function SearchingSystem({ cities }: Cities) {
+function SearchingSystem({ cities }: { cities: Cities }) {
   return (
     <form className='flex justify-center items-center mt-12 gap-[0.3rem]'>
       <JobTitleInput

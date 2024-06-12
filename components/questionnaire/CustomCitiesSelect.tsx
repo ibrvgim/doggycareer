@@ -4,7 +4,7 @@ import { Cities, QuestionnaireType } from '@/types/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLocation } from '@/redux/slices/questionnaireSLice';
 
-function CustomCitiesSelect({ cities }: Cities) {
+function CustomCitiesSelect({ cities }: { cities: Cities }) {
   const [input, setInput] = useState('');
   const dispatch = useDispatch();
   const questionnaire = useSelector(

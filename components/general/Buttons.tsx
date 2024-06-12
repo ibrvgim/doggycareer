@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormStatus } from 'react-dom';
-import MiniSpinner from '../general/MiniSpinner';
+import MiniSpinner from './MiniSpinner';
 
 export function Button({ children }: { children: React.ReactNode }) {
   const { pending } = useFormStatus();

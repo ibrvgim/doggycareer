@@ -10,9 +10,11 @@ export const metadata = {
 };
 
 async function SavedJobsPage() {
-  const allJobs = await getJobs();
-  const user = await getUserAPI();
-  const storedJobs = await getUserStoredJobs();
+  const [user, allJobs, storedJobs] = await Promise.all([
+    getUserAPI(),
+    getJobs(),
+    getUserStoredJobs(),
+  ]);
 
   const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id

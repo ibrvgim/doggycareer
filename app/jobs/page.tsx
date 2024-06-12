@@ -16,10 +16,12 @@ export async function generateStaticParams() {
 }
 
 async function JobsPage() {
-  const cities = await getCountries();
-  const allJobs: JobType[] = await getJobs();
-  const user = await getUserAPI();
-  const storedJobs = await getUserStoredJobs();
+  const [cities, allJobs, user, storedJobs] = await Promise.all([
+    getCountries(),
+    getJobs(),
+    getUserAPI(),
+    getUserStoredJobs(),
+  ]);
 
   const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
@@ -34,6 +36,7 @@ async function JobsPage() {
       <main>
         <Header cities={cities} />
         <JobsContainer
+          userId={user?.id}
           allJobs={allJobs}
           listSavedJobs={listSavedJobs}
           listAppliedJobs={listAppliedJobs}

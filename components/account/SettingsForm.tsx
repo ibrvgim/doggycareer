@@ -1,7 +1,7 @@
 'use client';
 
 import { UserType } from '@/types/types';
-import { Button, OutlineButton } from './FormSettingsButton';
+import { Button, OutlineButton } from '../general/Buttons';
 import { Input } from '../general/Input';
 import { useFormState } from 'react-dom';
 import { updatePassword, updateUserInfo } from '@/actions/authActions';

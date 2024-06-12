@@ -2,11 +2,9 @@ import NoPostedJobCard from '@/components/account/NoPostedJobCard';
 import SecondaryJobsListContainer from '@/components/general/SecondaryJobsListContainer';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getJobs } from '@/data/jobs/apiJobs';
-import { JobType } from '@/types/types';
 
 async function MyPostedJobs() {
-  const user = await getUserAPI();
-  const allJobs: JobType[] = await getJobs();
+  const [user, allJobs] = await Promise.all([getUserAPI(), getJobs()]);
 
   const myPostedJobs = allJobs
     .filter((job) => job.postAuthor === user?.id)

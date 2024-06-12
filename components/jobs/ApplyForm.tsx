@@ -13,7 +13,7 @@ import { GrCircleInformation } from 'react-icons/gr';
 import { IoDocument } from 'react-icons/io5';
 import { Input } from '../general/Input';
 import FileInput from './FileInput';
-import { Button, OutlineButton } from '../account/FormSettingsButton';
+import { Button, OutlineButton } from '../general/Buttons';
 import { useFormState } from 'react-dom';
 import { applyFormAction } from '@/actions/applyFormAction';
 

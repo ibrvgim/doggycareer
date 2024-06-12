@@ -9,8 +9,6 @@ async function SettingsPage() {
   const user: UserType | null = await getUserAPI();
   if (!user) return null;
 
-  console.log(user);
-
   return (
     <div className='w-full flex flex-col gap-10'>
       <div className='border-[1px] border-gray-300 rounded-xl px-12 py-10 bg-gray-50'>

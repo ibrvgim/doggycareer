@@ -8,10 +8,12 @@ import { ITEMS_PER_PAGE } from '@/utilities/constants';
 import { useState } from 'react';
 
 function JobsContainer({
+  userId,
   allJobs,
   listSavedJobs,
   listAppliedJobs,
 }: {
+  userId: string | undefined;
   allJobs: JobType[];
   listSavedJobs: string[];
   listAppliedJobs: string[];
@@ -23,10 +25,9 @@ function JobsContainer({
     setCurrentPage(page);
   }
 
-  const paginatedJobs = allJobs.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  const paginatedJobs = allJobs
+    .filter((job) => job.postAuthor !== userId)
+    .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <>

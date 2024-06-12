@@ -23,7 +23,7 @@ export async function saveJobAction(data: FormData) {
       const clearedJobs = listSavedJobs.filter((job: string) => job !== jobId);
       await updateSavedJobs(user?.id, [...clearedJobs]);
     } else await updateSavedJobs(user?.id, [jobId, ...listSavedJobs]);
-    revalidatePath('/personal-jobs');
+    revalidatePath('/');
   }
 }
 
@@ -43,6 +43,6 @@ export async function archiveJobAction(data: FormData) {
   if (user?.id && jobId) {
     await updateArchiveJobs(user?.id, [jobId, ...listArchivedJobs]);
     await updateAppliedJobs(user?.id, [...listAppliedJobs]);
-    revalidatePath('/jobs');
+    revalidatePath('/');
   }
 }

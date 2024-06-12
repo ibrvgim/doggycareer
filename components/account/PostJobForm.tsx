@@ -1,6 +1,5 @@
 'use client';
 
-import { Button, OutlineButton } from '@/components/account/FormSettingsButton';
 import { PiBuildingsFill } from 'react-icons/pi';
 import { IoLink, IoImagesOutline } from 'react-icons/io5';
 import { CiTextAlignCenter } from 'react-icons/ci';
@@ -13,6 +12,7 @@ import TextArea from '../general/TextArea';
 import { useFormState } from 'react-dom';
 import { postJobAction } from '@/actions/postJobAction';
 import EmployeesInput from './EmployeesInput';
+import { Button, OutlineButton } from '../general/Buttons';
 
 function PostJobForm({
   cities,
