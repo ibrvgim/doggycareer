@@ -9,7 +9,7 @@ function JobInterestedContainer({
 }) {
   return (
     <div className='flex justify-center items-center gap-5 mb-16 border-y-2 border-y-gray-300 py-8'>
-      {!listAppliedJobs.includes(jobId) ? (
+      {!listAppliedJobs?.includes(jobId) ? (
         <>
           <p className='text-[17px] font-semibold text-gray-600 tracking-wider'>
             Are you interested?

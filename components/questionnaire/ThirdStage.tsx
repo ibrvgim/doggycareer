@@ -3,7 +3,7 @@ import CustomJobsSelect from './CustomJobsSelection';
 import QuestionnaireCard from './QuestionnaireCard';
 import JobImage from '@/public/questionnaire-images/job.svg';
 
-function ThirdStage() {
+function ThirdStage({ industries }: { industries: string[] }) {
   return (
     <QuestionnaireCard
       question={
@@ -15,14 +15,7 @@ function ThirdStage() {
       image={JobImage}
     >
       <div className='mt-4'>
-        <CustomJobsSelect
-          jobs={[
-            'Information Teachnology',
-            'Medical Services',
-            'Teacher',
-            'Translator',
-          ]}
-        />
+        <CustomJobsSelect industries={industries} />
 
         <div className='border-[1px] border-blue-600 rounded-xl bg-blue-100 w-10/12 mt-6 px-6 py-3 flex gap-5 items-center'>
           <BoltIcon className='size-10 text-blue-500' />

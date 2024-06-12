@@ -13,7 +13,11 @@ function CustomCitiesSelect({ cities }: { cities: Cities }) {
 
   const getSomeCities = cities?.cities
     .map((city) => city.toLowerCase())
-    .filter((city: string) => city.includes(input.trim().toLowerCase()))
+    .filter(
+      (city: string) =>
+        !questionnaire.location.includes(city) &&
+        city.includes(input.trim().toLowerCase())
+    )
     .slice(0, 5);
 
   function chooseOnClick(chosenCity: string) {
@@ -73,12 +77,13 @@ function CustomCitiesSelect({ cities }: { cities: Cities }) {
       </div>
 
       {input.trim().length > 0 && (
-        <div className='bg-white w-10/12 rounded-xl absolute mt-2 flex flex-col items-start gap-3 px-8 py-4 border-gray-300 border-[1px] shadow-lg z-10'>
+        <div className='bg-white w-10/12 rounded-xl absolute mt-2 flex flex-col items-start gap-3 px-4 py-4 border-gray-300 border-[1px] shadow-lg z-10'>
           {getSomeCities && getSomeCities.length > 0 ? (
             getSomeCities.map((city: string) => (
               <button
                 key={city}
-                className='text-gray-500 cursor-pointer tracking-wider text-[15px] hover:text-cyan-700 transition-colors font-medium capitalize'
+                className='text-gray-400 cursor-pointer tracking-wider capitalize w-full flex px-3 py-1 rounded-[0.200rem]
+                  hover:text-gray-500 hover:bg-gray-100 transition-colors'
                 onClick={() => chooseOnClick(city)}
               >
                 {city}

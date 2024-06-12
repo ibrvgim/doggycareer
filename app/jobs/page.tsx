@@ -25,11 +25,11 @@ async function JobsPage() {
 
   const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).savedJobs;
+  )?.savedJobs;
 
   const listAppliedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).appliedJobs;
+  )?.appliedJobs;
 
   return (
     <>

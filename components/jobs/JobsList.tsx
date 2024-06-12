@@ -23,7 +23,33 @@ function JobsList({
   const officeType = params?.get('officeType');
   const sortBy = params?.get('sortBy');
 
+  const location = params.get('location');
+  const title = params.get('title');
+
   let filteredJobs: JobType[] = allJobs;
+
+  if (location || title) {
+    filteredJobs = filteredJobs.filter((job) => {
+      if (location && title) {
+        return (
+          job.location.toLowerCase().trim() ===
+            location?.toLowerCase().trim().split('-').join(' ') &&
+          job.industry.toLowerCase().trim() ===
+            title?.toLowerCase().trim().split('-').join(' ')
+        );
+      } else if (location) {
+        return (
+          job.location.toLowerCase().trim() ===
+          location?.toLowerCase().trim().split('-').join(' ')
+        );
+      } else {
+        return (
+          job.industry.toLowerCase().trim() ===
+          title?.toLowerCase().trim().split('-').join(' ')
+        );
+      }
+    });
+  }
 
   if (sortBy) {
     filteredJobs = filteredJobs.sort((a, b) => {

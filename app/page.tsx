@@ -8,11 +8,14 @@ import Footer from '@/components/general/Footer';
 import TipCard from '@/components/main/TipCard';
 import RecommendedJobs from '@/components/main/RecommendedJobs';
 import { getJobs } from '@/data/jobs/apiJobs';
-import { JobType } from '@/types/types';
+import { getIndustries } from '@/data/getIndustries';
 
 async function RootPage() {
-  const cities = await getCountries();
-  const allJobs: JobType[] = await getJobs();
+  const [cities, industries, allJobs] = await Promise.all([
+    getCountries(),
+    getIndustries(),
+    getJobs(),
+  ]);
 
   return (
     <>
@@ -20,7 +23,7 @@ async function RootPage() {
         <Header cities={cities} />
 
         <div className='py-20 px-28'>
-          <Questionnaire cities={cities} />
+          <Questionnaire cities={cities} industries={industries} />
           {/* <RecommendedJobs allJobs={allJobs} /> */}
           <Features />
           <TipCard />

@@ -8,10 +8,19 @@ interface Props {
   cities: {
     cities: string[];
   };
+  error?: string;
+  defaultValie?: string;
 }
 
-function RegionInput({ name, placeholder, icon, cities }: Props) {
-  const [input, setInput] = useState('');
+function RegionInput({
+  name,
+  placeholder,
+  icon,
+  cities,
+  error,
+  defaultValie,
+}: Props) {
+  const [input, setInput] = useState(defaultValie || '');
   const [show, setShow] = useState(false);
 
   const getSomeCities = cities?.cities
@@ -34,15 +43,17 @@ function RegionInput({ name, placeholder, icon, cities }: Props) {
           setShow(true);
         }}
         autoComplete='off'
+        style={error ? { border: '2px solid rgb(220 38 38)' } : {}}
       />
 
       {show && input.trim().length > 0 && (
-        <div className='bg-white w-full rounded-md absolute top-14 flex flex-col items-start gap-3 px-8 py-4 border-gray-300 border-[1px] shadow-lg'>
+        <div className='bg-white w-full rounded-md absolute top-14 flex flex-col items-start gap-2 px-3 py-4 border-gray-300 border-[1px] shadow-lg'>
           {getSomeCities.length > 0 ? (
             getSomeCities.map((city: string) => (
               <button
                 key={city}
-                className='text-gray-500 cursor-pointer tracking-wider hover:text-cyan-700 transition-colors capitalize'
+                className='text-gray-400 cursor-pointer tracking-wider capitalize w-full flex px-3 py-1 rounded-[0.200rem]
+                  hover:text-gray-500 hover:bg-gray-100 transition-colors'
                 onClick={() => {
                   setInput(city);
                   setShow(false);
@@ -54,7 +65,7 @@ function RegionInput({ name, placeholder, icon, cities }: Props) {
             ))
           ) : (
             <p className='text-gray-500 text-sm font-semibold tracking-wider'>
-              No city found
+              No City Found
             </p>
           )}
         </div>

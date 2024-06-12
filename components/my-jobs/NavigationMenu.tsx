@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IoIosBookmark, IoIosArchive } from 'react-icons/io';
 import { FaUserPen } from 'react-icons/fa6';
+import { RiPresentationFill } from 'react-icons/ri';
 
 function NavigationMenu() {
   return (
@@ -31,6 +32,13 @@ function NavigationMenu() {
           icon={<IoIosArchive className='text-lg text-gray-600' />}
         >
           Archive
+        </Tab>
+
+        <Tab
+          href='/personal-jobs/how-works'
+          icon={<RiPresentationFill className='text-lg text-gray-600' />}
+        >
+          How It Works?
         </Tab>
       </div>
     </div>

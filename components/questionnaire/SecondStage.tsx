@@ -3,7 +3,7 @@ import QuestionnaireCard from './QuestionnaireCard';
 import PlaceImage from '@/public/questionnaire-images/place.svg';
 import { Cities } from '@/types/types';
 
-function SecondStage({ cities }: Cities) {
+function SecondStage({ cities }: { cities: Cities }) {
   return (
     <QuestionnaireCard
       question={

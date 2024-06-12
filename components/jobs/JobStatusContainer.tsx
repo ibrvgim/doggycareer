@@ -17,7 +17,7 @@ function JobStatusContainer({
 }) {
   return (
     <div className='mt-8 flex items-center flex-wrap gap-2'>
-      {!listAppliedJobs.includes(jobId) ? (
+      {!listAppliedJobs?.includes(jobId) ? (
         <Link
           href={`apply/${jobId}`}
           className='bg-cyan-600 text-white hover:bg-cyan-700 border-[1.5px] rounded-full tracking-wider text-center min-w-72 py-1 px-4 font-bold transition-all'
@@ -28,7 +28,7 @@ function JobStatusContainer({
         <JobAppliedContainer jobId={jobId} />
       )}
 
-      {!listAppliedJobs.includes(jobId) && (
+      {!listAppliedJobs?.includes(jobId) && (
         <JobSaveContainer jobId={jobId} listSavedJobs={listSavedJobs} />
       )}
     </div>
@@ -66,7 +66,7 @@ function JobSaveContainer({
     <form action={saveJobAction}>
       <input name='jobId' value={jobId} hidden className='hidden' readOnly />
 
-      {!listSavedJobs.includes(jobId) ? (
+      {!listSavedJobs?.includes(jobId) ? (
         <JobManageButton style='border-cyan-700 hover:bg-cyan-50 font-semibold'>
           Save
         </JobManageButton>

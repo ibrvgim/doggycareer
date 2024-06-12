@@ -8,11 +8,16 @@ import {
   updateSavedJobs,
 } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function saveJobAction(data: FormData) {
   const jobId = data.get('jobId') as string;
-  const user = await getUserAPI();
-  const storedJobs = await getUserStoredJobs();
+  const [user, storedJobs] = await Promise.all([
+    getUserAPI(),
+    getUserStoredJobs(),
+  ]);
+
+  if (user?.role !== 'authenticated') redirect('/authentication');
 
   const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
@@ -29,8 +34,12 @@ export async function saveJobAction(data: FormData) {
 
 export async function archiveJobAction(data: FormData) {
   const jobId = data.get('jobId') as string;
-  const user = await getUserAPI();
-  const storedJobs = await getUserStoredJobs();
+  const [user, storedJobs] = await Promise.all([
+    getUserAPI(),
+    getUserStoredJobs(),
+  ]);
+
+  if (user?.role !== 'authenticated') redirect('/authentication');
 
   const listArchivedJobs = storedJobs?.find(
     (item) => item.userId === user?.id

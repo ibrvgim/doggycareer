@@ -11,8 +11,8 @@ function NoArchiveCard() {
         className='mb-14'
         draggable={false}
       />
-      <p className='uppercase tracking-widest text-5xl text-gray-400 font-extrabold'>
-        Archive Is Empty
+      <p className='tracking-widest text-5xl text-gray-400 font-extrabold'>
+        No Jobs in the Archive
       </p>
     </div>
   );

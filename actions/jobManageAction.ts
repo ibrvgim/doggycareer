@@ -1,11 +1,14 @@
 'use server';
 
 import { deleteJobAPI, getSingleJob, postJobAPI } from '@/data/jobs/apiJobs';
-import { JobType, PostedJobType } from '@/types/types';
+import { ErrorsType, JobType, PostedJobType } from '@/types/types';
+import { differenceInDays } from 'date-fns';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-export async function repostJob(data: FormData) {
+const errors: ErrorsType = {};
+
+export async function repostJob(_: any, data: FormData) {
   const jobId = data.get('jobId') as string;
   const getJob: JobType = await getSingleJob(jobId);
 
@@ -16,7 +19,7 @@ export async function repostJob(data: FormData) {
     location: getJob?.location,
     jobType: getJob?.jobType,
     officeType: getJob?.officeType,
-    website: getJob?.website,
+    website: getJob?.website || '',
     employeesNumber: getJob?.employeesNumber,
     jobDescription: getJob?.jobDescription,
     responsibilities: getJob?.responsibilities,
@@ -25,10 +28,17 @@ export async function repostJob(data: FormData) {
     postAuthor: getJob?.postAuthor,
   };
 
-  const response = await postJobAPI(repostedJob);
-  await deleteJobAPI(jobId);
-  revalidatePath('/');
-  redirect(`/jobs/${response?.[0].id}`);
+  if (differenceInDays(new Date(), new Date(getJob.postedAt)) <= 3) {
+    errors['repostError'] =
+      'You may re - post a vacancy in 3 days after publication.';
+    return errors;
+  } else {
+    const response = await postJobAPI(repostedJob);
+    await deleteJobAPI(jobId);
+    errors['repostError'] = '';
+    revalidatePath('/');
+    redirect(`/jobs/${response?.[0].id}`);
+  }
 }
 
 export async function deleteJob(data: FormData) {

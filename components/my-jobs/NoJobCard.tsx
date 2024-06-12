@@ -20,11 +20,13 @@ function NoJobCard({
         draggable={false}
       />
 
-      <p className='text-5xl uppercase font-extrabold text-gray-400 tracking-widest mb-3'>
+      <p className='text-5xl font-extrabold text-gray-400 tracking-widest mb-3'>
         {title}
       </p>
 
-      <p className='text-lg text-gray-400 tracking-wide mb-10'>{description}</p>
+      <p className='text-[17px] text-gray-400 tracking-wide mb-10'>
+        {description}
+      </p>
 
       <Link
         href='/jobs'

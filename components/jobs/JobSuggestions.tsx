@@ -21,7 +21,7 @@ async function JobSuggestions({ slugJob }: { slugJob: string }) {
     .filter(
       (job) =>
         job.id !== Number(slugJob) &&
-        !listAppliedJobs.includes(job.id.toString())
+        !listAppliedJobs?.includes(job.id.toString())
     )
     .slice(0, 5);
 

@@ -1,4 +1,4 @@
-import { JobType, PostedJobType } from '@/types/types';
+import { PostedJobType } from '@/types/types';
 import { createClient } from '../supabase/server';
 
 export async function getJobs() {

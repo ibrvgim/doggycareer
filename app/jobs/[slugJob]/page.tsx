@@ -48,7 +48,7 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
 
         <JobItemHeader job={singleJob} />
 
-        {!isAuthor && !listArchivedJobs.includes(params.slugJob) && (
+        {!isAuthor && !listArchivedJobs?.includes(params.slugJob) && (
           <JobStatusContainer
             jobId={params.slugJob}
             listAppliedJobs={listAppliedJobs}
@@ -56,7 +56,7 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
           />
         )}
 
-        {listArchivedJobs.includes(params.slugJob) && (
+        {listArchivedJobs?.includes(params.slugJob) && (
           <div className='flex gap-2 items-center opacity-80 pr-4 mt-8'>
             <FaBoxArchive className='size-5 text-gray-400' />
             <p className='text-gray-500 tracking-wider font-semibold'>
@@ -69,7 +69,7 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
 
         <JobContentContainer job={singleJob} />
 
-        {!isAuthor && !listArchivedJobs.includes(params.slugJob) && (
+        {!isAuthor && !listArchivedJobs?.includes(params.slugJob) && (
           <JobInterestedContainer
             jobId={params.slugJob}
             listAppliedJobs={listAppliedJobs}

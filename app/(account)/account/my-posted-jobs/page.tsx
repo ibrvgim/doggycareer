@@ -14,6 +14,10 @@ async function MyPostedJobs() {
 
   return (
     <div className='w-full'>
+      <p className='border-b-[1px] border-b-gray-300 mb-8 pb-4 text-lg tracking-wider text-rose-500'>
+        Jobs you post will not appear in search results for you.
+      </p>
+
       {myPostedJobs.length > 0 ? (
         <SecondaryJobsListContainer jobs={myPostedJobs} />
       ) : (

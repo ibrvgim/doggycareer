@@ -12,7 +12,13 @@ const SecondStage = lazy(() => import('./SecondStage'));
 const ThirdStage = lazy(() => import('./ThirdStage'));
 const FourthStage = lazy(() => import('./FourthStage'));
 
-function Questionnaire({ cities }: Cities) {
+function Questionnaire({
+  cities,
+  industries,
+}: {
+  cities: Cities;
+  industries: string[];
+}) {
   const [stage, setStage] = useState(0);
   const router = useRouter();
   const questionnaire = useSelector(
@@ -22,7 +28,7 @@ function Questionnaire({ cities }: Cities) {
   const stages = [
     <FirstStage key='first-stage' questionnaire={questionnaire} />,
     <SecondStage key='second-stage' cities={cities} />,
-    <ThirdStage key='third-stage' />,
+    <ThirdStage key='third-stage' industries={industries} />,
     <FourthStage key='fourth-stage' questionnaire={questionnaire} />,
   ];
 

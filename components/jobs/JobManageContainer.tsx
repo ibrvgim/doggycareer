@@ -1,8 +1,13 @@
+'use client';
+
 import { deleteJob, repostJob } from '@/actions/jobManageAction';
 import Link from 'next/link';
+import { useFormState } from 'react-dom';
 import { LuShieldCheck } from 'react-icons/lu';
 
 function JobManageContainer({ jobId }: { jobId: string }) {
+  const [state, formAction] = useFormState(repostJob, {});
+
   return (
     <div className='mt-8 flex flex-col items-start'>
       <span className='text-[10px] text-white font-bold tracking-widest uppercase bg-cyan-600 py-1 px-4 rounded-full flex items-center justify-start gap-1'>
@@ -11,8 +16,14 @@ function JobManageContainer({ jobId }: { jobId: string }) {
       </span>
 
       <div className='mt-5 flex flex-wrap gap-3'>
-        <form action={repostJob}>
-          <input name='jobId' value={jobId} className='hidden' hidden />
+        <form action={formAction}>
+          <input
+            name='jobId'
+            value={jobId}
+            className='hidden'
+            hidden
+            readOnly
+          />
           <Button style='bg-neutral-500 text-gray-100 border-neutral-500 hover:bg-neutral-600'>
             Re - Post
           </Button>
@@ -26,12 +37,23 @@ function JobManageContainer({ jobId }: { jobId: string }) {
         </Link>
 
         <form action={deleteJob}>
-          <input name='jobId' value={jobId} className='hidden' hidden />
+          <input
+            name='jobId'
+            value={jobId}
+            className='hidden'
+            hidden
+            readOnly
+          />
           <Button style='bg-red-500 text-gray-100 border-red-600 hover:bg-red-700'>
             Delete
           </Button>
         </form>
       </div>
+      {state.repostError && (
+        <p className='mt-6 text-red-500 font-semibold tracking-wide opacity-70'>
+          {state.repostError}
+        </p>
+      )}
     </div>
   );
 }

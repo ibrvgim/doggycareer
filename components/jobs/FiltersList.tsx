@@ -17,8 +17,21 @@ function FiltersList() {
   const defaultOfficeType = params.get('officeType') || '';
   const defaultSortBy = params.get('sortBy') || '';
 
+  const location = params.get('location');
+  const title = params.get('title');
+
   return (
     <form action={filterAction}>
+      {(location || title) && (
+        <input
+          name='mainFilter'
+          value={`${location}%${title}`}
+          className='hidden'
+          hidden
+          readOnly
+        />
+      )}
+
       <FilterCard
         options={sortBy}
         title='Sort By'

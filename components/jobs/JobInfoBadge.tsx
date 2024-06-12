@@ -18,7 +18,7 @@ function JobInfoBadge({ job }: { job: JobType }) {
 
       <li className='flex items-center gap-2'>
         <MapPinIcon className='size-[1.20rem] text-rose-300' />
-        <span className='font-semibold text-sm tracking-wider text-blue-950 opacity-70'>
+        <span className='font-semibold text-sm tracking-wider text-blue-950 opacity-70 capitalize'>
           {job.location}
         </span>
       </li>
