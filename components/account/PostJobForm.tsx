@@ -3,7 +3,6 @@
 import { PiBuildingsFill } from 'react-icons/pi';
 import { IoLink, IoImagesOutline } from 'react-icons/io5';
 import { CiTextAlignCenter } from 'react-icons/ci';
-import { BsPersonWorkspace } from 'react-icons/bs';
 import { Cities, ErrorsType, JobType } from '@/types/types';
 import JobRegionSelect from './JobRegionSelect';
 import { Input } from '../general/Input';
@@ -13,6 +12,8 @@ import { useFormState } from 'react-dom';
 import { postJobAction } from '@/actions/postJobAction';
 import EmployeesInput from './EmployeesInput';
 import { Button, OutlineButton } from '../general/Buttons';
+import JobIndustrySelect from './JobIndustrySelect';
+import { industries } from '@/data/manualData/industriesData';
 
 function PostJobForm({
   cities,
@@ -45,7 +46,12 @@ function PostJobForm({
       <p className='mb-6 font-bold text-gray-500 text-2xl tracking-wider mt-14'>
         Job Information
       </p>
-      <JobInformation state={state} edit={edit} defaultValues={defaultValues} />
+      <JobInformation
+        state={state}
+        edit={edit}
+        defaultValues={defaultValues}
+        industries={industries}
+      />
 
       <div className='flex gap-2 justify-end mt-8'>
         <OutlineButton>Cancel</OutlineButton>
@@ -119,10 +125,12 @@ function JobInformation({
   state,
   edit,
   defaultValues,
+  industries,
 }: {
   state: ErrorsType;
   edit?: boolean;
   defaultValues?: JobType;
+  industries: string[];
 }) {
   return (
     <div>
@@ -152,16 +160,12 @@ function JobInformation({
           defaultValue={edit ? defaultValues?.officeType : ''}
         />
 
-        <Input
+        <JobIndustrySelect
           name='industry'
-          type='text'
-          placeholder='ex. Information Technology'
-          label='Job Industry *'
-          error={state?.industry ? state.industry : ''}
           defaultValue={edit ? defaultValues?.industry : ''}
-        >
-          <BsPersonWorkspace />
-        </Input>
+          error={state?.industry ? state.industry : ''}
+          industries={industries}
+        />
       </div>
 
       <div className='mt-12'>

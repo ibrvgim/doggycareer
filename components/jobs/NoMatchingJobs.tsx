@@ -25,7 +25,7 @@ function NoMatchingJobs({ allJobs }: { allJobs: JobType[] }) {
       </div>
 
       <div>
-        <p className='text-2xl tracking-wider text-gray-500 font-semibold mb-10'>
+        <p className='text-2xl tracking-wider text-gray-500 font-semibold mb-6'>
           Other Job Suggestions
         </p>
         <div className='flex flex-col gap-5'>

@@ -35,15 +35,17 @@ function RegionInput({
         type='text'
         name={name}
         placeholder={placeholder}
-        className='h-12 w-[22rem] rounded-md pl-[3.2rem] pr-4 border-[1px] border-gray-400 shadow-lg 
-          text-[15px] text-gray-700 tracking-widest font-medium placeholder:text-gray-400 placeholder:font-light capitalize'
+        className={`h-12 w-[22rem] rounded-md pl-[3.2rem] pr-4 border-[1px] border-gray-400 shadow-lg 
+          text-[15px] text-gray-700 tracking-widest font-medium placeholder:font-light capitalize ${
+            error ? 'placeholder:text-red-500' : 'placeholder:text-gray-400'
+          }`}
         value={input}
         onChange={(e) => {
           setInput(e.target.value);
           setShow(true);
         }}
         autoComplete='off'
-        style={error ? { border: '2px solid rgb(220 38 38)' } : {}}
+        style={error ? { border: '2px solid rgb(239 68 68)' } : {}}
       />
 
       {show && input.trim().length > 0 && getSomeCities?.length > 0 && (

@@ -8,7 +8,7 @@ import { RiPresentationFill } from 'react-icons/ri';
 
 function NavigationMenu() {
   return (
-    <div className='border-[1.7px] border-gray-300 px-5 min-w-72 pt-5 pb-3 rounded-xl'>
+    <div className='border-[1.7px] border-gray-300 px-5 min-w-72 pt-5 pb-4 rounded-xl'>
       <div className='flex flex-col gap-2 tracking-[0.07rem] font-medium text-gray-700'>
         <p className='pb-3 px-2 mb-2 border-b-2 border-b-gray-200 font-semibold text-gray-600'>
           My Items

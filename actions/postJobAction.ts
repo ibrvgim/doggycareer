@@ -93,7 +93,7 @@ export async function postJobAction(_: any, data: FormData) {
     jobDescription,
     responsibilities,
     qualifications,
-    industry,
+    industry: industry.toLowerCase(),
     postAuthor: user?.id || '',
   };
 

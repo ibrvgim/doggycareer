@@ -45,7 +45,12 @@ function SearchingSystem({
       <JobTitleInput
         name='title'
         placeholder='Job Title'
-        icon={<MagnifyingGlassIcon className='size-6 text-gray-400' />}
+        icon={
+          <MagnifyingGlassIcon
+            className='size-6 text-gray-400'
+            style={state?.inputError ? { color: 'rgb(239 68 68)' } : {}}
+          />
+        }
         error={state?.inputError}
         defaultValue={title?.replaceAll('-', ' ') || ''}
         industries={industries}
@@ -58,7 +63,7 @@ function SearchingSystem({
           <MapPinIcon
             className='size-6 text-gray-400'
             fill='none'
-            stroke='rgb(156 163 175)'
+            stroke={state?.inputError ? 'rgb(239 68 68)' : 'rgb(156 163 175)'}
           />
         }
         cities={cities}

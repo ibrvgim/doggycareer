@@ -27,7 +27,7 @@ async function JobSuggestions({ slugJob }: { slugJob: string }) {
 
   return (
     <section className='mt-10 pt-16 pb-20 px-[20%] bg-gray-50'>
-      <p className='text-4xl font-bold mb-10 text-cyan-700 tracking-wider'>
+      <p className='text-4xl font-bold mb-8 text-cyan-700 tracking-wider'>
         Other Job Suggestions
       </p>
 
