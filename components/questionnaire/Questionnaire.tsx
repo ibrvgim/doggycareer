@@ -1,11 +1,13 @@
 'use client';
 
 import ProgressBar from './ProgressBar';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Cities, QuestionnaireType } from '@/types/types';
 import LoadingSpinner from './LoadingSpinner';
 import { useSelector } from 'react-redux';
+import { questionnaireAction } from '@/actions/questionnaireAction';
+import { useFormStatus } from 'react-dom';
 
 const FirstStage = lazy(() => import('./FirstStage'));
 const SecondStage = lazy(() => import('./SecondStage'));
@@ -20,6 +22,7 @@ function Questionnaire({
   industries: string[];
 }) {
   const [stage, setStage] = useState(0);
+  const formElement = useRef<HTMLFormElement>(null);
   const router = useRouter();
   const questionnaire = useSelector(
     (state: { questionnaire: QuestionnaireType }) => state.questionnaire
@@ -31,23 +34,6 @@ function Questionnaire({
     <ThirdStage key='third-stage' industries={industries} />,
     <FourthStage key='fourth-stage' questionnaire={questionnaire} />,
   ];
-
-  function handleBack() {
-    setStage((stage) => stage - 1);
-  }
-
-  function handleSkip() {
-    if (stage === stages.length - 1) router.push('/jobs');
-    else setStage((stage) => stage + 1);
-  }
-
-  function handleNext() {
-    setStage((stage) => stage + 1);
-  }
-
-  function handleFinish() {
-    router.push('/jobs');
-  }
 
   const validForSubmission = Boolean(
     questionnaire.email ||
@@ -62,8 +48,47 @@ function Questionnaire({
     (stage === 2 && questionnaire.industry.length > 0) ||
     (stage === 3 && !!questionnaire.email);
 
+  const allFieldsFilled = Boolean(
+    questionnaire.email &&
+      questionnaire.industry.length > 0 &&
+      questionnaire.jobType &&
+      questionnaire.location.length > 0
+  );
+
+  const allFieldsEmpty = Boolean(
+    !questionnaire.email &&
+      questionnaire.industry.length === 0 &&
+      !questionnaire.jobType &&
+      questionnaire.location.length === 0
+  );
+
+  function handleBack() {
+    setStage((stage) => stage - 1);
+  }
+
+  function handleSkip() {
+    if (stage === stages.length - 1) {
+      if (validForSubmission) {
+        localStorage.setItem('questionnaire', JSON.stringify(questionnaire));
+      }
+
+      router.push('/jobs');
+    } else setStage((stage) => stage + 1);
+  }
+
+  function handleNext() {
+    setStage((stage) => stage + 1);
+  }
+
+  function handleFinish() {
+    if (validForSubmission) {
+      localStorage.setItem('questionnaire', JSON.stringify(questionnaire));
+      formElement.current!.submit();
+    }
+  }
+
   return (
-    <section className='rounded-3xl min-h-[42rem] max-w-[104rem] mx-auto bg-gradient-to-br mt-12 from-blue-50 to-rose-50 px-24 pt-16 pb-10 flex flex-col shadow-md'>
+    <section className='rounded-3xl min-h-[42rem] max-w-[104rem] mx-auto bg-gradient-to-br from-blue-50 to-rose-50 px-24 pt-16 pb-10 flex flex-col shadow-md'>
       <ProgressBar stages={stages.length} currentStage={stage} />
 
       <Suspense fallback={<LoadingSpinner />}>{stages[stage]}</Suspense>
@@ -74,20 +99,46 @@ function Questionnaire({
         ) : (
           <div className='h-5'>&nbsp;</div>
         )}
-        <div className='flex gap-10'>
-          <Button handleOnClick={handleSkip} disabled={validForNextStage}>
-            Skip
-          </Button>
+
+        <form
+          className='flex gap-10'
+          action={questionnaireAction}
+          ref={formElement}
+        >
+          {validForSubmission && (
+            <input
+              name='questionnaireData'
+              value={JSON.stringify(questionnaire)}
+              className='hidden'
+              hidden
+              readOnly
+            />
+          )}
+          {((!allFieldsFilled && stage !== stages.length - 1) ||
+            allFieldsEmpty) && (
+            <Button handleOnClick={handleSkip} disabled={validForNextStage}>
+              Skip
+            </Button>
+          )}
+
           {stage === stages.length - 1 ? (
-            <Button handleOnClick={handleFinish} disabled={!validForSubmission}>
+            <Button
+              handleOnClick={handleFinish}
+              disabled={!validForSubmission}
+              type='button'
+            >
               Submit
             </Button>
           ) : (
-            <Button handleOnClick={handleNext} disabled={!validForNextStage}>
+            <Button
+              handleOnClick={handleNext}
+              disabled={!validForNextStage}
+              type='button'
+            >
               Next
             </Button>
           )}
-        </div>
+        </form>
       </div>
     </section>
   );
@@ -97,19 +148,24 @@ function Button({
   children,
   handleOnClick,
   disabled = false,
+  type = 'button',
 }: {
   children: string;
-  handleOnClick: () => void;
+  handleOnClick?: () => void;
   disabled?: boolean;
+  type?: 'submit' | 'reset' | 'button';
 }) {
+  const { pending } = useFormStatus();
+
   return (
     <button
       className='text-cyan-700 font-bold opacity-70 uppercase tracking-widest hover:opacity-100 transition-all 
       disabled:cursor-not-allowed disabled:opacity-50'
       onClick={handleOnClick}
-      disabled={disabled}
+      disabled={disabled || pending}
+      type={type}
     >
-      {children}
+      {pending && type === 'submit' ? 'Submitting...' : children}
     </button>
   );
 }

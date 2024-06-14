@@ -1,8 +1,10 @@
+import { QuestionnaireType } from '@/types/types';
 import { createClient } from '../supabase/server';
 
 interface PersonalDataType {
-  linkedin: string;
-  github: string;
+  linkedin?: string;
+  github?: string;
+  questionnaire?: QuestionnaireType;
 }
 
 export async function getPersonalData() {
@@ -28,7 +30,7 @@ export async function createPersonalData(id: string) {
 
 export async function updatePersonalData(
   id: string,
-  updatedData: PersonalDataType
+  updatedData: PersonalDataType | string
 ) {
   const supabase = createClient();
 

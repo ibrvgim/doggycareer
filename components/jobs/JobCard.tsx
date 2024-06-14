@@ -43,7 +43,7 @@ function JobCard({
         <JobInfoBadge job={job} />
 
         <div className='flex flex-col'>
-          <p className='mt-6 mb-4 text-gray-500 tracking-wider text-[15px] leading-7'>
+          <p className='mt-6 mb-4 text-gray-500 tracking-wider text-[15px] leading-7 h-full'>
             {job.jobDescription.slice(0, descriptionLength) + '...'}
           </p>
 

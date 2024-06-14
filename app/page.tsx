@@ -1,21 +1,30 @@
 import Header from '@/components/general/Header';
 import Features from '@/components/main/Features';
-import Questionnaire from '@/components/questionnaire/Questionnaire';
 import Statistics from '@/components/main/Statistics';
 import { getCountries } from '@/data/getCountries';
 import MobileAdCard from '@/components/general/MobileAdCard';
 import Footer from '@/components/general/Footer';
 import TipCard from '@/components/main/TipCard';
-import RecommendedJobs from '@/components/main/RecommendedJobs';
 import { getJobs } from '@/data/jobs/apiJobs';
 import { getIndustries } from '@/data/getIndustries';
+import RecommendedJobs from '@/components/main/RecommendedJobs';
+import Questionnaire from '@/components/questionnaire/Questionnaire';
+import { getPersonalData } from '@/data/users/apiUsers';
+import { getUserAPI } from '@/data/auth/apiUser';
 
 async function RootPage() {
-  const [cities, industries, allJobs] = await Promise.all([
-    getCountries(),
-    getIndustries(),
-    getJobs(),
-  ]);
+  const [user, cities, industries, allJobs, usersPersonalData] =
+    await Promise.all([
+      getUserAPI(),
+      getCountries(),
+      getIndustries(),
+      getJobs(),
+      getPersonalData(),
+    ]);
+
+  const checkQuestionnaire = usersPersonalData?.find(
+    (item) => item.userId === user?.id
+  )?.questionnaire;
 
   return (
     <>
@@ -23,8 +32,13 @@ async function RootPage() {
         <Header cities={cities} />
 
         <div className='py-20 px-28'>
-          <Questionnaire cities={cities} industries={industries} />
-          {/* <RecommendedJobs allJobs={allJobs} /> */}
+          {checkQuestionnaire ? (
+            <RecommendedJobs allJobs={allJobs} />
+          ) : (
+            <div className='mt-12'>
+              <Questionnaire cities={cities} industries={industries} />
+            </div>
+          )}
           <Features />
           <TipCard />
           <Statistics />

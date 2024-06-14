@@ -18,7 +18,7 @@ async function ProfilePage() {
     <section className='w-full text-[15px] flex flex-col gap-10'>
       <PersonalInformation user={user} />
       <ExternalReferences references={getCurrentUserData} />
-      <JobPreferences />
+      <JobPreferences jobPreferences={getCurrentUserData?.questionnaire} />
     </section>
   );
 }

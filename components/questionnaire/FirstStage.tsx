@@ -23,14 +23,14 @@ function FirstStage({ questionnaire }: { questionnaire: QuestionnaireType }) {
     >
       <div className='flex gap-3 mt-14'>
         <Button
-          handleOnClick={() => handleJobType('partTime')}
-          active={questionnaire.jobType === 'partTime'}
+          handleOnClick={() => handleJobType('part time')}
+          active={questionnaire.jobType === 'part time'}
         >
           Part time
         </Button>
         <Button
-          handleOnClick={() => handleJobType('fullTime')}
-          active={questionnaire.jobType === 'fullTime'}
+          handleOnClick={() => handleJobType('full time')}
+          active={questionnaire.jobType === 'full time'}
         >
           Full time
         </Button>

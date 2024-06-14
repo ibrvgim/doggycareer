@@ -4,14 +4,36 @@ import ListSpinner from '../general/ListSpinner';
 import { Suspense } from 'react';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import { getUserAPI } from '@/data/auth/apiUser';
+import { getPersonalData } from '@/data/users/apiUsers';
 
 async function RecommendedJobs({ allJobs }: { allJobs: JobType[] }) {
-  const user = await getUserAPI();
-  const storedJobs = await getUserStoredJobs();
+  const [user, storedJobs, personalData] = await Promise.all([
+    getUserAPI(),
+    getUserStoredJobs(),
+    getPersonalData(),
+  ]);
 
   const listAppliedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).appliedJobs;
+  )?.appliedJobs;
+
+  const listArchivedJobs = storedJobs?.find(
+    (item) => item.userId === user?.id
+  )?.archive;
+
+  const questionnaireData = personalData.find(
+    (item) => item.userId === user?.id
+  )?.questionnaire;
+
+  const filterJobs = allJobs
+    .filter(
+      (job) =>
+        !listAppliedJobs.includes(job.id.toString()) &&
+        !listArchivedJobs.includes(job.id.toString()) &&
+        job.postAuthor !== user?.id &&
+        questionnaireData?.industry.includes(job.industry)
+    )
+    .slice(0, 6);
 
   return (
     <div>
@@ -22,16 +44,13 @@ async function RecommendedJobs({ allJobs }: { allJobs: JobType[] }) {
         Jobs that match your searches and preferences
       </p>
 
-      <div className='flex justify-center items-stretch gap-5 mt-12 max-w-[104rem] min-h-96 mx-auto'>
+      <div className='grid grid-cols-2 gap-x-4 gap-y-6 mt-12 max-w-[104rem] mx-auto'>
         <Suspense fallback={<ListSpinner />}>
-          {allJobs
-            .filter((job) => !listAppliedJobs.includes(job.id.toString()))
-            .slice(0, 3)
-            .map((job) => (
-              <div key={job.id} className='flex-1'>
-                <JobCard job={job} descriptionLength={86} />
-              </div>
-            ))}
+          {filterJobs.map((job) => (
+            <div key={job.id}>
+              <JobCard job={job} descriptionLength={130} />
+            </div>
+          ))}
         </Suspense>
       </div>
     </div>
