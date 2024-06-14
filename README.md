@@ -6,7 +6,7 @@ Welcome to DoggyCareer, your job search platform for diverse career opportunitie
 > It's a Demo Website, for this reason:
 >
 > - The file attachment feature is disabled to avoid privacy issues for people.
-> - Company logo can be uploaded from logo svg link to avoid database overload.
+> - Company logo can be uploaded by link to svg file to avoid database overload.
 
 ## OVERVIEW
 
