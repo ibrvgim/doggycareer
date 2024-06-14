@@ -18,7 +18,7 @@ function ProfileNavigationMenu() {
           href='/account/profile'
           icon={<FaRegUserCircle className='text-[17px] text-gray-600' />}
         >
-          Profile
+          My Profile
         </NavTab>
 
         <NavTab

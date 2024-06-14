@@ -1,4 +1,4 @@
-import PostJobForm from '@/components/account/PostJobForm';
+import PostJobForm from '@/components/account/post-job/PostJobForm';
 import { getCountries } from '@/data/getCountries';
 
 async function PostJobPage() {

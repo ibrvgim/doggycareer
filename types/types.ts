@@ -56,6 +56,13 @@ export interface PostedJobType {
   postAuthor?: string;
 }
 
+export interface StoredJobsType {
+  id: string;
+  savedJobs: string[];
+  appliedJobs: string[];
+  archive: string[];
+}
+
 // QUESTIONNAIRE TYPE
 export interface QuestionnaireType {
   jobType: string;

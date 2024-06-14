@@ -21,7 +21,7 @@ function JobsContainer({
   listArchivedJobs: string[];
 }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageCount = Math.ceil(allJobs.length / ITEMS_PER_PAGE);
+  const pageCount = Math.floor(allJobs.length / ITEMS_PER_PAGE);
 
   function handlePageChange(event: React.ChangeEvent<unknown>, page: number) {
     setCurrentPage(page);

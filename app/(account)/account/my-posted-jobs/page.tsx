@@ -1,4 +1,4 @@
-import NoPostedJobCard from '@/components/account/NoPostedJobCard';
+import NoPostedJobCard from '@/components/account/post-job/NoPostedJobCard';
 import SecondaryJobsListContainer from '@/components/general/SecondaryJobsListContainer';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getJobs } from '@/data/jobs/apiJobs';

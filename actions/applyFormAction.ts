@@ -42,7 +42,7 @@ function validValue(key: string, value: string, length: number) {
 }
 
 function validLinks(key: string, value: string, linkPattern: string) {
-  if (!value.includes(linkPattern)) {
+  if (!value?.includes(linkPattern)) {
     errors[key] = `Incorrect link type`;
     return false;
   } else {

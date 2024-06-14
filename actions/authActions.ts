@@ -8,6 +8,7 @@ import {
   updatePersonalInformationAPI,
 } from '@/data/auth/apiUser';
 import { createSavedAppliedJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
+import { createPersonalData } from '@/data/users/apiUsers';
 import { ErrorsType } from '@/types/types';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -111,7 +112,8 @@ export async function createUser(_: any, data: FormData) {
   );
 
   if (newUser.user) {
-    createSavedAppliedJobs(newUser.user.id);
+    await createSavedAppliedJobs(newUser.user.id);
+    await createPersonalData(newUser.user.id);
     redirect('/');
   }
 }

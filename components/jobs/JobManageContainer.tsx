@@ -1,9 +1,11 @@
 'use client';
 
-import { deleteJob, repostJob } from '@/actions/jobManageAction';
+import { repostJob } from '@/actions/jobManageAction';
 import Link from 'next/link';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import { LuShieldCheck } from 'react-icons/lu';
+import JobDeleteButton from './JobDeleteButton';
+import MiniSpinner from '../general/MiniSpinner';
 
 function JobManageContainer({ jobId }: { jobId: string }) {
   const [state, formAction] = useFormState(repostJob, {});
@@ -36,18 +38,7 @@ function JobManageContainer({ jobId }: { jobId: string }) {
           Edit
         </Link>
 
-        <form action={deleteJob}>
-          <input
-            name='jobId'
-            value={jobId}
-            className='hidden'
-            hidden
-            readOnly
-          />
-          <Button style='bg-red-500 text-gray-100 border-red-600 hover:bg-red-700'>
-            Delete
-          </Button>
-        </form>
+        <JobDeleteButton jobId={jobId} />
       </div>
       {state.repostError && (
         <p className='mt-6 text-red-500 font-semibold tracking-wide opacity-70'>
@@ -65,11 +56,19 @@ function Button({
   children: React.ReactNode;
   style?: string;
 }) {
+  const { pending } = useFormStatus();
+
   return (
     <button
       className={`border-[1px] rounded-full tracking-widest min-w-48 py-0 px-4 opacity-85 ${style} transition-all`}
     >
-      {children}
+      {pending ? (
+        <div className='py-[2px]'>
+          <MiniSpinner />
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 }

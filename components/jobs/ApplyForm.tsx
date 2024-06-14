@@ -17,7 +17,15 @@ import { Button, OutlineButton } from '../general/Buttons';
 import { useFormState } from 'react-dom';
 import { applyFormAction } from '@/actions/applyFormAction';
 
-function ApplyForm({ user, jobId }: { user: UserType; jobId: string }) {
+function ApplyForm({
+  user,
+  jobId,
+  references,
+}: {
+  user: UserType;
+  jobId: string;
+  references: { linkedin: string; github: string };
+}) {
   const [state, formAction] = useFormState(applyFormAction, {});
 
   return (
@@ -36,7 +44,7 @@ function ApplyForm({ user, jobId }: { user: UserType; jobId: string }) {
       <p className='font-semibold text-2xl mb-6 mt-14 text-rose-400 tracking-wider'>
         Other References
       </p>
-      <OtherReferences state={state} />
+      <OtherReferences state={state} references={references} />
 
       <p className='font-semibold text-2xl mb-6 mt-14 text-rose-400 tracking-wider'>
         Additional Information
@@ -121,7 +129,13 @@ function PersonalInformation({
   );
 }
 
-function OtherReferences({ state }: { state: ErrorsType | undefined }) {
+function OtherReferences({
+  state,
+  references,
+}: {
+  state: ErrorsType | undefined;
+  references: { linkedin: string; github: string };
+}) {
   return (
     <div className='grid grid-cols-2 gap-x-4 gap-y-7'>
       <Input
@@ -130,6 +144,7 @@ function OtherReferences({ state }: { state: ErrorsType | undefined }) {
         placeholder='ex. www.linkedin.com/685a95287'
         label='LinkedIn'
         error={state?.linkedIn ? state?.linkedIn : ''}
+        defaultValue={references?.linkedin}
       >
         <FaLinkedin />
       </Input>
@@ -140,6 +155,7 @@ function OtherReferences({ state }: { state: ErrorsType | undefined }) {
         placeholder='ex. https://github.com/ibrvgim'
         label='GitHub'
         error={state?.github ? state?.github : ''}
+        defaultValue={references?.github}
       >
         <FaGithub />
       </Input>

@@ -5,13 +5,13 @@ import { IoLink, IoImagesOutline } from 'react-icons/io5';
 import { CiTextAlignCenter } from 'react-icons/ci';
 import { Cities, ErrorsType, JobType } from '@/types/types';
 import JobRegionSelect from './JobRegionSelect';
-import { Input } from '../general/Input';
-import Select from '../general/Select';
-import TextArea from '../general/TextArea';
+import { Input } from '../../general/Input';
+import Select from '../../general/Select';
+import TextArea from '../../general/TextArea';
 import { useFormState } from 'react-dom';
 import { postJobAction } from '@/actions/postJobAction';
 import EmployeesInput from './EmployeesInput';
-import { Button, OutlineButton } from '../general/Buttons';
+import { Button, OutlineButton } from '../../general/Buttons';
 import JobIndustrySelect from './JobIndustrySelect';
 import { industries } from '@/data/manualData/industriesData';
 

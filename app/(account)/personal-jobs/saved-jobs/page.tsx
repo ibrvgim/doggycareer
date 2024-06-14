@@ -18,9 +18,9 @@ async function SavedJobsPage() {
 
   const listSavedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
-  ).savedJobs;
+  )?.savedJobs;
 
-  const getAllSavedJobs = allJobs.filter((job) =>
+  const getAllSavedJobs = allJobs?.filter((job) =>
     listSavedJobs?.includes(job.id.toString())
   );
 

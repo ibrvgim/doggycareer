@@ -1,4 +1,4 @@
-import PostJobForm from '@/components/account/PostJobForm';
+import PostJobForm from '@/components/account/post-job/PostJobForm';
 import Footer from '@/components/general/Footer';
 import GoBack from '@/components/general/GoBack';
 import SecondaryHeader from '@/components/general/SecondaryHeader';
@@ -14,7 +14,7 @@ async function EditPage({ params }: { params: { slugEdit: string } }) {
   const getJob: JobType = await getSingleJob(params?.slugEdit);
   if (!getJob) notFound();
   const isAuthor = user?.id === getJob.postAuthor;
-  if (!isAuthor) redirect('/jobs');
+  if (!isAuthor) redirect(`/jobs/${params?.slugEdit}`);
 
   return (
     <div>

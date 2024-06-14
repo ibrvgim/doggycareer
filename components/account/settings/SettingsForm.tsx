@@ -1,8 +1,8 @@
 'use client';
 
 import { UserType } from '@/types/types';
-import { Button, OutlineButton } from '../general/Buttons';
-import { Input } from '../general/Input';
+import { Button, OutlineButton } from '../../general/Buttons';
+import { Input } from '../../general/Input';
 import { useFormState } from 'react-dom';
 import { updatePassword, updateUserInfo } from '@/actions/authActions';
 import {
@@ -18,7 +18,7 @@ export function PersonalInfoForm({ user }: { user: UserType }) {
   return (
     <form action={formAction}>
       <p className='mb-6 font-bold text-gray-500 text-3xl tracking-wider'>
-        Change Personal Information
+        Update Personal Information
       </p>
 
       <div className='grid grid-cols-2 gap-x-4 gap-y-6'>
@@ -79,7 +79,7 @@ export function PasswordForm() {
   return (
     <form action={formAction}>
       <p className='mb-6 font-bold text-gray-500 text-3xl tracking-wider'>
-        Change Credentials
+        Update Credentials
       </p>
 
       <div className='grid grid-cols-2 gap-x-4 gap-y-6'>

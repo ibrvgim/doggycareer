@@ -5,16 +5,25 @@ import JobInfoBadge from '@/components/jobs/JobInfoBadge';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
-import { JobType } from '@/types/types';
+import { getPersonalData } from '@/data/users/apiUsers';
 import { redirect } from 'next/navigation';
 
 async function ApplyPage({ params }: { params: { slugApply: string } }) {
-  const storedJobs = await getUserStoredJobs();
-  const getJob: JobType = await getSingleJob(params.slugApply);
-  const user = await getUserAPI();
+  const [storedJobs, getJob, user, usersReferences] = await Promise.all([
+    getUserStoredJobs(),
+    getSingleJob(params.slugApply),
+    getUserAPI(),
+    getPersonalData(),
+  ]);
+
   if (!user) redirect('/authentication');
+
   const isAuthor = user?.id === getJob.postAuthor;
   if (isAuthor) redirect('/jobs');
+
+  const getCurrentUserData = usersReferences?.find(
+    (item) => item?.userId === user?.id
+  );
 
   const listAppliedJobs = storedJobs?.find(
     (item) => item.userId === user?.id
@@ -42,7 +51,11 @@ async function ApplyPage({ params }: { params: { slugApply: string } }) {
           </div>
         </div>
 
-        <ApplyForm user={user} jobId={params.slugApply} />
+        <ApplyForm
+          user={user}
+          jobId={params.slugApply}
+          references={getCurrentUserData}
+        />
       </section>
     </div>
   );

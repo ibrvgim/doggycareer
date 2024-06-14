@@ -45,7 +45,7 @@ export async function deleteJob(data: FormData) {
   const jobId = data.get('jobId') as string;
 
   // disabled for safety reasons
-  //   await deleteJobAPI(jobId);
-  //   revalidatePath('/');
-  //   redirect('/jobs');
+  // await deleteJobAPI(jobId);
+  // revalidatePath('/');
+  // redirect('/account/my-posted-jobs');
 }
