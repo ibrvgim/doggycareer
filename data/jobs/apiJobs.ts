@@ -4,7 +4,6 @@ import { createClient } from '../supabase/server';
 export async function getJobs() {
   const supabase = createClient();
 
-  // await new Promise((res) => setTimeout(res, 5000));
   const { data: jobs, error } = await supabase.from('jobs').select('*');
   if (error) throw new Error(error.message);
 

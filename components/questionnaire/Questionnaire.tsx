@@ -5,7 +5,7 @@ import { Suspense, lazy, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Cities, QuestionnaireType } from '@/types/types';
 import LoadingSpinner from './LoadingSpinner';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { questionnaireAction } from '@/actions/questionnaireAction';
 import { useFormStatus } from 'react-dom';
 
@@ -27,7 +27,6 @@ function Questionnaire({
   const questionnaire = useSelector(
     (state: { questionnaire: QuestionnaireType }) => state.questionnaire
   );
-  const dispatch = useDispatch();
 
   const stages = [
     <FirstStage key='first-stage' questionnaire={questionnaire} />,

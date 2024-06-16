@@ -1,4 +1,4 @@
-import { FaMinus, FaPeopleGroup, FaUserLarge } from 'react-icons/fa6';
+import { FaMinus, FaPeopleGroup } from 'react-icons/fa6';
 
 function EmployeesInput({
   error,

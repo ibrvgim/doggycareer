@@ -1,6 +1,5 @@
-import type { Metadata } from 'next';
 import '../styles/globals.css';
-
+import type { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import ReduxProvider from '@/redux/ReduxProvider';
