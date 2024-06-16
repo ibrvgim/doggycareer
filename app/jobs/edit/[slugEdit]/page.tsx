@@ -8,6 +8,16 @@ import { getSingleJob } from '@/data/jobs/apiJobs';
 import { JobType } from '@/types/types';
 import { notFound, redirect } from 'next/navigation';
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slugEdit: string };
+}) {
+  return {
+    title: `Edit Job #${params?.slugEdit}`,
+  };
+}
+
 async function EditPage({ params }: { params: { slugEdit: string } }) {
   const user = await getUserAPI();
   const cities = await getCountries();

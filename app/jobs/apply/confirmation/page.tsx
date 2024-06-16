@@ -7,6 +7,10 @@ import ConfirmationImage from '@/public/general/confirmation.svg';
 import Image from 'next/image';
 import Footer from '@/components/general/Footer';
 
+export const metadata = {
+  title: 'Confirmation',
+};
+
 async function ConfirmationPage({
   searchParams,
 }: {

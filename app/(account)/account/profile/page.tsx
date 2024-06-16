@@ -5,6 +5,10 @@ import { getUserAPI } from '@/data/auth/apiUser';
 import { getPersonalData } from '@/data/users/apiUsers';
 import { redirect } from 'next/navigation';
 
+export const metadata = {
+  title: 'My Profile',
+};
+
 async function ProfilePage() {
   const user = await getUserAPI();
   if (!user) redirect('/authentication');

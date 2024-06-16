@@ -1,3 +1,4 @@
+import { clearQuestionnaireAction } from '@/actions/questionnaireAction';
 import { QuestionnaireType } from '@/types/types';
 import Link from 'next/link';
 import { HiMiniPencilSquare } from 'react-icons/hi2';
@@ -9,15 +10,28 @@ function JobPreferences({
 }) {
   return (
     <div>
-      <p className='text-2xl font-bold text-gray-400 tracking-widest flex items-center gap-3'>
-        Job Preferences
-        <Link
-          href={jobPreferences ? '/account/questionnaire' : '/'}
-          className='hover:text-cyan-700 transition-all'
-        >
-          <HiMiniPencilSquare />
-        </Link>
-      </p>
+      <div className='flex items-center gap-3'>
+        <p className='text-2xl font-bold text-gray-400 tracking-widest'>
+          Job Preferences
+        </p>
+        {jobPreferences ? (
+          <form action={clearQuestionnaireAction}>
+            <button
+              className='border-[1px] border-rose-400 text-rose-400 text-xs tracking-wider py-[1px] px-5 rounded-full 
+            hover:border-rose-700 hover:text-rose-700 transition-all'
+            >
+              Delete
+            </button>
+          </form>
+        ) : (
+          <Link
+            href='/'
+            className='text-2xl font-bold text-gray-400 hover:text-cyan-700 transition-all'
+          >
+            <HiMiniPencilSquare />
+          </Link>
+        )}
+      </div>
 
       {jobPreferences ? (
         <div className='flex flex-col gap-2 mt-4 text-gray-400 font-semibold tracking-wider'>

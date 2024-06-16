@@ -38,8 +38,15 @@ function JobRegionSelect({ name, cities, error, defaultValue }: Props) {
           type='text'
           name={name}
           placeholder='ex. Berlin'
-          className='w-full h-10 rounded-md pl-11 text-sm tracking-wider border-[1px] text-gray-600 border-gray-400 disabled:text-gray-500  disabled:opacity-85 disabled:border-gray-300 placeholder:text-gray-300 capitalize'
-          value={input.slice(0, 1).toUpperCase() + input.slice(1).toLowerCase()}
+          className='w-full h-10 rounded-md pl-11 text-sm tracking-wider border-[1px] text-gray-600 border-gray-400 disabled:text-gray-500  disabled:opacity-85 disabled:border-gray-300 placeholder:text-gray-300'
+          // value={input.slice(0, 1).toUpperCase() + input.slice(1).toLowerCase()}
+          value={input
+            ?.split(' ')
+            .map(
+              (item) =>
+                item.slice(0, 1).toUpperCase() + item.slice(1).toLowerCase()
+            )
+            .join(' ')}
           onChange={(e) => {
             setInput(e.target.value);
             setShow(true);

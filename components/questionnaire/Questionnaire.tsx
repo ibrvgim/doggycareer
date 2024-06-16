@@ -5,7 +5,7 @@ import { Suspense, lazy, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Cities, QuestionnaireType } from '@/types/types';
 import LoadingSpinner from './LoadingSpinner';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { questionnaireAction } from '@/actions/questionnaireAction';
 import { useFormStatus } from 'react-dom';
 
@@ -27,6 +27,7 @@ function Questionnaire({
   const questionnaire = useSelector(
     (state: { questionnaire: QuestionnaireType }) => state.questionnaire
   );
+  const dispatch = useDispatch();
 
   const stages = [
     <FirstStage key='first-stage' questionnaire={questionnaire} />,
@@ -83,7 +84,7 @@ function Questionnaire({
   function handleFinish() {
     if (validForSubmission) {
       localStorage.setItem('questionnaire', JSON.stringify(questionnaire));
-      formElement.current!.submit();
+      formElement.current!.requestSubmit();
     }
   }
 
@@ -122,19 +123,11 @@ function Questionnaire({
           )}
 
           {stage === stages.length - 1 ? (
-            <Button
-              handleOnClick={handleFinish}
-              disabled={!validForSubmission}
-              type='button'
-            >
+            <Button handleOnClick={handleFinish} disabled={!validForSubmission}>
               Submit
             </Button>
           ) : (
-            <Button
-              handleOnClick={handleNext}
-              disabled={!validForNextStage}
-              type='button'
-            >
+            <Button handleOnClick={handleNext} disabled={!validForNextStage}>
               Next
             </Button>
           )}
@@ -148,12 +141,10 @@ function Button({
   children,
   handleOnClick,
   disabled = false,
-  type = 'button',
 }: {
   children: string;
   handleOnClick?: () => void;
   disabled?: boolean;
-  type?: 'submit' | 'reset' | 'button';
 }) {
   const { pending } = useFormStatus();
 
@@ -163,9 +154,9 @@ function Button({
       disabled:cursor-not-allowed disabled:opacity-50'
       onClick={handleOnClick}
       disabled={disabled || pending}
-      type={type}
+      type='button'
     >
-      {pending && type === 'submit' ? 'Submitting...' : children}
+      {pending ? 'Submitting...' : children}
     </button>
   );
 }

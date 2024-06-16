@@ -1,6 +1,10 @@
 import Image from 'next/image';
 import MessageImage from '@/public/general/messages.svg';
 
+export const metadata = {
+  title: 'Messages',
+};
+
 function MessagesPage() {
   return (
     <div className='w-full px-5 pt-5 pb-3 min-h-[28rem] flex flex-col items-center justify-center text-center'>

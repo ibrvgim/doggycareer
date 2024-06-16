@@ -7,6 +7,10 @@ import { getJobs } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import { JobType } from '@/types/types';
 
+export const metadata = {
+  title: 'Jobs',
+};
+
 export async function generateStaticParams() {
   const allJobs: JobType[] = await getJobs();
 

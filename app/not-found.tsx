@@ -4,6 +4,10 @@ import NotFoundImage from '@/public/general/not-found.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Page Not Found',
+};
+
 function PageNotFound() {
   return (
     <div>

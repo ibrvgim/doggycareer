@@ -5,6 +5,10 @@ import Image from 'next/image';
 import ErrorImage from '@/public/general/error.svg';
 import { useRouter } from 'next/navigation';
 
+export const metadata = {
+  title: 'Something went wrong',
+};
+
 function ErrorPage({
   error,
   reset,

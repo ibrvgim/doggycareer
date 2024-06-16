@@ -5,10 +5,6 @@ import { getJobs } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import SaveJobImage from '@/public/general/save-job-image.svg';
 
-export const metadata = {
-  title: 'Saved Jobs',
-};
-
 async function SavedJobsPage() {
   const [user, allJobs, storedJobs] = await Promise.all([
     getUserAPI(),

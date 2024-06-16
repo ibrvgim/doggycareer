@@ -1,27 +1,36 @@
 import { getJobs } from '@/data/jobs/apiJobs';
-import JobCard from './JobCard';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
+import JobCard from './JobCard';
+import { JobType } from '@/types/types';
 
 async function JobSuggestions({ slugJob }: { slugJob: string }) {
-  const allJobs = await getJobs();
-  const user = await getUserAPI();
-  const storedJobs = await getUserStoredJobs();
+  const [allJobs, user, storedJobs] = await Promise.all([
+    getJobs(),
+    getUserAPI(),
+    getUserStoredJobs(),
+  ]);
 
-  const listSavedJobs = storedJobs?.find(
+  const listSavedJobs: string[] = storedJobs?.find(
     (item) => item.userId === user?.id
   )?.savedJobs;
 
-  const listAppliedJobs = storedJobs?.find(
+  const listAppliedJobs: string[] = storedJobs?.find(
     (item) => item.userId === user?.id
   )?.appliedJobs;
 
-  // exclude current job and jobs that user already applied
-  const filteredJobs = allJobs
+  const listArchivedJobs: string[] = storedJobs?.find(
+    (item) => item.userId === user?.id
+  )?.archive;
+
+  // exclude current job, jobs posted by user and jobs that user already applied, archived
+  const filteredJobs: JobType[] = allJobs
     .filter(
-      (job) =>
+      (job: JobType) =>
         job.id !== Number(slugJob) &&
-        !listAppliedJobs?.includes(job.id.toString())
+        !listAppliedJobs?.includes(job.id.toString()) &&
+        !listArchivedJobs?.includes(job.id.toString()) &&
+        job.postAuthor !== user?.id
     )
     .slice(0, 5);
 

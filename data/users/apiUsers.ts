@@ -4,7 +4,7 @@ import { createClient } from '../supabase/server';
 interface PersonalDataType {
   linkedin?: string;
   github?: string;
-  questionnaire?: QuestionnaireType;
+  questionnaire?: QuestionnaireType | null;
 }
 
 export async function getPersonalData() {

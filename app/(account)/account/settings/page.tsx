@@ -7,6 +7,10 @@ import { getUserAPI } from '@/data/auth/apiUser';
 import { getPersonalData } from '@/data/users/apiUsers';
 import { UserType } from '@/types/types';
 
+export const metadata = {
+  title: 'Settings',
+};
+
 async function SettingsPage() {
   const user: UserType | null = await getUserAPI();
   const usersReferences = await getPersonalData();

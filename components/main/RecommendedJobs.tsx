@@ -25,15 +25,19 @@ async function RecommendedJobs({ allJobs }: { allJobs: JobType[] }) {
     (item) => item.userId === user?.id
   )?.questionnaire;
 
-  const filterJobs = allJobs
-    .filter(
-      (job) =>
-        !listAppliedJobs.includes(job.id.toString()) &&
-        !listArchivedJobs.includes(job.id.toString()) &&
-        job.postAuthor !== user?.id &&
-        questionnaireData?.industry.includes(job.industry)
-    )
+  const exludeJobs = allJobs.filter(
+    (job) =>
+      !listAppliedJobs.includes(job.id.toString()) &&
+      !listArchivedJobs.includes(job.id.toString()) &&
+      job.postAuthor !== user?.id
+  );
+
+  const finalFilterization = exludeJobs
+    .filter((job) => questionnaireData?.industry.includes(job.industry))
     .slice(0, 6);
+
+  const activeJobs =
+    finalFilterization.length >= 2 ? finalFilterization : exludeJobs;
 
   return (
     <div>
@@ -46,7 +50,7 @@ async function RecommendedJobs({ allJobs }: { allJobs: JobType[] }) {
 
       <div className='grid grid-cols-2 gap-x-4 gap-y-6 mt-12 max-w-[104rem] mx-auto'>
         <Suspense fallback={<ListSpinner />}>
-          {filterJobs.map((job) => (
+          {activeJobs.map((job) => (
             <div key={job.id}>
               <JobCard job={job} descriptionLength={130} />
             </div>

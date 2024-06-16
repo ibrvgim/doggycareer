@@ -8,6 +8,16 @@ import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedApplie
 import { getPersonalData } from '@/data/users/apiUsers';
 import { redirect } from 'next/navigation';
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slugApply: string };
+}) {
+  return {
+    title: `Apply Job #${params.slugApply}`,
+  };
+}
+
 async function ApplyPage({ params }: { params: { slugApply: string } }) {
   const [storedJobs, getJob, user, usersReferences] = await Promise.all([
     getUserStoredJobs(),

@@ -17,3 +17,12 @@ export async function questionnaireAction(data: FormData) {
     revalidatePath('/');
   }
 }
+
+export async function clearQuestionnaireAction() {
+  const user = await getUserAPI();
+
+  if (user) {
+    await updatePersonalData(user?.id, { questionnaire: null });
+    revalidatePath('/');
+  }
+}

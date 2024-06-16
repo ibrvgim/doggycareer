@@ -3,6 +3,10 @@ import SecondaryJobsListContainer from '@/components/general/SecondaryJobsListCo
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getJobs } from '@/data/jobs/apiJobs';
 
+export const metadata = {
+  title: 'My Posted Jobs',
+};
+
 async function MyPostedJobs() {
   const [user, allJobs] = await Promise.all([getUserAPI(), getJobs()]);
 

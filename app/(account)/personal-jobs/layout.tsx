@@ -2,6 +2,10 @@ import NavigationMenu from '@/components/my-jobs/NavigationMenu';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { redirect } from 'next/navigation';
 
+export const metadata = {
+  title: 'My Jobs',
+};
+
 async function MyJobsLayout({
   children,
 }: Readonly<{

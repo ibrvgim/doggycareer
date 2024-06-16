@@ -11,8 +11,21 @@ import JobSuggestions from '@/components/jobs/JobSuggestions';
 import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
+import { JobType } from '@/types/types';
 import { notFound } from 'next/navigation';
 import { FaBoxArchive } from 'react-icons/fa6';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slugJob: string };
+}) {
+  const singleJob: JobType = await getSingleJob(params.slugJob);
+
+  return {
+    title: singleJob.jobTitle,
+  };
+}
 
 async function JobItemPage({ params }: { params: { slugJob: string } }) {
   const [user, singleJob, storedJobs] = await Promise.all([
