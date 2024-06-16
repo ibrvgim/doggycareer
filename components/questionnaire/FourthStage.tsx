@@ -10,7 +10,7 @@ import MailImage from '@/public/questionnaire-images/mail.svg';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { QuestionnaireType } from '@/types/types';
-import { setEmail } from '../../redux/slices/questionnaireSlice';
+import { setEmail } from '@/redux/slices/questionnaireSlice';
 
 function FourthStage({ questionnaire }: { questionnaire: QuestionnaireType }) {
   const dispatch = useDispatch();
