@@ -2,7 +2,7 @@ import { QuestionnaireType } from '@/types/types';
 import QuestionnaireCard from './QuestionnaireCard';
 import WorkImage from '@/public/questionnaire-images/work.svg';
 import { useDispatch } from 'react-redux';
-import { setJobType } from '@/redux/slices/questionnaireSlice';
+import { setJobType } from '@/app/redux/slices/questionnaireSlice';
 
 function FirstStage({ questionnaire }: { questionnaire: QuestionnaireType }) {
   const dispatch = useDispatch();
