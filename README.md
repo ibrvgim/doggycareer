@@ -7,6 +7,7 @@ Welcome to DoggyCareer, your job search platform for diverse career opportunitie
 >
 > - The file attachment feature is disabled to avoid privacy issues for people.
 > - Company logo can be uploaded by link to svg file to avoid database overload.
+> - Since the number of Jobs is limited, some filters have been adjusted to account for this issue.
 
 ## OVERVIEW
 
@@ -24,14 +25,6 @@ Welcome to DoggyCareer, your job search platform for diverse career opportunitie
 - Slugify - https://www.npmjs.com/package/slugify
 
 For the server part SUPABASE was used: https://supabase.com/
-
-### Setup
-
-Manage locally:
-
-```
-npm install && npm run dev
-```
 
 ## AUTHOR
 
