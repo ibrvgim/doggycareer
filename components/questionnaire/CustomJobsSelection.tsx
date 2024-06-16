@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { useDispatch, useSelector } from 'react-redux';
 import { QuestionnaireType } from '@/types/types';
-import { setIndustry } from '@/redux/slices/questionnaireSlice';
+import { setIndustry } from '../../redux/slices/questionnaireSlice';
 
 function CustomJobsSelect({ industries }: { industries: string[] }) {
   const [input, setInput] = useState('');
