@@ -46,6 +46,7 @@ function LoginCard() {
             label='Email Address'
             placeholder='ex. alex.johnson@gmail.com'
             error={state?.email ? state.email : ''}
+            defaultValue='doggycareer@gmail.com'
           >
             <MdEmail />
           </Input>
@@ -57,6 +58,7 @@ function LoginCard() {
               label='Password'
               placeholder='Minimum 8 characters'
               error={state?.password ? state.password : ''}
+              defaultValue='doggycareer'
             >
               <MdLock />
             </Input>
