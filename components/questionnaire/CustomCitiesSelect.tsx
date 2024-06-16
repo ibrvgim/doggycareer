@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { Cities, QuestionnaireType } from '@/types/types';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLocation } from '@/redux/slices/questionnaireSlice';
+import { setLocation } from '../../redux/slices/questionnaireSlice';
 
 function CustomCitiesSelect({ cities }: { cities: Cities }) {
   const [input, setInput] = useState('');
