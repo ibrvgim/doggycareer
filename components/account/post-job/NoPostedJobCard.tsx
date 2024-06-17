@@ -8,16 +8,16 @@ function NoPostedJobCard() {
       <Image
         src={PostJobImage}
         alt='bookmark image'
-        width={300}
+        width={250}
         className='mb-14'
         draggable={false}
       />
 
-      <p className='text-5xl font-extrabold text-gray-500 tracking-widest mb-3'>
+      <p className='text-[2.6rem] font-extrabold text-gray-500 tracking-widest mb-3'>
         No Posted Jobs
       </p>
 
-      <p className='text-lg text-gray-400 tracking-wide mb-10'>
+      <p className='text-[17px] text-gray-400 tracking-wide mb-10'>
         You do not have posted jobs. Start placing jobs and hiring people as
         easily as possible.
       </p>

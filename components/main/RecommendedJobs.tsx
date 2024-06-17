@@ -38,7 +38,9 @@ async function RecommendedJobs({ allJobs }: { allJobs: JobType[] }) {
     .slice(0, 6);
 
   const activeJobs =
-    finalFilterization.length >= 2 ? finalFilterization : exludeJobs;
+    finalFilterization.length >= 2
+      ? finalFilterization
+      : exludeJobs.slice(0, 6);
 
   return (
     <div>

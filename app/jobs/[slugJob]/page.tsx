@@ -1,3 +1,7 @@
+import {
+  archiveJobAction,
+  saveJobAction,
+} from '@/actions/actionSavedAppliedJobs';
 import Footer from '@/components/general/Footer';
 import GoBack from '@/components/general/GoBack';
 import SecondaryHeader from '@/components/general/SecondaryHeader';
@@ -5,6 +9,7 @@ import CompanyInfoCard from '@/components/jobs/CompanyInfoCard';
 import JobContentContainer from '@/components/jobs/JobContentContainer';
 import JobInterestedContainer from '@/components/jobs/JobInterestedContainer';
 import { JobItemHeader } from '@/components/jobs/JobItemHeader';
+import JobManageButton from '@/components/jobs/JobManageButton';
 import JobManageContainer from '@/components/jobs/JobManageContainer';
 import JobStatusContainer from '@/components/jobs/JobStatusContainer';
 import JobSuggestions from '@/components/jobs/JobSuggestions';
@@ -24,7 +29,7 @@ export async function generateMetadata({
   const singleJob: JobType = await getSingleJob(params.slugJob);
 
   return {
-    title: singleJob.jobTitle,
+    title: singleJob?.jobTitle,
   };
 }
 
@@ -73,11 +78,47 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
           )}
 
         {!singleJob.active && !isAuthor && (
-          <div className='flex gap-2 items-center opacity-80 mt-10'>
-            <MdOutlineBlock className='size-5 text-red-600' />
-            <p className='text-red-600 tracking-wider font-semibold'>
-              Submission Closed.
-            </p>
+          <div className='mt-10 flex items-center gap-5'>
+            <div className='flex gap-2 items-center opacity-80'>
+              <MdOutlineBlock className='size-5 text-red-600' />
+              <p className='text-red-600 tracking-wider font-semibold'>
+                Submission Closed.
+              </p>
+            </div>
+            {listAppliedJobs?.includes(params.slugJob) && (
+              <form
+                action={archiveJobAction}
+                className='border-l-2 border-l-red-400 pl-5'
+              >
+                <input
+                  name='jobId'
+                  value={params.slugJob}
+                  className='hidden'
+                  hidden
+                />
+                <JobManageButton style='border-red-500 hover:bg-red-50 text-red-500 text-sm font-semibold min-w-64'>
+                  Move to Archive
+                </JobManageButton>
+              </form>
+            )}
+
+            {listSavedJobs?.includes(params.slugJob) && (
+              <form
+                action={saveJobAction}
+                className='border-l-2 border-l-red-400 pl-5'
+              >
+                <input
+                  name='jobId'
+                  value={params.slugJob}
+                  hidden
+                  className='hidden'
+                  readOnly
+                />
+                <JobManageButton style='border-red-500 hover:bg-red-50 text-red-500 text-sm font-semibold min-w-64'>
+                  Remove from My Jobs
+                </JobManageButton>
+              </form>
+            )}
           </div>
         )}
 

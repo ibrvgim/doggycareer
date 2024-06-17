@@ -39,7 +39,7 @@ function JobStatusContainer({
 function JobAppliedContainer({ jobId }: { jobId: string }) {
   return (
     <div className='mt-6 flex items-center gap-5'>
-      <div className='flex gap-2 items-center opacity-80 border-r-2 border-r-gray-400 pr-4'>
+      <div className='flex gap-2 items-center opacity-80 border-r-2 border-r-gray-400 pr-5'>
         <AiOutlineFileProtect className='size-6 text-gray-500' />
         <p className='text-gray-500 tracking-wider font-semibold'>
           You have applied for this Job.
