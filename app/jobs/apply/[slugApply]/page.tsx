@@ -29,7 +29,7 @@ async function ApplyPage({ params }: { params: { slugApply: string } }) {
   if (!user) redirect('/authentication');
 
   const isAuthor = user?.id === getJob.postAuthor;
-  if (isAuthor) redirect('/jobs');
+  if (isAuthor || !getJob.active) redirect('/jobs');
 
   const getCurrentUserData = usersReferences?.find(
     (item) => item?.userId === user?.id

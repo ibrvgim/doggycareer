@@ -6,7 +6,7 @@ function JobContentContainer({ job }: { job: JobType }) {
   const qualifications = job.qualifications.trim().split('\\n');
 
   return (
-    <section className='my-14'>
+    <section className='mb-14 mt-10'>
       <div className='text-gray-600 text-justify tracking-wide leading-relaxed mb-10'>
         <p className='text-cyan-700 text-xl font-semibold mb-4 tracking-wider'>
           About the Job:

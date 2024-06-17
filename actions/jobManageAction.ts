@@ -1,6 +1,11 @@
 'use server';
 
-import { deleteJobAPI, getSingleJob, postJobAPI } from '@/data/jobs/apiJobs';
+import {
+  deleteJobAPI,
+  getSingleJob,
+  postJobAPI,
+  updateJobAPI,
+} from '@/data/jobs/apiJobs';
 import { ErrorsType, JobType, PostedJobType } from '@/types/types';
 import { differenceInDays } from 'date-fns';
 import { revalidatePath } from 'next/cache';
@@ -26,6 +31,7 @@ export async function repostJob(_: any, data: FormData) {
     qualifications: getJob?.qualifications,
     industry: getJob?.industry,
     postAuthor: getJob?.postAuthor,
+    active: true,
   };
 
   if (differenceInDays(new Date(), new Date(getJob.postedAt)) <= 3) {
@@ -48,4 +54,12 @@ export async function deleteJob(data: FormData) {
   // await deleteJobAPI(jobId);
   // revalidatePath('/');
   // redirect('/account/my-posted-jobs');
+}
+
+export async function jobActivationStatus(data: FormData) {
+  const jobId = data.get('jobId') as string;
+  const getJob = await getSingleJob(jobId);
+
+  await updateJobAPI(jobId, { active: !getJob.active });
+  revalidatePath('/');
 }

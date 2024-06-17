@@ -38,6 +38,7 @@ export interface JobType {
   qualifications: string;
   industry: string;
   postAuthor?: string;
+  active?: boolean;
 }
 
 export interface PostedJobType {
@@ -54,6 +55,7 @@ export interface PostedJobType {
   qualifications: string;
   industry: string;
   postAuthor?: string;
+  active: boolean;
 }
 
 export interface StoredJobsType {

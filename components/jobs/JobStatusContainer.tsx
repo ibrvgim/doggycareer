@@ -16,11 +16,12 @@ function JobStatusContainer({
   listSavedJobs: string[];
 }) {
   return (
-    <div className='mt-8 flex items-center flex-wrap gap-2'>
+    <div className='mt-10 flex items-center flex-wrap gap-2'>
       {!listAppliedJobs?.includes(jobId) ? (
         <Link
           href={`apply/${jobId}`}
-          className='bg-cyan-600 text-white hover:bg-cyan-700 border-[1.5px] rounded-full tracking-wider text-center min-w-72 py-1 px-4 font-bold transition-all'
+          className='bg-cyan-600 text-white border-2 border-cyan-600 rounded-full 
+          tracking-wider text-center min-w-72 py-[2px] px-4 font-bold transition-all hover:bg-cyan-700 hover:border-cyan-700'
         >
           Apply
         </Link>

@@ -35,7 +35,10 @@ export async function postJobAPI(job: PostedJobType) {
   return data;
 }
 
-export async function updateJobAPI(jobId: string, updatedJob: PostedJobType) {
+export async function updateJobAPI(
+  jobId: string,
+  updatedJob: PostedJobType | { active: boolean }
+) {
   const supabase = createClient();
 
   const { data, error } = await supabase

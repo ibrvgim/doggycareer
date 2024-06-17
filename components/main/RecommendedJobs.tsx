@@ -29,7 +29,8 @@ async function RecommendedJobs({ allJobs }: { allJobs: JobType[] }) {
     (job) =>
       !listAppliedJobs.includes(job.id.toString()) &&
       !listArchivedJobs.includes(job.id.toString()) &&
-      job.postAuthor !== user?.id
+      job.postAuthor !== user?.id &&
+      job.active
   );
 
   const finalFilterization = exludeJobs

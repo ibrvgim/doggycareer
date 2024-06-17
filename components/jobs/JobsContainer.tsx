@@ -1,11 +1,8 @@
 'use client';
 
 import { JobType } from '@/types/types';
-import BasicPagination from '../general/Pagination';
 import FiltersList from './FiltersList';
 import JobsList from './JobsList';
-import { ITEMS_PER_PAGE } from '@/utilities/constants';
-import { useState } from 'react';
 
 function JobsContainer({
   userId,
@@ -20,43 +17,22 @@ function JobsContainer({
   listAppliedJobs: string[];
   listArchivedJobs: string[];
 }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageCount = Math.floor(allJobs.length / ITEMS_PER_PAGE);
-
-  function handlePageChange(event: React.ChangeEvent<unknown>, page: number) {
-    setCurrentPage(page);
-  }
-
-  const paginatedJobs = allJobs
-    .filter(
-      (job) =>
-        job.postAuthor !== userId &&
-        !listArchivedJobs?.includes(job?.id.toString())
-    )
-    .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+  const filteredJobs = allJobs.filter(
+    (job) =>
+      job.postAuthor !== userId &&
+      job.active &&
+      !listArchivedJobs?.includes(job?.id.toString())
+  );
 
   return (
-    <>
-      <section className='flex gap-12 py-20 px-28'>
-        <FiltersList />
-        <JobsList
-          allJobs={paginatedJobs}
-          savedJobs={listSavedJobs}
-          aplliedJobs={listAppliedJobs}
-        />
-      </section>
-
-      <div className='flex gap-12 pb-20 px-28'>
-        <div className='w-[19rem]'>&nbsp;</div>
-        <div className='mx-auto'>
-          <BasicPagination
-            pageCount={pageCount}
-            currentPage={currentPage}
-            handlePageChange={handlePageChange}
-          />
-        </div>
-      </div>
-    </>
+    <section className='flex gap-12 py-20 px-28'>
+      <FiltersList />
+      <JobsList
+        allJobs={filteredJobs}
+        savedJobs={listSavedJobs}
+        aplliedJobs={listAppliedJobs}
+      />
+    </section>
   );
 }
 

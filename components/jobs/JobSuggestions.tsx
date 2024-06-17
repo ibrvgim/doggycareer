@@ -30,7 +30,8 @@ async function JobSuggestions({ slugJob }: { slugJob: string }) {
         job.id !== Number(slugJob) &&
         !listAppliedJobs?.includes(job.id.toString()) &&
         !listArchivedJobs?.includes(job.id.toString()) &&
-        job.postAuthor !== user?.id
+        job.postAuthor !== user?.id &&
+        job.active
     )
     .slice(0, 5);
 

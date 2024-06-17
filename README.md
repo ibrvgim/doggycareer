@@ -5,6 +5,7 @@ Welcome to DoggyCareer, your job search platform for diverse career opportunitie
 > [!NOTE]
 > It's a Demo Website, for this reason:
 >
+> - Job Delete function disabled.
 > - The file attachment feature is disabled to avoid privacy issues for people.
 > - Company logo can be uploaded by link to svg file to avoid database overload.
 > - Since the number of Jobs is limited, some filters have been adjusted to account for this issue.

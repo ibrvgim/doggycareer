@@ -26,6 +26,7 @@ export async function postJobAction(_: any, data: FormData) {
   const user = await getUserAPI();
 
   const jobId = data.get('jobId') as string | undefined;
+  const currentJob = jobId && (await getSingleJob(jobId));
 
   const companyName = data.get('companyName') as string;
   const logo = data.get('logo') as string;
@@ -95,6 +96,7 @@ export async function postJobAction(_: any, data: FormData) {
     qualifications,
     industry: industry.toLowerCase(),
     postAuthor: user?.id || '',
+    active: currentJob ? currentJob.active : true,
   };
 
   if (jobId) {

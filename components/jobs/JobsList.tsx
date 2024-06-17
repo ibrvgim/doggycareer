@@ -3,10 +3,12 @@
 import { JobType } from '@/types/types';
 import JobCard from './JobCard';
 import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import ListSpinner from '../general/ListSpinner';
 import NoMatchingJobs from './NoMatchingJobs';
 import { differenceInDays, differenceInHours } from 'date-fns';
+import BasicPagination from '../general/Pagination';
+import { ITEMS_PER_PAGE } from '@/utilities/constants';
 
 function JobsList({
   allJobs,
@@ -17,14 +19,15 @@ function JobsList({
   savedJobs: string[];
   aplliedJobs: string[];
 }) {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const params = useSearchParams();
+  const location = params.get('location');
+  const title = params.get('title');
   const publicationDate = params?.get('publicationDate');
   const jobType = params?.get('jobType');
   const officeType = params?.get('officeType');
   const sortBy = params?.get('sortBy');
-
-  const location = params.get('location');
-  const title = params.get('title');
 
   let filteredJobs: JobType[] = allJobs;
 
@@ -105,6 +108,17 @@ function JobsList({
     });
   }
 
+  function handlePageChange(event: React.ChangeEvent<unknown>, page: number) {
+    setCurrentPage(page);
+  }
+
+  const paginatedJobs = filteredJobs?.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const pageCount = Math.ceil(filteredJobs.length / ITEMS_PER_PAGE);
+
   return (
     <div className='w-full'>
       {filteredJobs.length > 0 ? (
@@ -114,7 +128,7 @@ function JobsList({
           </p>
 
           <div className='flex flex-col gap-5'>
-            {filteredJobs.map((job) => (
+            {paginatedJobs.map((job) => (
               <JobCard
                 key={job.id}
                 job={job}
@@ -126,6 +140,16 @@ function JobsList({
         </Suspense>
       ) : (
         <NoMatchingJobs allJobs={allJobs} />
+      )}
+
+      {pageCount >= 2 && (
+        <div className='flex justify-center mt-16'>
+          <BasicPagination
+            currentPage={currentPage}
+            handlePageChange={handlePageChange}
+            pageCount={pageCount}
+          />
+        </div>
       )}
     </div>
   );

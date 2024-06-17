@@ -14,6 +14,7 @@ import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedApplie
 import { JobType } from '@/types/types';
 import { notFound } from 'next/navigation';
 import { FaBoxArchive } from 'react-icons/fa6';
+import { MdOutlineBlock } from 'react-icons/md';
 
 export async function generateMetadata({
   params,
@@ -61,16 +62,27 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
 
         <JobItemHeader job={singleJob} />
 
-        {!isAuthor && !listArchivedJobs?.includes(params.slugJob) && (
-          <JobStatusContainer
-            jobId={params.slugJob}
-            listAppliedJobs={listAppliedJobs}
-            listSavedJobs={listSavedJobs}
-          />
+        {!isAuthor &&
+          !listArchivedJobs?.includes(params.slugJob) &&
+          singleJob.active && (
+            <JobStatusContainer
+              jobId={params.slugJob}
+              listAppliedJobs={listAppliedJobs}
+              listSavedJobs={listSavedJobs}
+            />
+          )}
+
+        {!singleJob.active && !isAuthor && (
+          <div className='flex gap-2 items-center opacity-80 mt-10'>
+            <MdOutlineBlock className='size-5 text-red-600' />
+            <p className='text-red-600 tracking-wider font-semibold'>
+              Submission Closed.
+            </p>
+          </div>
         )}
 
-        {listArchivedJobs?.includes(params.slugJob) && (
-          <div className='flex gap-2 items-center opacity-80 pr-4 mt-8'>
+        {listArchivedJobs?.includes(params.slugJob) && singleJob.active && (
+          <div className='flex gap-2 items-center opacity-80 pr-4 mt-10'>
             <FaBoxArchive className='size-5 text-gray-400' />
             <p className='text-gray-500 tracking-wider font-semibold'>
               Job is Archived.
@@ -78,16 +90,23 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
           </div>
         )}
 
-        {isAuthor && <JobManageContainer jobId={params?.slugJob} />}
+        {isAuthor && (
+          <JobManageContainer
+            jobId={params?.slugJob}
+            activeJob={singleJob?.active}
+          />
+        )}
 
         <JobContentContainer job={singleJob} />
 
-        {!isAuthor && !listArchivedJobs?.includes(params.slugJob) && (
-          <JobInterestedContainer
-            jobId={params.slugJob}
-            listAppliedJobs={listAppliedJobs}
-          />
-        )}
+        {!isAuthor &&
+          !listArchivedJobs?.includes(params.slugJob) &&
+          singleJob.active && (
+            <JobInterestedContainer
+              jobId={params.slugJob}
+              listAppliedJobs={listAppliedJobs}
+            />
+          )}
 
         <CompanyInfoCard job={singleJob} />
       </main>
