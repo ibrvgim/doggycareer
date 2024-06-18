@@ -5,7 +5,7 @@ import { getUserAPI } from '@/data/auth/apiUser';
 import { getCountries } from '@/data/getCountries';
 import { getJobs } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
-import { JobType } from '@/types/types';
+import { JobType, StoredJobsType } from '@/types/types';
 
 export const metadata = {
   title: 'Jobs',
@@ -27,17 +27,9 @@ async function JobsPage() {
     getUserStoredJobs(),
   ]);
 
-  const listSavedJobs = storedJobs?.find(
+  const allStoredJobs: StoredJobsType = storedJobs?.find(
     (item) => item.userId === user?.id
-  )?.savedJobs;
-
-  const listAppliedJobs = storedJobs?.find(
-    (item) => item.userId === user?.id
-  )?.appliedJobs;
-
-  const listArchivedJobs = storedJobs?.find(
-    (item) => item.userId === user?.id
-  )?.archive;
+  );
 
   return (
     <>
@@ -46,9 +38,9 @@ async function JobsPage() {
         <JobsContainer
           userId={user?.id}
           allJobs={allJobs}
-          listSavedJobs={listSavedJobs}
-          listAppliedJobs={listAppliedJobs}
-          listArchivedJobs={listArchivedJobs}
+          listSavedJobs={allStoredJobs?.savedJobs}
+          listAppliedJobs={allStoredJobs?.appliedJobs}
+          listArchivedJobs={allStoredJobs?.archive}
         />
       </main>
       <Footer />

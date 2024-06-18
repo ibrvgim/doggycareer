@@ -6,7 +6,7 @@ import { getUserAPI } from '@/data/auth/apiUser';
 import { getSingleJob } from '@/data/jobs/apiJobs';
 import { getUserStoredJobs } from '@/data/jobs/saved-applied-jobs/apiSavedAppliedJobs';
 import { getPersonalData } from '@/data/users/apiUsers';
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 export async function generateMetadata({
   params,
@@ -27,9 +27,10 @@ async function ApplyPage({ params }: { params: { slugApply: string } }) {
   ]);
 
   if (!user) redirect('/authentication');
+  if (!getJob) notFound();
 
-  const isAuthor = user?.id === getJob.postAuthor;
-  if (isAuthor || !getJob.active) redirect('/jobs');
+  const isAuthor = user?.id === getJob?.postAuthor;
+  if (isAuthor || !getJob?.active) redirect('/jobs');
 
   const getCurrentUserData = usersReferences?.find(
     (item) => item?.userId === user?.id
@@ -39,7 +40,8 @@ async function ApplyPage({ params }: { params: { slugApply: string } }) {
     (item) => item.userId === user?.id
   )?.appliedJobs;
 
-  if (listAppliedJobs.includes(params.slugApply)) redirect('/jobs');
+  if (listAppliedJobs.includes(params.slugApply))
+    redirect(`/jobs/${params.slugApply}`);
 
   return (
     <div>

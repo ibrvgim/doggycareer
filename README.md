@@ -10,6 +10,9 @@ Welcome to DoggyCareer, your job search platform for diverse career opportunitie
 > - Company logo can be uploaded by link to svg file to avoid database overload.
 > - Since the number of Jobs is limited, some filters have been adjusted to account for this issue.
 
+> [!IMPORTANT]
+> Responsive Design is integrated from time to time, but it is not fully implemented.
+
 ## OVERVIEW
 
 ### Technologies used to build

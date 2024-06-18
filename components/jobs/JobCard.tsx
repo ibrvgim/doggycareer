@@ -2,7 +2,7 @@ import Link from 'next/link';
 import JobInfoBadge from './JobInfoBadge';
 import { JobType } from '@/types/types';
 import { jobPosted } from '@/utilities/jobPosted';
-import { IoCheckmarkDoneCircle, IoStar } from 'react-icons/io5';
+import { IoCheckmarkDoneCircle, IoBookmarks } from 'react-icons/io5';
 
 function JobCard({
   job,
@@ -32,8 +32,8 @@ function JobCard({
             )}
 
             {savedJobs && savedJobs?.includes(job.id.toString()) && (
-              <IoStar
-                className='size-[1.40rem] cursor-default text-cyan-700 opacity-70'
+              <IoBookmarks
+                className='size-[1.20rem] cursor-default text-cyan-700 opacity-70'
                 title='Job Saved'
               />
             )}

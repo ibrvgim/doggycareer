@@ -88,7 +88,10 @@ function Questionnaire({
   }
 
   return (
-    <section className='rounded-3xl min-h-[42rem] max-w-[104rem] mx-auto bg-gradient-to-br from-blue-50 to-rose-50 px-24 pt-16 pb-10 flex flex-col shadow-md'>
+    <section
+      className='rounded-3xl min-h-[42rem] max-w-[104rem] mx-auto bg-gradient-to-br from-blue-50 to-rose-50 
+    px-16 pt-16 pb-10 flex flex-col shadow-md lg:px-24'
+    >
       <ProgressBar stages={stages.length} currentStage={stage} />
 
       <Suspense fallback={<LoadingSpinner />}>{stages[stage]}</Suspense>

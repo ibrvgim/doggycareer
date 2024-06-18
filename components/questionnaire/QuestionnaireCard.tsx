@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@mui/material';
 import Image from 'next/image';
 
 function QuestionnaireCard({
@@ -9,26 +10,28 @@ function QuestionnaireCard({
   question: JSX.Element;
   image: string;
 }) {
+  const xl = useMediaQuery('(min-width:1280px)');
+
   return (
     <>
       <div className='flex-grow'>&nbsp;</div>
-      <div className='flex gap-5 items-center'>
-        <div className='flex-1'>
-          <p className='text-5xl font-bold text-cyan-600 leading-snug'>
-            {question}
-          </p>
-          {children}
-        </div>
-
+      <div className='flex flex-col gap-7 xl:items-center xl:flex-row'>
         <div className='flex-1'>
           <Image
             src={image}
             alt='questionnaire image'
-            width={450}
-            height={450}
+            width={xl ? 450 : 400}
+            height={xl ? 450 : 400}
             className='mx-auto'
             draggable={false}
           />
+        </div>
+
+        <div className='flex-1'>
+          <p className='text-4xl font-bold text-cyan-600 leading-snug xl:text-5xl'>
+            {question}
+          </p>
+          {children}
         </div>
       </div>
     </>

@@ -16,9 +16,9 @@ const featuresData = [
 
   {
     icon: <AtSymbolIcon className='size-20 text-rose-400 mb-5 mx-auto' />,
-    title: 'Get Notifications About New Jobs',
+    title: 'Get New Jobs Notifications',
     description:
-      'Subscribe to email notifications and stay updated on the latest jobs ensuring you are the first to know about new opportunities.',
+      'Subscribe to email and stay updated on the latest jobs ensuring you are the first to know about new opportunities.',
   },
 
   {
@@ -27,7 +27,7 @@ const featuresData = [
     ),
     title: 'See Only Jobs That Match You',
     description:
-      'Get jobs that align with your skills, experience, and preferences, saving you time and helping you focus on the best matches.',
+      'Get jobs that align with your skills, and preferences, saving you time and helping you focus on the best matches.',
   },
 
   {
@@ -50,7 +50,7 @@ function Features() {
         Make your own decisions
       </p>
 
-      <div className='flex gap-5 justify-center mt-12'>
+      <div className='grid grid-cols-2 gap-5 justify-items-center mt-12 max-w-[104rem] mx-auto xl:grid-cols-4 xl:px-0 lg:px-24'>
         {featuresData.map((feature) => (
           <FeatureCard
             key={feature.title}

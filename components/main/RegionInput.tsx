@@ -35,7 +35,7 @@ function RegionInput({
         type='text'
         name={name}
         placeholder={placeholder}
-        className={`h-12 w-[22rem] rounded-md pl-[3.2rem] pr-4 border-[1px] border-gray-400 shadow-lg 
+        className={`h-12 w-full  rounded-md pl-[3.2rem] pr-4 border-[1px] border-gray-400 shadow-lg 
           text-[15px] text-gray-700 tracking-widest font-medium placeholder:font-light capitalize ${
             error ? 'placeholder:text-red-500' : 'placeholder:text-gray-400'
           }`}

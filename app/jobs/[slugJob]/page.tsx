@@ -42,19 +42,11 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
 
   if (!singleJob) notFound();
 
-  const listSavedJobs = storedJobs?.find(
-    (item) => item.userId === user?.id
-  )?.savedJobs;
-
-  const listAppliedJobs = storedJobs?.find(
-    (item) => item.userId === user?.id
-  )?.appliedJobs;
-
-  const listArchivedJobs = storedJobs?.find(
-    (item) => item.userId === user?.id
-  )?.archive;
-
-  const isAuthor = user?.id === singleJob.postAuthor;
+  const allStoredJobs = storedJobs?.find((item) => item.userId === user?.id);
+  const listSavedJobs = allStoredJobs?.savedJobs;
+  const listAppliedJobs = allStoredJobs?.appliedJobs;
+  const listArchivedJobs = allStoredJobs?.archive;
+  const isAuthor = user?.id === singleJob?.postAuthor;
 
   return (
     <div>
@@ -85,6 +77,7 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
                 Submission Closed.
               </p>
             </div>
+
             {listAppliedJobs?.includes(params.slugJob) && (
               <form
                 action={archiveJobAction}
@@ -151,6 +144,7 @@ async function JobItemPage({ params }: { params: { slugJob: string } }) {
 
         <CompanyInfoCard job={singleJob} />
       </main>
+
       <JobSuggestions slugJob={params.slugJob} />
       <Footer />
     </div>

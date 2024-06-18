@@ -16,7 +16,7 @@ function Logo() {
           width={50}
           className='opacity-80'
         />
-        Doggycareer
+        <span className='hidden md:inline-block'>Doggycareer</span>
       </Link>
     </div>
   );
