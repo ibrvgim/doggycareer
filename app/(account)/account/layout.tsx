@@ -11,7 +11,7 @@ async function MyJobsLayout({
   if (user?.role !== 'authenticated') redirect('/authentication');
 
   return (
-    <div className='flex items-start gap-14 px-32 py-20'>
+    <div className='flex items-start gap-14 px-16 py-20 xl:px-32'>
       <ProfileNavigationMenu />
       {children}
     </div>

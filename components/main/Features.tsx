@@ -9,7 +9,7 @@ import {
 const featuresData = [
   {
     icon: <AcademicCapIcon className='size-20 text-rose-400 mb-5 mx-auto' />,
-    title: 'Build a Solid Resume',
+    title: 'Build a Solid Resume With Us',
     description:
       'By following the tips and lessons from our resume writing experts, you can learn the best ways to represent yourself.',
   },
@@ -50,7 +50,7 @@ function Features() {
         Make your own decisions
       </p>
 
-      <div className='grid grid-cols-2 gap-5 justify-items-center mt-12 max-w-[104rem] mx-auto xl:grid-cols-4 xl:px-0 lg:px-24'>
+      <div className='grid grid-cols-1 gap-5 justify-items-center mt-12 max-w-[104rem] mx-auto xl:grid-cols-4 xl:px-0 lg:px-24 lg:grid-cols-2'>
         {featuresData.map((feature) => (
           <FeatureCard
             key={feature.title}

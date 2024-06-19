@@ -13,7 +13,7 @@ export const metadata = {
 function AboutUsPage() {
   return (
     <div>
-      <section className='px-32 py-24 grid grid-cols-[1fr_1fr] gap-20 gap-y-40 max-w-[105rem] mx-auto items-center justify-items-center'>
+      <section className='px-32 py-24 grid grid-cols-[1fr_1fr] gap-40 gap-y-40 max-w-[105rem] mx-auto items-center justify-items-center'>
         <DescriptionCard title='Our Story'>
           In 2019, four university friends crammed into a small studio in
           Berlin, Germany and started building doggycareer. They were united by
@@ -55,7 +55,7 @@ function DescriptionCard({
 }) {
   return (
     <div className='max-w-[35rem]'>
-      <p className='text-5xl font-extrabold text-cyan-700 opacity-80 tracking-wider mb-8'>
+      <p className='text-4xl font-extrabold text-cyan-700 opacity-80 tracking-wider mb-8 lg:text-5xl'>
         {title}
       </p>
       <p className='text-justify tracking-wide leading-loose text-gray-600'>

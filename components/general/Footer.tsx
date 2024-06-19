@@ -23,7 +23,7 @@ interface List {
 
 function Footer() {
   return (
-    <footer className='bg-gradient-to-br from-rose-50 to-blue-50 min-h-96 px-32 py-12 flex flex-col'>
+    <footer className='bg-gradient-to-br from-rose-50 to-blue-50 min-h-96 px-16 py-12 flex flex-col lg:px-32'>
       <div className='flex-grow flex justify-between flex-wrap gap-y-10 gap-x-5'>
         <FooterList title='Company' lists={companyList} />
         <FooterList title='Other Sources' lists={additionalList} />
