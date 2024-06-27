@@ -80,7 +80,6 @@ function JobsList({
         return job.jobType.toLowerCase() === 'part time';
       else if (jobType === 'fullTime')
         return job.jobType.toLowerCase() === 'full time';
-      else return job;
     });
   }
 
@@ -92,7 +91,6 @@ function JobsList({
         return job.officeType.toLowerCase() === 'on site';
       else if (officeType === 'remote')
         return job.officeType.toLowerCase() === 'remote';
-      else return job;
     });
   }
 
@@ -101,10 +99,9 @@ function JobsList({
       if (publicationDate === '24hours')
         return differenceInHours(new Date(), new Date(job.postedAt)) <= 24;
       else if (publicationDate === '7days')
-        return differenceInDays(new Date(), new Date(job.postedAt)) <= 7;
+        return differenceInDays(new Date(), new Date(job.postedAt)) <= 8;
       else if (publicationDate === '14days')
-        return differenceInDays(new Date(), new Date(job.postedAt)) <= 14;
-      else return job;
+        return differenceInDays(new Date(), new Date(job.postedAt)) <= 15;
     });
   }
 
