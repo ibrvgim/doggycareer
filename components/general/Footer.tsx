@@ -107,11 +107,17 @@ function SocialMedia() {
       </ul>
 
       <div className='flex gap-3 mt-12'>
-        <Link href='https://www.apple.com/app-store/' target='_blank'>
+        <Link
+          href='https://github.com/ibrvgim/doggycareer-mobile-app'
+          target='_blank'
+        >
           <Image src={AppStoreIcon} alt='app store icon' className='w-24' />
         </Link>
 
-        <Link href='https://play.google.com/store/apps' target='_blank'>
+        <Link
+          href='https://github.com/ibrvgim/doggycareer-mobile-app'
+          target='_blank'
+        >
           <Image
             src={PlayStoreIcon}
             alt='play store icon'

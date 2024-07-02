@@ -27,7 +27,10 @@ function MobileAdCard() {
         </p>
 
         <div className='flex items-center gap-5 mt-8'>
-          <Link href='https://www.apple.com/app-store/' target='_blank'>
+          <Link
+            href='https://github.com/ibrvgim/doggycareer-mobile-app'
+            target='_blank'
+          >
             <Image
               src={AppStoreIcon}
               alt='app store icon'
@@ -35,7 +38,10 @@ function MobileAdCard() {
             />
           </Link>
 
-          <Link href='https://play.google.com/store/apps' target='_blank'>
+          <Link
+            href='https://github.com/ibrvgim/doggycareer-mobile-app'
+            target='_blank'
+          >
             <Image
               src={PlayStoreIcon}
               alt='play store icon'
